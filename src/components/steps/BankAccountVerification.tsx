@@ -1,6 +1,5 @@
-
 import { useState } from "react";
-import { Check } from "lucide-react";
+import { Check, ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
@@ -11,7 +10,7 @@ interface BankAccountVerificationProps {
   onPrev: () => void;
 }
 
-export const BankAccountVerification = ({ onNext }: BankAccountVerificationProps) => {
+export const BankAccountVerification = ({ onNext, onPrev }: BankAccountVerificationProps) => {
   const [iban, setIban] = useState("54697070101");
   const [accountHolder, setAccountHolder] = useState("Ideal Brothers L.L.C");
   const [isVerified, setIsVerified] = useState(false);
@@ -29,6 +28,15 @@ export const BankAccountVerification = ({ onNext }: BankAccountVerificationProps
       <SidePanel />
       <div className="flex-1">
         <div className="bg-white rounded-lg shadow-sm p-6">
+          <Button 
+            variant="ghost" 
+            onClick={onPrev} 
+            className="mb-4 flex items-center gap-2"
+          >
+            <ArrowLeft className="w-4 h-4" />
+            Back
+          </Button>
+
           <h2 className="text-xl font-semibold mb-6">Bank Account Verification</h2>
           
           <div className="mb-8">

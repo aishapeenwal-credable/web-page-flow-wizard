@@ -1,6 +1,5 @@
-
 import { useState } from "react";
-import { Upload, FileText, Eye, Trash2 } from "lucide-react";
+import { Upload, FileText, Eye, Trash2, ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { SidePanel } from "../SidePanel";
@@ -10,7 +9,7 @@ interface KYCVerificationProps {
   onPrev: () => void;
 }
 
-export const KYCVerification = ({ onNext }: KYCVerificationProps) => {
+export const KYCVerification = ({ onNext, onPrev }: KYCVerificationProps) => {
   const [kycStatus] = useState([
     { name: "Jane Cooper", role: "Authorised Signatory", status: "completed", statusText: "C-KYC completed successfully!" },
     { name: "Esther Howard", role: "Authorised Signatory, Personal Guarantor", status: "completed", statusText: "C-KYC completed successfully!" }
@@ -28,6 +27,15 @@ export const KYCVerification = ({ onNext }: KYCVerificationProps) => {
       <SidePanel />
       <div className="flex-1">
         <div className="bg-white rounded-lg shadow-sm p-6">
+          <Button 
+            variant="ghost" 
+            onClick={onPrev} 
+            className="mb-4 flex items-center gap-2"
+          >
+            <ArrowLeft className="w-4 h-4" />
+            Back
+          </Button>
+
           <h2 className="text-xl font-semibold mb-6">KYC</h2>
           
           <div className="mb-8">

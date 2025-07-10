@@ -1,17 +1,16 @@
-
 import { useState } from "react";
+import { ArrowLeft, ChevronUp, ChevronDown, Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { SidePanel } from "../SidePanel";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
-import { ChevronUp, ChevronDown, Phone } from "lucide-react";
 
 interface LoanOfferProps {
   onNext: () => void;
   onPrev: () => void;
 }
 
-export const LoanOffer = ({ onNext }: LoanOfferProps) => {
+export const LoanOffer = ({ onNext, onPrev }: LoanOfferProps) => {
   const [loanAmount, setLoanAmount] = useState(30000);
   const [repaymentPeriod, setRepaymentPeriod] = useState(6);
   const [affordabilityOpen, setAffordabilityOpen] = useState(true);
@@ -25,6 +24,15 @@ export const LoanOffer = ({ onNext }: LoanOfferProps) => {
       <SidePanel />
       <div className="flex-1">
         <div className="bg-white rounded-lg shadow-sm p-6">
+          <Button 
+            variant="ghost" 
+            onClick={onPrev} 
+            className="mb-4 flex items-center gap-2"
+          >
+            <ArrowLeft className="w-4 h-4" />
+            Back
+          </Button>
+
           <div className="bg-blue-50 p-4 rounded-lg mb-6">
             <h2 className="text-lg font-semibold mb-2">Congratulations John! Your credit limit has been sanctioned.</h2>
             <p className="text-sm text-gray-600">Please note that approved credit limit is provisional and subject to verification of facts provided.</p>

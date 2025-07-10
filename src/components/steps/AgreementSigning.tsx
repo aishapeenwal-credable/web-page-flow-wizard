@@ -1,5 +1,4 @@
-
-import { Check } from "lucide-react";
+import { ArrowLeft, Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { SidePanel } from "../SidePanel";
 
@@ -8,7 +7,7 @@ interface AgreementSigningProps {
   onPrev: () => void;
 }
 
-export const AgreementSigning = ({ onNext }: AgreementSigningProps) => {
+export const AgreementSigning = ({ onNext, onPrev }: AgreementSigningProps) => {
   const signatories = [
     {
       name: "Jane Cooper",
@@ -31,6 +30,15 @@ export const AgreementSigning = ({ onNext }: AgreementSigningProps) => {
       <SidePanel />
       <div className="flex-1">
         <div className="bg-white rounded-lg shadow-sm p-6">
+          <Button 
+            variant="ghost" 
+            onClick={onPrev} 
+            className="mb-4 flex items-center gap-2"
+          >
+            <ArrowLeft className="w-4 h-4" />
+            Back
+          </Button>
+
           <h2 className="text-xl font-semibold mb-8">Agreement Signing</h2>
           
           <div className="space-y-8">

@@ -42,7 +42,7 @@ export const LoanApplication = () => {
       case 1:
         return <VATReturns onNext={handleNextStep} />;
       case 2:
-        return <ProcessingStep onNext={handleNextStep} />;
+        return <ProcessingStep onNext={handleNextStep} onPrev={handlePrevStep} />;
       case 3:
         return <LoanOffer onNext={handleNextStep} onPrev={handlePrevStep} />;
       case 4:

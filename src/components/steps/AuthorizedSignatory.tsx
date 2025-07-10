@@ -1,6 +1,5 @@
-
 import { useState } from "react";
-import { Upload, FileText, Eye, Trash2, Plus, ChevronDown } from "lucide-react";
+import { Upload, FileText, Eye, Trash2, Plus, ChevronDown, ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
@@ -11,7 +10,7 @@ interface AuthorizedSignatoryProps {
   onPrev: () => void;
 }
 
-export const AuthorizedSignatory = ({ onNext }: AuthorizedSignatoryProps) => {
+export const AuthorizedSignatory = ({ onNext, onPrev }: AuthorizedSignatoryProps) => {
   const [incorporationDoc, setIncorporationDoc] = useState({
     name: "Business name-partnership agreement.pdf",
     size: "765 KB",
@@ -41,6 +40,15 @@ export const AuthorizedSignatory = ({ onNext }: AuthorizedSignatoryProps) => {
       <SidePanel />
       <div className="flex-1">
         <div className="bg-white rounded-lg shadow-sm p-6">
+          <Button 
+            variant="ghost" 
+            onClick={onPrev} 
+            className="mb-4 flex items-center gap-2"
+          >
+            <ArrowLeft className="w-4 h-4" />
+            Back
+          </Button>
+
           <div className="bg-blue-50 p-4 rounded-lg mb-6 flex items-center space-x-2">
             <div className="w-4 h-4 border-2 border-blue-600 rounded-full flex items-center justify-center">
               <div className="w-2 h-2 bg-blue-600 rounded-full"></div>

@@ -1,12 +1,13 @@
 
-import { useState } from "react";
-import { Upload, Plus, FileText, Eye, Trash2 } from "lucide-react";
+import { useState, useRef } from "react";
+import { Upload, Plus, FileText, Eye, Trash2, ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { SidePanel } from "../SidePanel";
 
 interface VATReturnsProps {
   onNext: () => void;
+  onPrev?: () => void;
 }
 
 interface UploadedFile {
@@ -14,20 +15,30 @@ interface UploadedFile {
   name: string;
   size: string;
   status: string;
+  file: File;
 }
 
-export const VATReturns = ({ onNext }: VATReturnsProps) => {
+export const VATReturns = ({ onNext, onPrev }: VATReturnsProps) => {
   const [uploadedFiles, setUploadedFiles] = useState<UploadedFile[]>([]);
   const [passwords, setPasswords] = useState<{ [key: string]: string }>({});
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
-  const handleFileUpload = () => {
-    const newFile: UploadedFile = {
-      id: Date.now().toString(),
-      name: `Sample returns ${uploadedFiles.length + 1}.pdf`,
-      size: "789 KB",
-      status: "100% uploaded"
-    };
-    setUploadedFiles([...uploadedFiles, newFile]);
+  const handleFileUpload = (files: FileList | null) => {
+    if (!files) return;
+
+    const newFiles: UploadedFile[] = Array.from(files).map(file => ({
+      id: Date.now().toString() + Math.random().toString(36).substr(2, 9),
+      name: file.name,
+      size: `${Math.round(file.size / 1024)} KB`,
+      status: "100% uploaded",
+      file: file
+    }));
+
+    setUploadedFiles(prev => [...prev, ...newFiles]);
+  };
+
+  const handleClickUpload = () => {
+    fileInputRef.current?.click();
   };
 
   const handleRemoveFile = (id: string) => {
@@ -41,23 +52,55 @@ export const VATReturns = ({ onNext }: VATReturnsProps) => {
     setPasswords({ ...passwords, [fileId]: password });
   };
 
+  const handleDragOver = (e: React.DragEvent) => {
+    e.preventDefault();
+  };
+
+  const handleDrop = (e: React.DragEvent) => {
+    e.preventDefault();
+    const files = e.dataTransfer.files;
+    handleFileUpload(files);
+  };
+
   return (
     <div className="flex gap-8">
       <SidePanel />
       <div className="flex-1">
         <div className="bg-white rounded-lg shadow-sm p-6">
+          {onPrev && (
+            <Button 
+              variant="ghost" 
+              onClick={onPrev} 
+              className="mb-4 flex items-center gap-2"
+            >
+              <ArrowLeft className="w-4 h-4" />
+              Back
+            </Button>
+          )}
+          
           <h2 className="text-xl font-semibold mb-2">VAT Returns</h2>
           
           <h3 className="text-lg font-medium mb-2">Upload returns</h3>
           <p className="text-gray-600 mb-6">You can upload VAT returns one by one or all at once.</p>
 
+          <input
+            ref={fileInputRef}
+            type="file"
+            multiple
+            accept=".pdf"
+            onChange={(e) => handleFileUpload(e.target.files)}
+            className="hidden"
+          />
+
           <div className="mb-6">
-            <div className="border-2 border-dashed border-gray-300 rounded-lg p-8 text-center">
+            <div 
+              className="border-2 border-dashed border-gray-300 rounded-lg p-8 text-center cursor-pointer hover:border-gray-400 transition-colors"
+              onDragOver={handleDragOver}
+              onDrop={handleDrop}
+              onClick={handleClickUpload}
+            >
               <Upload className="w-12 h-12 text-gray-400 mx-auto mb-4" />
-              <button 
-                onClick={handleFileUpload}
-                className="text-blue-600 hover:text-blue-700 font-medium"
-              >
+              <button className="text-blue-600 hover:text-blue-700 font-medium">
                 Click to upload
               </button>
               <span className="text-gray-600"> or drag and drop</span>
@@ -96,7 +139,10 @@ export const VATReturns = ({ onNext }: VATReturnsProps) => {
             </div>
           )}
 
-          <button className="flex items-center space-x-2 text-blue-600 hover:text-blue-700 font-medium mb-8">
+          <button 
+            onClick={handleClickUpload}
+            className="flex items-center space-x-2 text-blue-600 hover:text-blue-700 font-medium mb-8"
+          >
             <Plus className="w-4 h-4" />
             <span>Add more VAT returns</span>
           </button>
