@@ -70,6 +70,11 @@ export const AECBScore = () => {
     setShowPartnerModal(true);
   };
 
+  const handlePartnerSubmit = (data: any) => {
+    setShowPartnerModal(false);
+    setShowOTPModal(true);
+  };
+
   const steps = [
     { id: 1, name: "Applicant Detail", description: "Just a few Personal details.", completed: true },
     { id: 2, name: "Bank Statements", description: "Upload your bank statements, safely.", completed: true },
@@ -266,17 +271,13 @@ export const AECBScore = () => {
           setShowOTPModal(false);
           // Handle OTP verification logic
         }}
-        phoneNumber={selectedPartner?.mobile || ''}
+        mobileNumber={selectedPartner?.mobile || ''}
       />
 
       <PartnerAuthModal
         isOpen={showPartnerModal}
         onClose={() => setShowPartnerModal(false)}
-        onSuccess={() => {
-          setShowPartnerModal(false);
-          setShowOTPModal(true);
-        }}
-        partner={selectedPartner}
+        onSubmit={handlePartnerSubmit}
       />
     </div>
   );
