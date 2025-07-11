@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -35,7 +34,7 @@ export const ApplicantDetails = () => {
   };
 
   const handleBack = () => {
-    navigate(-1);
+    navigate("/login");
   };
 
   const steps = [
@@ -114,7 +113,7 @@ export const ApplicantDetails = () => {
                 className="mb-4 flex items-center gap-2"
               >
                 <ArrowLeft className="w-4 h-4" />
-                Back
+                Back to Login
               </Button>
 
               <div className="mb-8">
