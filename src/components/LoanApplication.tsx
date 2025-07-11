@@ -13,6 +13,7 @@ import { KYCVerification } from "./steps/KYCVerification";
 import { BankAccountVerification } from "./steps/BankAccountVerification";
 import { UAEFTSStep } from "./steps/UAEFTSStep";
 import { AgreementSigning } from "./steps/AgreementSigning";
+import { ThankYou } from "./ThankYou";
 
 export const LoanApplication = () => {
   const [currentStep, setCurrentStep] = useState(1);
@@ -35,7 +36,7 @@ export const LoanApplication = () => {
   ];
 
   const handleNextStep = () => {
-    setCurrentStep(prev => Math.min(prev + 1, 8));
+    setCurrentStep(prev => Math.min(prev + 1, 9));
   };
 
   const handlePrevStep = () => {
@@ -64,10 +65,17 @@ export const LoanApplication = () => {
         return <UAEFTSStep onNext={handleNextStep} onPrev={handlePrevStep} />;
       case 8:
         return <AgreementSigning onNext={handleNextStep} onPrev={handlePrevStep} />;
+      case 9:
+        return <ThankYou />;
       default:
         return <VATReturns onNext={handleNextStep} />;
     }
   };
+
+  // If we're on the thank you page, render it without the layout
+  if (currentStep === 9) {
+    return <ThankYou />;
+  }
 
   return (
     <div className="min-h-screen bg-gray-50">

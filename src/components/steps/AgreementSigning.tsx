@@ -1,6 +1,9 @@
+
+import { useState } from "react";
 import { ArrowLeft, Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { SidePanel } from "../SidePanel";
+import { SigningModal } from "../SigningModal";
 
 interface AgreementSigningProps {
   onNext: () => void;
@@ -8,6 +11,8 @@ interface AgreementSigningProps {
 }
 
 export const AgreementSigning = ({ onNext, onPrev }: AgreementSigningProps) => {
+  const [showModal, setShowModal] = useState(false);
+
   const signatories = [
     {
       name: "Jane Cooper",
@@ -24,6 +29,15 @@ export const AgreementSigning = ({ onNext, onPrev }: AgreementSigningProps) => {
       ]
     }
   ];
+
+  const handleContinue = () => {
+    setShowModal(true);
+  };
+
+  const handleApply = () => {
+    setShowModal(false);
+    onNext();
+  };
 
   return (
     <div className="flex gap-8">
@@ -65,12 +79,18 @@ export const AgreementSigning = ({ onNext, onPrev }: AgreementSigningProps) => {
           </div>
 
           <div className="mt-8">
-            <Button onClick={onNext} className="bg-blue-600 hover:bg-blue-700">
+            <Button onClick={handleContinue} className="bg-blue-600 hover:bg-blue-700">
               Continue
             </Button>
           </div>
         </div>
       </div>
+
+      <SigningModal 
+        isOpen={showModal}
+        onClose={() => setShowModal(false)}
+        onApply={handleApply}
+      />
     </div>
   );
 };
