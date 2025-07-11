@@ -29,6 +29,11 @@ export const Login = () => {
     <div className="min-h-screen bg-gray-50 flex">
       <div className="flex-1 flex items-center justify-center p-8">
         <div className="relative w-96 h-96 bg-gradient-to-br from-gray-700 to-gray-900 rounded-lg overflow-hidden">
+          <img 
+            src="/placeholder.svg" 
+            alt="Digital financing illustration" 
+            className="absolute inset-0 w-full h-full object-cover"
+          />
           <div className="absolute inset-0 bg-black bg-opacity-40"></div>
           <div className="relative z-10 p-8 text-white h-full flex flex-col justify-center">
             <h2 className="text-2xl font-bold mb-8">Improve your working capital with digital financing</h2>
