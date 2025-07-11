@@ -9,6 +9,7 @@ import { Check, ArrowLeft } from "lucide-react";
 
 export const ApplicantDetails = () => {
   const navigate = useNavigate();
+  const [isVerified, setIsVerified] = useState(false);
   const [formData, setFormData] = useState({
     mobile: "+971 123 456 7890",
     email: "john.doe@idealbrothers.ae",
@@ -28,6 +29,12 @@ export const ApplicantDetails = () => {
 
   const handleInputChange = (field: string, value: string) => {
     setFormData(prev => ({ ...prev, [field]: value }));
+  };
+
+  const handleVerify = () => {
+    // Simulate verification process
+    setIsVerified(true);
+    // In a real app, you would make an API call here to verify and fetch the remaining details
   };
 
   const handleContinue = () => {
@@ -123,7 +130,7 @@ export const ApplicantDetails = () => {
               </Button>
 
               <div className="mb-8">
-                <h2 className="text-xl font-semibold mb-2">Welcome to Ideal Bank Loans!</h2>
+                <h2 className="text-xl font-semibold mb-2">Welcome to {isVerified ? 'Ideal Bank' : 'CredAble'} Loans!</h2>
                 <p className="text-gray-600">
                   Please provide your personal details to continue with your loan request. 
                   Your information is secure with us and will be used solely for processing your loan application.
@@ -133,6 +140,7 @@ export const ApplicantDetails = () => {
               <div className="mb-8">
                 <h3 className="text-lg font-medium mb-4">Please enter your details</h3>
                 
+                {/* Initial 4 fields that are always visible */}
                 <div className="grid grid-cols-2 gap-4 mb-4">
                   <div>
                     <Label htmlFor="mobile">Mobile Number*</Label>
@@ -152,7 +160,7 @@ export const ApplicantDetails = () => {
                   </div>
                 </div>
 
-                <div className="grid grid-cols-2 gap-4 mb-4">
+                <div className="grid grid-cols-2 gap-4 mb-6">
                   <div>
                     <Label htmlFor="companyNumber">Company Number*</Label>
                     <Input
@@ -171,114 +179,186 @@ export const ApplicantDetails = () => {
                   </div>
                 </div>
 
-                <div className="grid grid-cols-2 gap-4 mb-4">
-                  <div>
-                    <Label htmlFor="registeredName">Registered Name*</Label>
-                    <Input
-                      id="registeredName"
-                      value={formData.registeredName}
-                      onChange={(e) => handleInputChange('registeredName', e.target.value)}
-                    />
+                {/* Verify button - only show if not verified */}
+                {!isVerified && (
+                  <div className="mb-6">
+                    <Button onClick={handleVerify} className="bg-blue-600 hover:bg-blue-700">
+                      Verify
+                    </Button>
                   </div>
-                  <div>
-                    <Label htmlFor="licensingAuthority">Licensing Authority*</Label>
-                    <Input
-                      id="licensingAuthority"
-                      value={formData.licensingAuthority}
-                      onChange={(e) => handleInputChange('licensingAuthority', e.target.value)}
-                    />
-                  </div>
-                </div>
+                )}
 
-                <div className="grid grid-cols-2 gap-4 mb-6">
-                  <div>
-                    <Label htmlFor="companyName">Company Name*</Label>
-                    <Input
-                      id="companyName"
-                      value={formData.companyName}
-                      onChange={(e) => handleInputChange('companyName', e.target.value)}
-                    />
-                  </div>
-                  <div>
-                    <Label htmlFor="legalForm">Legal Form*</Label>
-                    <Input
-                      id="legalForm"
-                      value={formData.legalForm}
-                      onChange={(e) => handleInputChange('legalForm', e.target.value)}
-                    />
-                  </div>
-                </div>
+                {/* Additional fields that appear after verification */}
+                {isVerified && (
+                  <>
+                    <div className="grid grid-cols-2 gap-4 mb-4">
+                      <div>
+                        <Label htmlFor="registeredName">Registered Name*</Label>
+                        <Input
+                          id="registeredName"
+                          value={formData.registeredName}
+                          onChange={(e) => handleInputChange('registeredName', e.target.value)}
+                          className="bg-green-50 border-green-200"
+                          readOnly
+                        />
+                        <div className="flex items-center mt-1">
+                          <Check className="w-4 h-4 text-green-600 mr-1" />
+                          <span className="text-xs text-green-600">Verified</span>
+                        </div>
+                      </div>
+                      <div>
+                        <Label htmlFor="licensingAuthority">Licensing Authority*</Label>
+                        <Input
+                          id="licensingAuthority"
+                          value={formData.licensingAuthority}
+                          onChange={(e) => handleInputChange('licensingAuthority', e.target.value)}
+                          className="bg-green-50 border-green-200"
+                          readOnly
+                        />
+                        <div className="flex items-center mt-1">
+                          <Check className="w-4 h-4 text-green-600 mr-1" />
+                          <span className="text-xs text-green-600">Verified</span>
+                        </div>
+                      </div>
+                    </div>
 
-                <h4 className="text-md font-medium mb-4">Address Details</h4>
-                <div className="grid grid-cols-2 gap-4 mb-4">
-                  <div>
-                    <Label htmlFor="addressLine1">Address line 1*</Label>
-                    <Input
-                      id="addressLine1"
-                      value={formData.addressLine1}
-                      onChange={(e) => handleInputChange('addressLine1', e.target.value)}
-                    />
-                  </div>
-                  <div>
-                    <Label htmlFor="street">Street*</Label>
-                    <Input
-                      id="street"
-                      value={formData.street}
-                      onChange={(e) => handleInputChange('street', e.target.value)}
-                    />
-                  </div>
-                </div>
+                    <div className="grid grid-cols-2 gap-4 mb-6">
+                      <div>
+                        <Label htmlFor="companyName">Company Name*</Label>
+                        <Input
+                          id="companyName"
+                          value={formData.companyName}
+                          onChange={(e) => handleInputChange('companyName', e.target.value)}
+                          className="bg-green-50 border-green-200"
+                          readOnly
+                        />
+                        <div className="flex items-center mt-1">
+                          <Check className="w-4 h-4 text-green-600 mr-1" />
+                          <span className="text-xs text-green-600">Verified</span>
+                        </div>
+                      </div>
+                      <div>
+                        <Label htmlFor="legalForm">Legal Form*</Label>
+                        <Input
+                          id="legalForm"
+                          value={formData.legalForm}
+                          onChange={(e) => handleInputChange('legalForm', e.target.value)}
+                          className="bg-green-50 border-green-200"
+                          readOnly
+                        />
+                        <div className="flex items-center mt-1">
+                          <Check className="w-4 h-4 text-green-600 mr-1" />
+                          <span className="text-xs text-green-600">Verified</span>
+                        </div>
+                      </div>
+                    </div>
 
-                <div className="grid grid-cols-2 gap-4 mb-4">
-                  <div>
-                    <Label htmlFor="poBox">PO box*</Label>
-                    <Input
-                      id="poBox"
-                      value={formData.poBox}
-                      onChange={(e) => handleInputChange('poBox', e.target.value)}
-                    />
-                  </div>
-                  <div>
-                    <Label htmlFor="area">Area*</Label>
-                    <Input
-                      id="area"
-                      value={formData.area}
-                      onChange={(e) => handleInputChange('area', e.target.value)}
-                    />
-                  </div>
-                </div>
+                    <h4 className="text-md font-medium mb-4">Address Details</h4>
+                    <div className="grid grid-cols-2 gap-4 mb-4">
+                      <div>
+                        <Label htmlFor="addressLine1">Address line 1*</Label>
+                        <Input
+                          id="addressLine1"
+                          value={formData.addressLine1}
+                          onChange={(e) => handleInputChange('addressLine1', e.target.value)}
+                          className="bg-green-50 border-green-200"
+                          readOnly
+                        />
+                        <div className="flex items-center mt-1">
+                          <Check className="w-4 h-4 text-green-600 mr-1" />
+                          <span className="text-xs text-green-600">Verified</span>
+                        </div>
+                      </div>
+                      <div>
+                        <Label htmlFor="street">Street*</Label>
+                        <Input
+                          id="street"
+                          value={formData.street}
+                          onChange={(e) => handleInputChange('street', e.target.value)}
+                          className="bg-green-50 border-green-200"
+                          readOnly
+                        />
+                        <div className="flex items-center mt-1">
+                          <Check className="w-4 h-4 text-green-600 mr-1" />
+                          <span className="text-xs text-green-600">Verified</span>
+                        </div>
+                      </div>
+                    </div>
 
-                <div className="grid grid-cols-2 gap-4 mb-6">
-                  <div>
-                    <Label htmlFor="town">Town*</Label>
-                    <select 
-                      id="town"
-                      value={formData.town}
-                      onChange={(e) => handleInputChange('town', e.target.value)}
-                      className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
-                    >
-                      <option value="Sharjah">Sharjah</option>
-                      <option value="Dubai">Dubai</option>
-                      <option value="Abu Dhabi">Abu Dhabi</option>
-                    </select>
-                  </div>
-                  <div>
-                    <Label htmlFor="tradeZone">Trade Zone*</Label>
-                    <select 
-                      id="tradeZone"
-                      value={formData.tradeZone}
-                      onChange={(e) => handleInputChange('tradeZone', e.target.value)}
-                      className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
-                    >
-                      <option value="Freezone">Freezone</option>
-                      <option value="Mainland">Mainland</option>
-                    </select>
-                  </div>
-                </div>
+                    <div className="grid grid-cols-2 gap-4 mb-4">
+                      <div>
+                        <Label htmlFor="poBox">PO box*</Label>
+                        <Input
+                          id="poBox"
+                          value={formData.poBox}
+                          onChange={(e) => handleInputChange('poBox', e.target.value)}
+                          className="bg-green-50 border-green-200"
+                          readOnly
+                        />
+                        <div className="flex items-center mt-1">
+                          <Check className="w-4 h-4 text-green-600 mr-1" />
+                          <span className="text-xs text-green-600">Verified</span>
+                        </div>
+                      </div>
+                      <div>
+                        <Label htmlFor="area">Area*</Label>
+                        <Input
+                          id="area"
+                          value={formData.area}
+                          onChange={(e) => handleInputChange('area', e.target.value)}
+                          className="bg-green-50 border-green-200"
+                          readOnly
+                        />
+                        <div className="flex items-center mt-1">
+                          <Check className="w-4 h-4 text-green-600 mr-1" />
+                          <span className="text-xs text-green-600">Verified</span>
+                        </div>
+                      </div>
+                    </div>
 
-                <Button onClick={handleContinue} className="bg-blue-600 hover:bg-blue-700">
-                  Continue
-                </Button>
+                    <div className="grid grid-cols-2 gap-4 mb-6">
+                      <div>
+                        <Label htmlFor="town">Town*</Label>
+                        <select 
+                          id="town"
+                          value={formData.town}
+                          onChange={(e) => handleInputChange('town', e.target.value)}
+                          className="flex h-10 w-full rounded-md border border-green-200 bg-green-50 px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                          disabled
+                        >
+                          <option value="Sharjah">Sharjah</option>
+                          <option value="Dubai">Dubai</option>
+                          <option value="Abu Dhabi">Abu Dhabi</option>
+                        </select>
+                        <div className="flex items-center mt-1">
+                          <Check className="w-4 h-4 text-green-600 mr-1" />
+                          <span className="text-xs text-green-600">Verified</span>
+                        </div>
+                      </div>
+                      <div>
+                        <Label htmlFor="tradeZone">Trade Zone*</Label>
+                        <select 
+                          id="tradeZone"
+                          value={formData.tradeZone}
+                          onChange={(e) => handleInputChange('tradeZone', e.target.value)}
+                          className="flex h-10 w-full rounded-md border border-green-200 bg-green-50 px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                          disabled
+                        >
+                          <option value="Freezone">Freezone</option>
+                          <option value="Mainland">Mainland</option>
+                        </select>
+                        <div className="flex items-center mt-1">
+                          <Check className="w-4 h-4 text-green-600 mr-1" />
+                          <span className="text-xs text-green-600">Verified</span>
+                        </div>
+                      </div>
+                    </div>
+
+                    <Button onClick={handleContinue} className="bg-blue-600 hover:bg-blue-700">
+                      Continue
+                    </Button>
+                  </>
+                )}
               </div>
             </div>
           </div>
