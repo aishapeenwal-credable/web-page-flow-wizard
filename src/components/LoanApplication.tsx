@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -11,7 +12,6 @@ import { AuthorizedSignatory } from "./steps/AuthorizedSignatory";
 import { KYCVerification } from "./steps/KYCVerification";
 import { BankAccountVerification } from "./steps/BankAccountVerification";
 import { AgreementSigning } from "./steps/AgreementSigning";
-import { UAEFTSStep } from "./steps/UAEFTSStep";
 
 export const LoanApplication = () => {
   const [currentStep, setCurrentStep] = useState(1);
@@ -60,7 +60,7 @@ export const LoanApplication = () => {
       case 6:
         return <BankAccountVerification onNext={handleNextStep} onPrev={handlePrevStep} />;
       case 7:
-        return <UAEFTSStep onNext={handleNextStep} onPrev={handlePrevStep} />;
+        return <BankAccountVerification onNext={handleNextStep} onPrev={handlePrevStep} />;
       case 8:
         return <AgreementSigning onNext={handleNextStep} onPrev={handlePrevStep} />;
       default:

@@ -1,9 +1,6 @@
-
-import { useState } from "react";
 import { ArrowLeft, Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { SidePanel } from "../SidePanel";
-import { SigningModal } from "../SigningModal";
 
 interface AgreementSigningProps {
   onNext: () => void;
@@ -11,8 +8,6 @@ interface AgreementSigningProps {
 }
 
 export const AgreementSigning = ({ onNext, onPrev }: AgreementSigningProps) => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
   const signatories = [
     {
       name: "Jane Cooper",
@@ -29,19 +24,6 @@ export const AgreementSigning = ({ onNext, onPrev }: AgreementSigningProps) => {
       ]
     }
   ];
-
-  const handleAgreementClick = () => {
-    setIsModalOpen(true);
-  };
-
-  const handleModalClose = () => {
-    setIsModalOpen(false);
-  };
-
-  const handleApply = () => {
-    setIsModalOpen(false);
-    onNext();
-  };
 
   return (
     <div className="flex gap-8">
@@ -65,11 +47,7 @@ export const AgreementSigning = ({ onNext, onPrev }: AgreementSigningProps) => {
                 <h3 className="text-lg font-medium mb-4">{signatory.name}</h3>
                 <div className="grid grid-cols-2 gap-4">
                   {signatory.agreements.map((agreement, agreementIndex) => (
-                    <div 
-                      key={agreementIndex} 
-                      className="border border-gray-200 rounded-lg p-4 flex items-center justify-between cursor-pointer hover:bg-gray-50"
-                      onClick={handleAgreementClick}
-                    >
+                    <div key={agreementIndex} className="border border-gray-200 rounded-lg p-4 flex items-center justify-between">
                       <div className="flex items-center space-x-3">
                         <div className="w-8 h-8 bg-blue-100 rounded flex items-center justify-center">
                           <div className="w-4 h-4 bg-blue-600 rounded"></div>
@@ -93,12 +71,6 @@ export const AgreementSigning = ({ onNext, onPrev }: AgreementSigningProps) => {
           </div>
         </div>
       </div>
-
-      <SigningModal 
-        isOpen={isModalOpen}
-        onClose={handleModalClose}
-        onApply={handleApply}
-      />
     </div>
   );
 };
