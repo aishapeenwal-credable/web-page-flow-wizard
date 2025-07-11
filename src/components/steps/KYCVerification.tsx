@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { Upload, FileText, Eye, Trash2, ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -9,6 +10,12 @@ interface KYCVerificationProps {
   onPrev: () => void;
 }
 
+interface UploadedFile {
+  name: string;
+  size: string;
+  status: string;
+}
+
 export const KYCVerification = ({ onNext, onPrev }: KYCVerificationProps) => {
   const [kycStatus] = useState([
     { name: "Jane Cooper", role: "Authorised Signatory", status: "completed", statusText: "C-KYC completed successfully!" },
@@ -16,11 +23,27 @@ export const KYCVerification = ({ onNext, onPrev }: KYCVerificationProps) => {
   ]);
 
   const [indemnityEmail, setIndemnityEmail] = useState("legal@idealbrothers.ae");
-  const [incorporationCert, setIncorporationCert] = useState({
+  const [incorporationCert, setIncorporationCert] = useState<UploadedFile | null>({
     name: "Incorporation_certificate.pdf",
     size: "789 KB",
     status: "100% uploaded"
   });
+
+  const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (file) {
+      const newFile: UploadedFile = {
+        name: file.name,
+        size: `${Math.round(file.size / 1024)} KB`,
+        status: "100% uploaded"
+      };
+      setIncorporationCert(newFile);
+    }
+  };
+
+  const handleRemoveFile = () => {
+    setIncorporationCert(null);
+  };
 
   return (
     <div className="flex gap-8">
@@ -104,7 +127,16 @@ export const KYCVerification = ({ onNext, onPrev }: KYCVerificationProps) => {
             
             <div className="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center mb-4">
               <Upload className="w-8 h-8 text-gray-400 mx-auto mb-2" />
-              <button className="text-blue-600 hover:text-blue-700 font-medium">Click to upload</button>
+              <input
+                type="file"
+                id="incorporation-cert-upload"
+                className="hidden"
+                accept=".pdf,.doc,.docx"
+                onChange={handleFileUpload}
+              />
+              <label htmlFor="incorporation-cert-upload" className="text-blue-600 hover:text-blue-700 font-medium cursor-pointer">
+                Click to upload
+              </label>
               <span className="text-gray-600"> or drag and drop</span>
               <p className="text-sm text-gray-500 mt-1">PDF (max. 1 MB)</p>
             </div>
@@ -124,7 +156,7 @@ export const KYCVerification = ({ onNext, onPrev }: KYCVerificationProps) => {
                 <Button variant="ghost" size="sm">
                   <Eye className="w-4 h-4" />
                 </Button>
-                <Button variant="ghost" size="sm">
+                <Button variant="ghost" size="sm" onClick={handleRemoveFile}>
                   <Trash2 className="w-4 h-4 text-red-500" />
                 </Button>
               </div>
