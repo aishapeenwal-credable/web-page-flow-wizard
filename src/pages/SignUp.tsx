@@ -36,7 +36,7 @@ export const SignUp = () => {
       <div className="flex-1 flex items-center justify-center p-8">
         <div className="relative w-96 h-96 bg-gradient-to-br from-gray-700 to-gray-900 rounded-lg overflow-hidden">
           <img 
-            src="/placeholder.svg" 
+            src="/lovable-uploads/2649b397-eebb-483d-9680-f00c29bd6a95.png" 
             alt="Digital financing illustration" 
             className="absolute inset-0 w-full h-full object-cover"
           />
