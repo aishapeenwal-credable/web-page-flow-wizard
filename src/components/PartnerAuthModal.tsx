@@ -49,18 +49,18 @@ const countryCodes = [
 
 export const PartnerAuthModal = ({ isOpen, onClose, onSubmit }: PartnerAuthModalProps) => {
   const [formData, setFormData] = useState<PartnerData>({
-    fullName: "",
-    emiratesId: "",
-    dateOfBirth: "",
-    gender: "",
-    email: "",
-    mobileNumber: "",
+    fullName: "Esther Howard",
+    emiratesId: "784-1980-94xxxxx-8",
+    dateOfBirth: "1986-03-12",
+    gender: "female",
+    email: "esther.howard@idealbrothers.ae",
+    mobileNumber: "77394 72531",
     countryCode: "+971",
-    addressLine1: "",
-    street: "",
-    poBox: "",
-    area: "",
-    town: "",
+    addressLine1: "Deira Riggat Al Buteen",
+    street: "Deira Riggat Al Buteen",
+    poBox: "93903",
+    area: "Dubai",
+    town: "sharjah",
     consent: false
   });
 
@@ -242,10 +242,10 @@ export const PartnerAuthModal = ({ isOpen, onClose, onSubmit }: PartnerAuthModal
           <div className="flex justify-end">
             <Button 
               onClick={handleSubmit}
-              disabled={!formData.consent || !formData.fullName || !formData.emiratesId}
+              disabled={!formData.consent}
               className="bg-blue-600 hover:bg-blue-700"
             >
-              Verify
+              Send OTP
             </Button>
           </div>
         </div>
