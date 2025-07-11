@@ -1,15 +1,44 @@
+
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Header } from "@/components/Header";
+import { PartnerAuthModal } from "@/components/PartnerAuthModal";
+import { OTPModal } from "@/components/OTPModal";
 import { Check, ArrowLeft } from "lucide-react";
+
+interface Partner {
+  id: string;
+  name: string;
+  status: "Authorized" | "Authorize";
+  mobileNumber?: string;
+}
+
+interface PartnerData {
+  fullName: string;
+  emiratesId: string;
+  dateOfBirth: string;
+  gender: string;
+  email: string;
+  mobileNumber: string;
+  countryCode: string;
+  addressLine1: string;
+  street: string;
+  poBox: string;
+  area: string;
+  town: string;
+  consent: boolean;
+}
 
 export const AECBScore = () => {
   const navigate = useNavigate();
-  const [partners, setPartners] = useState([
-    { name: "Jane Cooper", status: "Authorized" },
-    { name: "Esther Howard", status: "Authorize" }
+  const [partners, setPartners] = useState<Partner[]>([
+    { id: "1", name: "Jane Cooper", status: "Authorized" },
+    { id: "2", name: "Esther Howard", status: "Authorize" }
   ]);
+  const [isPartnerModalOpen, setIsPartnerModalOpen] = useState(false);
+  const [isOTPModalOpen, setIsOTPModalOpen] = useState(false);
+  const [currentPartnerData, setCurrentPartnerData] = useState<PartnerData | null>(null);
 
   const handleContinue = () => {
     navigate("/analysis-loading");
@@ -19,16 +48,36 @@ export const AECBScore = () => {
     navigate(-1);
   };
 
-  const handleAuthorize = (index: number) => {
-    setPartners(prev => 
-      prev.map((partner, i) => 
-        i === index ? { ...partner, status: "Authorized" } : partner
-      )
-    );
+  const handleAuthorize = (id: string) => {
+    const partner = partners.find(p => p.id === id);
+    if (partner && partner.status === "Authorize") {
+      setIsPartnerModalOpen(true);
+    }
   };
 
   const addPartner = () => {
-    setPartners(prev => [...prev, { name: "New Partner", status: "Authorize" }]);
+    setIsPartnerModalOpen(true);
+  };
+
+  const handlePartnerSubmit = (data: PartnerData) => {
+    setCurrentPartnerData(data);
+    setIsPartnerModalOpen(false);
+    setIsOTPModalOpen(true);
+  };
+
+  const handleOTPVerify = (otp: string) => {
+    if (currentPartnerData) {
+      const newPartner: Partner = {
+        id: Date.now().toString(),
+        name: currentPartnerData.fullName,
+        status: "Authorized",
+        mobileNumber: `${currentPartnerData.countryCode}${currentPartnerData.mobileNumber}`
+      };
+      
+      setPartners(prev => [...prev, newPartner]);
+      setIsOTPModalOpen(false);
+      setCurrentPartnerData(null);
+    }
   };
 
   const steps = [
@@ -126,8 +175,8 @@ export const AECBScore = () => {
                 <h3 className="text-lg font-medium mb-6">Private Limited (Pvt Ltd)</h3>
                 
                 <div className="space-y-4">
-                  {partners.map((partner, index) => (
-                    <div key={index} className="flex items-center justify-between p-4 border border-gray-200 rounded-lg">
+                  {partners.map((partner) => (
+                    <div key={partner.id} className="flex items-center justify-between p-4 border border-gray-200 rounded-lg">
                       <span className="font-medium">{partner.name}</span>
                       {partner.status === "Authorized" ? (
                         <span className="px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm font-medium">
@@ -135,7 +184,7 @@ export const AECBScore = () => {
                         </span>
                       ) : (
                         <Button 
-                          onClick={() => handleAuthorize(index)}
+                          onClick={() => handleAuthorize(partner.id)}
                           className="text-blue-600 hover:text-blue-700"
                           variant="ghost"
                         >
@@ -161,6 +210,19 @@ export const AECBScore = () => {
           </div>
         </div>
       </div>
+
+      <PartnerAuthModal
+        isOpen={isPartnerModalOpen}
+        onClose={() => setIsPartnerModalOpen(false)}
+        onSubmit={handlePartnerSubmit}
+      />
+
+      <OTPModal
+        isOpen={isOTPModalOpen}
+        onClose={() => setIsOTPModalOpen(false)}
+        onVerify={handleOTPVerify}
+        mobileNumber={currentPartnerData ? `${currentPartnerData.countryCode}${currentPartnerData.mobileNumber}` : ""}
+      />
     </div>
   );
 };

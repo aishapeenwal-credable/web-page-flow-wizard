@@ -1,7 +1,9 @@
+
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Header } from "@/components/Header";
 import { Check, Upload, FileText, Eye, Trash2, Plus, ArrowLeft } from "lucide-react";
 
@@ -13,6 +15,23 @@ interface UploadedFile {
   file: File;
 }
 
+const countryCodes = [
+  { code: "+971", country: "UAE" },
+  { code: "+1", country: "USA" },
+  { code: "+44", country: "UK" },
+  { code: "+91", country: "India" },
+  { code: "+966", country: "Saudi Arabia" },
+  { code: "+965", country: "Kuwait" },
+  { code: "+974", country: "Qatar" },
+  { code: "+973", country: "Bahrain" },
+  { code: "+968", country: "Oman" },
+  { code: "+60", country: "Malaysia" },
+  { code: "+65", country: "Singapore" },
+  { code: "+86", country: "China" },
+  { code: "+33", country: "France" },
+  { code: "+49", country: "Germany" },
+];
+
 export const BankStatements = () => {
   const navigate = useNavigate();
   const [uploadedFiles, setUploadedFiles] = useState<UploadedFile[]>([
@@ -20,18 +39,19 @@ export const BankStatements = () => {
       id: "1",
       name: "Sample bank 1.pdf",
       size: "789 KB",
-      status: "100% uploAEDd",
+      status: "100% uploaded",
       file: new File([], "sample1.pdf")
     },
     {
       id: "2", 
       name: "Sample bank 2.pdf",
       size: "789 KB",
-      status: "100% uploAEDd",
+      status: "100% uploaded",
       file: new File([], "sample2.pdf")
     }
   ]);
   const [passwords, setPasswords] = useState<{ [key: string]: string }>({});
+  const [banks, setBanks] = useState([{ id: 1, name: "Bank 1" }]);
 
   const handleContinue = () => {
     navigate("/aecb-score");
@@ -41,14 +61,14 @@ export const BankStatements = () => {
     navigate(-1);
   };
 
-  const handleFileUpload = (files: FileList | null) => {
+  const handleFileUpload = (files: FileList | null, bankId?: number) => {
     if (!files) return;
 
     const newFiles: UploadedFile[] = Array.from(files).map(file => ({
       id: Date.now().toString() + Math.random().toString(36).substr(2, 9),
       name: file.name,
       size: `${Math.round(file.size / 1024)} KB`,
-      status: "100% uploAEDd",
+      status: "100% uploaded",
       file: file
     }));
 
@@ -64,6 +84,11 @@ export const BankStatements = () => {
 
   const handlePasswordChange = (fileId: string, password: string) => {
     setPasswords({ ...passwords, [fileId]: password });
+  };
+
+  const addNewBank = () => {
+    const newBankId = banks.length + 1;
+    setBanks([...banks, { id: newBankId, name: `Bank ${newBankId}` }]);
   };
 
   const steps = [
@@ -183,28 +208,37 @@ export const BankStatements = () => {
                 <h3 className="text-lg font-medium mb-4">Upload statements</h3>
                 <p className="text-gray-600 mb-4">You can upload bank statements one by one or all at once.</p>
 
-                <div className="border border-gray-300 rounded-lg p-4 mb-4">
-                  <div className="flex items-center justify-between mb-2">
-                    <span className="font-medium">Bank 1</span>
-                    <div className="flex items-center space-x-2">
-                      <Check className="w-4 h-4 text-green-600" />
-                      <button className="text-gray-400">
-                        <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                          <path d="M6 10a2 2 0 11-4 0 2 2 0 014 0zM12 10a2 2 0 11-4 0 2 2 0 014 0zM16 12a2 2 0 100-4 2 2 0 000 4z" />
-                        </svg>
-                      </button>
+                {banks.map((bank) => (
+                  <div key={bank.id} className="border border-gray-300 rounded-lg p-4 mb-4">
+                    <div className="flex items-center justify-between mb-2">
+                      <span className="font-medium">{bank.name}</span>
+                      <div className="flex items-center space-x-2">
+                        <Check className="w-4 h-4 text-green-600" />
+                        <button className="text-gray-400">
+                          <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M6 10a2 2 0 11-4 0 2 2 0 014 0zM12 10a2 2 0 11-4 0 2 2 0 014 0zM16 12a2 2 0 100-4 2 2 0 000 4z" />
+                          </svg>
+                        </button>
+                      </div>
+                    </div>
+                    
+                    <div className="border-2 border-dashed border-gray-300 rounded-lg p-8 text-center">
+                      <Upload className="w-8 h-8 text-gray-400 mx-auto mb-2" />
+                      <label className="text-blue-600 hover:text-blue-700 font-medium cursor-pointer">
+                        <input
+                          type="file"
+                          multiple
+                          accept=".pdf"
+                          className="hidden"
+                          onChange={(e) => handleFileUpload(e.target.files, bank.id)}
+                        />
+                        Click to upload
+                      </label>
+                      <span className="text-gray-600"> or drag and drop</span>
+                      <p className="text-sm text-gray-500 mt-1">Supported format: PDF (max. 1 MB)</p>
                     </div>
                   </div>
-                  
-                  <div className="border-2 border-dashed border-gray-300 rounded-lg p-8 text-center">
-                    <Upload className="w-8 h-8 text-gray-400 mx-auto mb-2" />
-                    <button className="text-blue-600 hover:text-blue-700 font-medium">
-                      Click to upload
-                    </button>
-                    <span className="text-gray-600"> or drag and drop</span>
-                    <p className="text-sm text-gray-500 mt-1">Supported format: PDF (max. 1 MB)</p>
-                  </div>
-                </div>
+                ))}
 
                 {uploadedFiles.length > 0 && (
                   <div className="space-y-4 mb-6">
@@ -237,7 +271,10 @@ export const BankStatements = () => {
                   </div>
                 )}
 
-                <button className="flex items-center space-x-2 text-blue-600 hover:text-blue-700 font-medium mb-8 p-4 border-2 border-dashed border-blue-200 rounded-lg w-full justify-center">
+                <button 
+                  onClick={addNewBank}
+                  className="flex items-center space-x-2 text-blue-600 hover:text-blue-700 font-medium mb-8 p-4 border-2 border-dashed border-blue-200 rounded-lg w-full justify-center"
+                >
                   <Plus className="w-4 h-4" />
                   <span>Add Statements for Another Bank</span>
                 </button>
