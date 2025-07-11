@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -34,6 +35,11 @@ export const SignUp = () => {
     <div className="min-h-screen bg-gray-50 flex">
       <div className="flex-1 flex items-center justify-center p-8">
         <div className="relative w-96 h-96 bg-gradient-to-br from-gray-700 to-gray-900 rounded-lg overflow-hidden">
+          <img 
+            src="/lovable-uploads/80121522-ad76-4175-95c6-4a130741e914.png" 
+            alt="Person working with laptop"
+            className="absolute inset-0 w-full h-full object-cover"
+          />
           <div className="absolute inset-0 bg-black bg-opacity-40"></div>
           <div className="relative z-10 p-8 text-white h-full flex flex-col justify-center">
             <h2 className="text-2xl font-bold mb-8">Improve your working capital with digital financing</h2>
@@ -78,7 +84,7 @@ export const SignUp = () => {
               <span className="text-xl font-bold text-blue-600">Ideal Bank</span>
             </div>
             <div className="flex items-center space-x-4">
-              <select className="text-sm text-blue-600">
+              <select className="text-sm text-blue-600 bg-transparent border-none">
                 <option>English</option>
                 <option>العربية</option>
               </select>

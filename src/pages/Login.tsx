@@ -12,6 +12,7 @@ export const Login = () => {
     email: "john.doe@idealbrothers.ae",
     password: "********"
   });
+  const [showPassword, setShowPassword] = useState(false);
 
   const handleInputChange = (field: string, value: string) => {
     setFormData(prev => ({ ...prev, [field]: value }));
@@ -29,6 +30,11 @@ export const Login = () => {
     <div className="min-h-screen bg-gray-50 flex">
       <div className="flex-1 flex items-center justify-center p-8">
         <div className="relative w-96 h-96 bg-gradient-to-br from-gray-700 to-gray-900 rounded-lg overflow-hidden">
+          <img 
+            src="/lovable-uploads/80121522-ad76-4175-95c6-4a130741e914.png" 
+            alt="Person working with laptop"
+            className="absolute inset-0 w-full h-full object-cover"
+          />
           <div className="absolute inset-0 bg-black bg-opacity-40"></div>
           <div className="relative z-10 p-8 text-white h-full flex flex-col justify-center">
             <h2 className="text-2xl font-bold mb-8">Improve your working capital with digital financing</h2>
@@ -73,7 +79,7 @@ export const Login = () => {
               <span className="text-xl font-bold text-blue-600">Ideal Bank</span>
             </div>
             <div className="flex items-center space-x-4">
-              <select className="text-sm text-blue-600">
+              <select className="text-sm text-blue-600 bg-transparent border-none">
                 <option>English</option>
                 <option>العربية</option>
               </select>
@@ -81,9 +87,11 @@ export const Login = () => {
             </div>
           </div>
 
-          <h1 className="text-2xl font-semibold mb-6">Login</h1>
+          <h1 className="text-2xl font-semibold mb-6">Sign in</h1>
 
           <div className="space-y-6">
+            <div className="text-sm text-gray-600 mb-4">Login with SSO</div>
+            
             <Button variant="outline" className="w-full mb-4">
               <User className="w-4 h-4 mr-2" />
               Login with UAE PASS
@@ -105,20 +113,44 @@ export const Login = () => {
 
             <div>
               <Label htmlFor="password">Password</Label>
-              <Input
-                id="password"
-                type="password"
-                value={formData.password}
-                onChange={(e) => handleInputChange('password', e.target.value)}
-              />
+              <div className="relative">
+                <Input
+                  id="password"
+                  type={showPassword ? "text" : "password"}
+                  value={formData.password}
+                  onChange={(e) => handleInputChange('password', e.target.value)}
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute right-3 top-1/2 transform -translate-y-1/2 text-blue-600 text-sm hover:underline"
+                >
+                  {showPassword ? "Hide" : "Show"}
+                </button>
+              </div>
             </div>
 
-            <div className="flex items-center justify-between">
-              <div className="flex items-center space-x-2">
-                <input type="checkbox" id="remember" />
-                <Label htmlFor="remember" className="text-sm">Remember me</Label>
+            <div className="text-right">
+              <a href="#" className="text-sm text-blue-600 hover:underline">Forgot Password?</a>
+            </div>
+
+            <div>
+              <Label htmlFor="security">Enter Security Code</Label>
+              <div className="flex space-x-2">
+                <Input
+                  id="security"
+                  defaultValue="etsans"
+                  className="flex-1"
+                />
+                <div className="w-20 h-10 bg-green-100 rounded flex items-center justify-center">
+                  <span className="text-green-600 font-mono text-sm">captcha</span>
+                </div>
               </div>
-              <a href="#" className="text-sm text-blue-600 hover:underline">Forgot password?</a>
+            </div>
+
+            <div className="flex items-center space-x-2">
+              <input type="checkbox" id="marketing" />
+              <Label htmlFor="marketing" className="text-sm">I agree to be contacted for marketing purposes via SMS, email or WhatsApp.</Label>
             </div>
 
             <Button 
@@ -130,13 +162,14 @@ export const Login = () => {
 
             <div className="text-center">
               <span className="text-sm text-gray-600">
-                Don't have an account?{" "}
+                If you don't have an account,{" "}
                 <button 
                   onClick={() => navigate("/signup")}
                   className="text-blue-600 hover:underline"
                 >
-                  Sign up
+                  Sign Up
                 </button>
+                {" "}here
               </span>
             </div>
           </div>
