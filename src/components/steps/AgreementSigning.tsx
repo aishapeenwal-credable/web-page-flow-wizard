@@ -12,20 +12,21 @@ interface AgreementSigningProps {
 
 export const AgreementSigning = ({ onNext, onPrev }: AgreementSigningProps) => {
   const [showModal, setShowModal] = useState(false);
+  const [signedAgreements, setSignedAgreements] = useState<Set<string>>(new Set());
 
   const signatories = [
     {
       name: "Jane Cooper",
       agreements: [
-        { type: "Facility agreement", status: "completed" },
-        { type: "Personal guarantee", status: "completed" }
+        { type: "Facility agreement", id: "jane-facility" },
+        { type: "Personal guarantee", id: "jane-guarantee" }
       ]
     },
     {
       name: "Esther Howard", 
       agreements: [
-        { type: "Facility agreement", status: "completed" },
-        { type: "Personal guarantee", status: "completed" }
+        { type: "Facility agreement", id: "esther-facility" },
+        { type: "Personal guarantee", id: "esther-guarantee" }
       ]
     }
   ];
@@ -35,8 +36,17 @@ export const AgreementSigning = ({ onNext, onPrev }: AgreementSigningProps) => {
   };
 
   const handleApply = () => {
+    // Mark all agreements as signed
+    const allAgreementIds = signatories.flatMap(signatory => 
+      signatory.agreements.map(agreement => agreement.id)
+    );
+    setSignedAgreements(new Set(allAgreementIds));
     setShowModal(false);
     onNext();
+  };
+
+  const isAgreementSigned = (agreementId: string) => {
+    return signedAgreements.has(agreementId);
   };
 
   return (
@@ -68,8 +78,16 @@ export const AgreementSigning = ({ onNext, onPrev }: AgreementSigningProps) => {
                         </div>
                         <span className="font-medium">{agreement.type}</span>
                       </div>
-                      <div className="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center">
-                        <Check className="w-4 h-4 text-white" />
+                      <div className={`w-6 h-6 rounded-full flex items-center justify-center ${
+                        isAgreementSigned(agreement.id) 
+                          ? 'bg-green-500' 
+                          : 'bg-gray-300'
+                      }`}>
+                        <Check className={`w-4 h-4 ${
+                          isAgreementSigned(agreement.id) 
+                            ? 'text-white' 
+                            : 'text-gray-500'
+                        }`} />
                       </div>
                     </div>
                   ))}
