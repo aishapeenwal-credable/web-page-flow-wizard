@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Upload, FileText, Eye, Trash2, Plus, ChevronDown, ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -58,6 +57,21 @@ export const AuthorizedSignatory = ({ onNext, onPrev }: AuthorizedSignatoryProps
       mobile: "773 947 253"
     }
   ]);
+
+  // Helper function to check if signatory is complete
+  const isSignatoryComplete = (signatory: SignatoryData): boolean => {
+    return signatory.name.trim() !== '' && 
+           signatory.designation.trim() !== '' && 
+           signatory.email.trim() !== '' && 
+           signatory.mobile.trim() !== '';
+  };
+
+  // Helper function to check if guarantor is complete
+  const isGuarantorComplete = (guarantor: GuarantorData): boolean => {
+    return guarantor.name.trim() !== '' && 
+           guarantor.email.trim() !== '' && 
+           guarantor.mobile.trim() !== '';
+  };
 
   const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
@@ -179,13 +193,22 @@ export const AuthorizedSignatory = ({ onNext, onPrev }: AuthorizedSignatoryProps
               </div>
             </div>
 
-            {signatories.map((signatory, index) => (
+            {signatories.map((signatory, index) => {
+              const isComplete = isSignatoryComplete(signatory);
+              return (
               <div key={index} className="mb-4">
-                <div className="flex items-center justify-between p-4 border border-gray-200 rounded-lg">
+                <div className={`flex items-center justify-between p-4 rounded-lg border ${isComplete ? 'bg-green-50 border-green-200' : 'border-gray-200'}`}>
                   <span className="font-medium">Authorised Signatory {index + 2}</span>
-                  <ChevronDown className="w-4 h-4" />
+                  <div className="flex items-center gap-2">
+                    {isComplete && (
+                      <div className="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center">
+                        <div className="w-2 h-2 bg-white rounded-full"></div>
+                      </div>
+                    )}
+                    <ChevronDown className="w-4 h-4" />
+                  </div>
                 </div>
-                <div className="p-4 border-l border-r border-b border-gray-200 rounded-b-lg space-y-4">
+                <div className={`p-4 border-l border-r border-b rounded-b-lg space-y-4 ${isComplete ? 'border-green-200' : 'border-gray-200'}`}>
                   <div className="grid grid-cols-2 gap-4">
                     <div>
                       <label className="block text-sm font-medium mb-1">Authorised Signatory Name</label>
@@ -237,7 +260,8 @@ export const AuthorizedSignatory = ({ onNext, onPrev }: AuthorizedSignatoryProps
                   </div>
                 </div>
               </div>
-            ))}
+              );
+            })}
 
             <button 
               onClick={addSignatory}
@@ -251,15 +275,19 @@ export const AuthorizedSignatory = ({ onNext, onPrev }: AuthorizedSignatoryProps
           <div className="mb-8">
             <h3 className="text-lg font-medium mb-4">Personal Guarantor</h3>
             
-            {guarantors.map((guarantor, index) => (
+            {guarantors.map((guarantor, index) => {
+              const isComplete = isGuarantorComplete(guarantor);
+              const isFirstGuarantor = index === 0;
+              
+              return (
               <div key={index} className="mb-4">
-                <div className={`flex items-center justify-between p-4 rounded-lg border ${index === 0 ? 'bg-green-50 border-green-200' : 'border-gray-200'}`}>
+                <div className={`flex items-center justify-between p-4 rounded-lg border ${(isComplete || isFirstGuarantor) ? 'bg-green-50 border-green-200' : 'border-gray-200'}`}>
                   <span className="font-medium">Personal Guarantor {index + 1}</span>
-                  <div className={`w-6 h-6 rounded-full flex items-center justify-center ${index === 0 ? 'bg-green-500' : 'bg-gray-300'}`}>
-                    <div className={`w-2 h-2 rounded-full ${index === 0 ? 'bg-white' : 'bg-gray-600'}`}></div>
+                  <div className={`w-6 h-6 rounded-full flex items-center justify-center ${(isComplete || isFirstGuarantor) ? 'bg-green-500' : 'bg-gray-300'}`}>
+                    <div className={`w-2 h-2 rounded-full ${(isComplete || isFirstGuarantor) ? 'bg-white' : 'bg-gray-600'}`}></div>
                   </div>
                 </div>
-                <div className={`p-4 border-l border-r border-b rounded-b-lg space-y-4 ${index === 0 ? 'border-green-200' : 'border-gray-200'}`}>
+                <div className={`p-4 border-l border-r border-b rounded-b-lg space-y-4 ${(isComplete || isFirstGuarantor) ? 'border-green-200' : 'border-gray-200'}`}>
                   <div>
                     <label className="block text-sm font-medium mb-1">Personal Guarantor Name</label>
                     <Input
@@ -302,7 +330,8 @@ export const AuthorizedSignatory = ({ onNext, onPrev }: AuthorizedSignatoryProps
                   </div>
                 </div>
               </div>
-            ))}
+              );
+            })}
 
             <button 
               onClick={addGuarantor}
