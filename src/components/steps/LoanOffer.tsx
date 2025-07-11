@@ -1,9 +1,14 @@
+
 import { useState } from "react";
-import { ArrowLeft, ChevronUp, ChevronDown, Phone } from "lucide-react";
+import { ArrowLeft, ChevronUp, ChevronDown, Phone, Calendar } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { SidePanel } from "../SidePanel";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import { Calendar as CalendarComponent } from "@/components/ui/calendar";
+import { format } from "date-fns";
+import { cn } from "@/lib/utils";
 
 interface LoanOfferProps {
   onNext: () => void;
@@ -13,11 +18,20 @@ interface LoanOfferProps {
 export const LoanOffer = ({ onNext, onPrev }: LoanOfferProps) => {
   const [loanAmount, setLoanAmount] = useState(30000);
   const [repaymentPeriod, setRepaymentPeriod] = useState(6);
+  const [drawdownAmount, setDrawdownAmount] = useState(30000);
+  const [disbursementDate, setDisbursementDate] = useState<Date>(new Date(2025, 2, 29)); // March 29, 2025
   const [affordabilityOpen, setAffordabilityOpen] = useState(true);
   const [repaymentOpen, setRepaymentOpen] = useState(true);
 
   const maxLoanAmount = 50000;
   const maxRepaymentPeriod = 12;
+
+  const handleDrawdownAmountChange = (value: string) => {
+    const numValue = Number(value);
+    if (numValue >= 0 && numValue <= loanAmount) {
+      setDrawdownAmount(numValue);
+    }
+  };
 
   return (
     <div className="flex gap-8">
@@ -153,11 +167,45 @@ export const LoanOffer = ({ onNext, onPrev }: LoanOfferProps) => {
               <div className="grid grid-cols-2 gap-4 mb-4">
                 <div>
                   <label className="block text-sm font-medium mb-2">Select Drawdown Amount*</label>
-                  <Input value="30000 AED" readOnly />
+                  <div className="relative">
+                    <Input 
+                      type="number"
+                      value={drawdownAmount}
+                      onChange={(e) => handleDrawdownAmountChange(e.target.value)}
+                      className="pr-12"
+                      min="0"
+                      max={loanAmount}
+                    />
+                    <span className="absolute right-3 top-1/2 transform -translate-y-1/2 text-sm text-gray-500">AED</span>
+                  </div>
+                  <p className="text-xs text-gray-500 mt-1">Maximum: {loanAmount.toLocaleString()} AED</p>
                 </div>
                 <div>
                   <label className="block text-sm font-medium mb-2">Disbursement Date*</label>
-                  <Input value="29/03/2025" readOnly />
+                  <Popover>
+                    <PopoverTrigger asChild>
+                      <Button
+                        variant="outline"
+                        className={cn(
+                          "w-full justify-start text-left font-normal",
+                          !disbursementDate && "text-muted-foreground"
+                        )}
+                      >
+                        <Calendar className="mr-2 h-4 w-4" />
+                        {disbursementDate ? format(disbursementDate, "dd/MM/yyyy") : <span>Pick a date</span>}
+                      </Button>
+                    </PopoverTrigger>
+                    <PopoverContent className="w-auto p-0" align="start">
+                      <CalendarComponent
+                        mode="single"
+                        selected={disbursementDate}
+                        onSelect={setDisbursementDate}
+                        initialFocus
+                        className="pointer-events-auto"
+                        disabled={(date) => date < new Date()}
+                      />
+                    </PopoverContent>
+                  </Popover>
                 </div>
               </div>
               <div className="overflow-x-auto">
