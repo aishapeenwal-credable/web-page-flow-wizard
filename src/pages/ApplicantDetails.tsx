@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -22,7 +23,7 @@ export const ApplicantDetails = () => {
     poBox: "93903",
     area: "Dubai",
     town: "Sharjah",
-    traedZone: "Freezone"
+    tradeZone: "Freezone"
   });
 
   const handleInputChange = (field: string, value: string) => {
@@ -257,11 +258,11 @@ export const ApplicantDetails = () => {
                     </select>
                   </div>
                   <div>
-                    <Label htmlFor="traedZone">TrAED Zone*</Label>
+                    <Label htmlFor="tradeZone">Trade Zone*</Label>
                     <select 
-                      id="traedZone"
-                      value={formData.traedZone}
-                      onChange={(e) => handleInputChange('traedZone', e.target.value)}
+                      id="tradeZone"
+                      value={formData.tradeZone}
+                      onChange={(e) => handleInputChange('tradeZone', e.target.value)}
                       className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
                     >
                       <option value="Freezone">Freezone</option>
