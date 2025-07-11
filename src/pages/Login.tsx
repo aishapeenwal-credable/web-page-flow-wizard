@@ -31,7 +31,7 @@ export const Login = () => {
       <div className="flex-1 flex items-center justify-center p-8">
         <div className="relative w-96 h-96 bg-gradient-to-br from-gray-700 to-gray-900 rounded-lg overflow-hidden">
           <img 
-            src="/lovable-uploads/80121522-ad76-4175-95c6-4a130741e914.png" 
+            src="/lovable-uploads/aeea3da9-e3cd-46bb-8fb6-b44431ba9f35.png" 
             alt="Person working with laptop"
             className="absolute inset-0 w-full h-full object-cover"
           />
