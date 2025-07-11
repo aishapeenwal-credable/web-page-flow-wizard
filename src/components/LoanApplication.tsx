@@ -1,5 +1,8 @@
 
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { Button } from "@/components/ui/button";
+import { ArrowLeft } from "lucide-react";
 import { Header } from "./Header";
 import { ProgressIndicator } from "./ProgressIndicator";
 import { VATReturns } from "./steps/VATReturns";
@@ -12,6 +15,7 @@ import { AgreementSigning } from "./steps/AgreementSigning";
 
 export const LoanApplication = () => {
   const [currentStep, setCurrentStep] = useState(1);
+  const navigate = useNavigate();
 
   const steps = [
     { id: 1, name: "Applicant Detail", description: "Just a few Personal details.", completed: true },
@@ -35,6 +39,10 @@ export const LoanApplication = () => {
 
   const handlePrevStep = () => {
     setCurrentStep(prev => Math.max(prev - 1, 1));
+  };
+
+  const handleBack = () => {
+    navigate("/analysis-loading");
   };
 
   const renderCurrentStep = () => {
@@ -64,6 +72,14 @@ export const LoanApplication = () => {
     <div className="min-h-screen bg-gray-50">
       <Header />
       <div className="max-w-7xl mx-auto px-4 py-8">
+        <Button 
+          variant="ghost" 
+          onClick={handleBack} 
+          className="mb-4 flex items-center gap-2"
+        >
+          <ArrowLeft className="w-4 h-4" />
+          Back
+        </Button>
         <h1 className="text-2xl font-semibold mb-8">Your loan application</h1>
         <ProgressIndicator 
           steps={currentStep <= 3 ? steps : extendedSteps} 

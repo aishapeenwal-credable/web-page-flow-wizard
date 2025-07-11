@@ -10,7 +10,7 @@ import { ApplicantDetails } from "./pages/ApplicantDetails";
 import { BankStatements } from "./pages/BankStatements";
 import { AECBScore } from "./pages/AECBScore";
 import { AnalysisLoading } from "./pages/AnalysisLoading";
-import Index from "./pages/Index";
+import { LoanApplication } from "./components/LoanApplication";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -22,13 +22,14 @@ const App = () => (
       <Sonner />
       <BrowserRouter>
         <Routes>
+          <Route path="/" element={<Login />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/applicant-details" element={<ApplicantDetails />} />
           <Route path="/bank-statements" element={<BankStatements />} />
           <Route path="/aecb-score" element={<AECBScore />} />
           <Route path="/analysis-loading" element={<AnalysisLoading />} />
-          <Route path="/" element={<Index />} />
+          <Route path="/loan-application" element={<LoanApplication />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

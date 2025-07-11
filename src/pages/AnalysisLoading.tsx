@@ -1,4 +1,3 @@
-
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Header } from "@/components/Header";
@@ -10,7 +9,7 @@ export const AnalysisLoading = () => {
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      navigate("/");
+      navigate("/loan-application");
     }, 3000);
 
     return () => clearTimeout(timer);
