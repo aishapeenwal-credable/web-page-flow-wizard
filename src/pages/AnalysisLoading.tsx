@@ -2,7 +2,8 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Header } from "@/components/Header";
-import { Check } from "lucide-react";
+import { Check, ArrowLeft } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 export const AnalysisLoading = () => {
   const navigate = useNavigate();
@@ -14,6 +15,10 @@ export const AnalysisLoading = () => {
 
     return () => clearTimeout(timer);
   }, [navigate]);
+
+  const handleBack = () => {
+    navigate(-1);
+  };
 
   const steps = [
     { id: 1, name: "Applicant Detail", description: "Just a few Personal details.", completed: true },
@@ -27,6 +32,15 @@ export const AnalysisLoading = () => {
     <div className="min-h-screen bg-gray-50">
       <Header />
       <div className="max-w-7xl mx-auto px-4 py-8">
+        <Button 
+          variant="ghost" 
+          onClick={handleBack} 
+          className="mb-4 flex items-center gap-2"
+        >
+          <ArrowLeft className="w-4 h-4" />
+          Back
+        </Button>
+
         <h1 className="text-2xl font-semibold mb-8">Your loan application</h1>
         
         {/* Progress Indicator */}

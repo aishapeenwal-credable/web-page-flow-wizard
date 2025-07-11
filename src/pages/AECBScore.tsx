@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -13,11 +12,11 @@ export const AECBScore = () => {
   ]);
 
   const handleContinue = () => {
-    navigate("/");
+    navigate("/analysis-loading");
   };
 
   const handleBack = () => {
-    navigate("/bank-statements");
+    navigate(-1);
   };
 
   const handleAuthorize = (index: number) => {

@@ -1,10 +1,9 @@
-
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { User } from "lucide-react";
+import { User, ArrowLeft } from "lucide-react";
 
 export const SignUp = () => {
   const navigate = useNavigate();
@@ -25,6 +24,10 @@ export const SignUp = () => {
 
   const handleSignUp = () => {
     navigate("/applicant-details");
+  };
+
+  const handleBack = () => {
+    navigate(-1);
   };
 
   return (
@@ -58,6 +61,15 @@ export const SignUp = () => {
 
       <div className="flex-1 flex items-center justify-center p-8">
         <div className="w-full max-w-md">
+          <Button 
+            variant="ghost" 
+            onClick={handleBack} 
+            className="mb-4 flex items-center gap-2"
+          >
+            <ArrowLeft className="w-4 h-4" />
+            Back
+          </Button>
+
           <div className="flex items-center justify-between mb-8">
             <div className="flex items-center space-x-2">
               <div className="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center">
@@ -187,6 +199,18 @@ export const SignUp = () => {
             >
               Sign Up!
             </Button>
+
+            <div className="text-center">
+              <span className="text-sm text-gray-600">
+                Already have an account?{" "}
+                <button 
+                  onClick={() => navigate("/login")}
+                  className="text-blue-600 hover:underline"
+                >
+                  Login
+                </button>
+              </span>
+            </div>
           </div>
 
           <div className="mt-8 text-center">

@@ -1,11 +1,10 @@
-
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Header } from "@/components/Header";
-import { Check } from "lucide-react";
+import { Check, ArrowLeft } from "lucide-react";
 
 export const ApplicantDetails = () => {
   const navigate = useNavigate();
@@ -32,6 +31,10 @@ export const ApplicantDetails = () => {
 
   const handleContinue = () => {
     navigate("/bank-statements");
+  };
+
+  const handleBack = () => {
+    navigate(-1);
   };
 
   const steps = [
@@ -104,6 +107,15 @@ export const ApplicantDetails = () => {
 
           <div className="flex-1">
             <div className="bg-white rounded-lg shadow-sm p-6">
+              <Button 
+                variant="ghost" 
+                onClick={handleBack} 
+                className="mb-4 flex items-center gap-2"
+              >
+                <ArrowLeft className="w-4 h-4" />
+                Back
+              </Button>
+
               <div className="mb-8">
                 <h2 className="text-xl font-semibold mb-2">Welcome to Ideal Bank Loans!</h2>
                 <p className="text-gray-600">

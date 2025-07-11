@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -39,7 +38,7 @@ export const BankStatements = () => {
   };
 
   const handleBack = () => {
-    navigate("/applicant-details");
+    navigate(-1);
   };
 
   const handleFileUpload = (files: FileList | null) => {
