@@ -1,8 +1,9 @@
+
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { Header } from "@/components/Header";
-import { Check, ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { ArrowLeft, Check } from "lucide-react";
+import { Header } from "@/components/Header";
 
 export const AnalysisLoading = () => {
   const navigate = useNavigate();
@@ -10,20 +11,20 @@ export const AnalysisLoading = () => {
   useEffect(() => {
     const timer = setTimeout(() => {
       navigate("/loan-application");
-    }, 3000);
+    }, 5000);
 
     return () => clearTimeout(timer);
   }, [navigate]);
 
   const handleBack = () => {
-    navigate(-1);
+    navigate("/aecb-score");
   };
 
   const steps = [
     { id: 1, name: "Applicant Detail", description: "Just a few Personal details.", completed: true },
-    { id: 2, name: "Bank Statements", description: "Upload your bank statements, safely.", completed: true, active: true },
-    { id: 3, name: "AECB Score", description: "Add partners and check AECB scores.", completed: false },
-    { id: 4, name: "VAT Returns", description: "Check VAT returns easily.", completed: false },
+    { id: 2, name: "Bank Statements", description: "Upload your bank statements, safely.", completed: true },
+    { id: 3, name: "AECB Score", description: "Add partners and check AECB scores.", completed: true },
+    { id: 4, name: "VAT Returns", description: "Check VAT returns easily.", completed: false, active: true },
     { id: 5, name: "Loan Offer", description: "View and accept loan offers.", completed: false }
   ];
 
@@ -39,7 +40,6 @@ export const AnalysisLoading = () => {
           <ArrowLeft className="w-4 h-4" />
           Back
         </Button>
-
         <h1 className="text-2xl font-semibold mb-8">Your loan application</h1>
         
         {/* Progress Indicator */}
@@ -74,15 +74,48 @@ export const AnalysisLoading = () => {
           ))}
         </div>
 
-        <div className="flex items-center justify-center min-h-96">
-          <div className="text-center">
-            <div className="w-16 h-16 border-4 border-blue-600 border-t-transparent rounded-full animate-spin mx-auto mb-8"></div>
-            <h2 className="text-2xl font-semibold text-blue-600 mb-4">
-              We are currently analysing your bank statement.
-            </h2>
-            <p className="text-gray-600">
-              This process may require a bit more time, and we appreciate your patience.
-            </p>
+        <div className="flex gap-8">
+          <div className="w-80 bg-gradient-to-br from-blue-600 to-blue-800 rounded-lg relative overflow-hidden">
+            <img 
+              src="/lovable-uploads/c1dc414f-1d31-4eb0-83cf-c75066ea23c9.png" 
+              alt="Woman working on laptop" 
+              className="absolute inset-0 w-full h-full object-cover"
+            />
+            <div className="absolute inset-0 bg-black opacity-20"></div>
+            <div className="relative z-10 p-6 text-white">
+              <div className="mb-4">
+                <p className="text-sm uppercase tracking-wide opacity-90">EMPOWERING YOUR FINANCIAL JOURNEY</p>
+                <h2 className="text-xl font-bold mt-2">Loans crafted for all your aspirations</h2>
+              </div>
+              
+              <div className="space-y-3">
+                {["Collateral free financing", "Instant eligibility confirmation", "Credit limit as per requirement", "Hassle-free disbursal in account"].map((feature, index) => (
+                  <div key={index} className="flex items-center space-x-3">
+                    <div className="w-6 h-6 bg-white bg-opacity-20 rounded-full flex items-center justify-center">
+                      <Check className="w-4 h-4" />
+                    </div>
+                    <span className="text-sm">{feature}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          <div className="flex-1">
+            <div className="bg-white rounded-lg shadow-sm p-12 text-center">
+              <div className="w-16 h-16 border-4 border-blue-600 border-t-transparent rounded-full animate-spin mx-auto mb-8"></div>
+              <h2 className="text-2xl font-semibold text-blue-600 mb-4">
+                We are currently analysing your application.
+              </h2>
+              <p className="text-gray-600 mb-8">
+                This process may require a bit more time, and we appreciate your patience.
+              </p>
+              <div className="bg-blue-50 p-4 rounded-lg">
+                <p className="text-blue-800 text-sm">
+                  Please do not refresh or close this page. You will be automatically redirected once the analysis is complete.
+                </p>
+              </div>
+            </div>
           </div>
         </div>
       </div>

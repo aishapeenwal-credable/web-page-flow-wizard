@@ -2,82 +2,72 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import { Header } from "@/components/Header";
-import { PartnerAuthModal } from "@/components/PartnerAuthModal";
+import { ArrowLeft, Plus, Trash2, Check, User } from "lucide-react";
 import { OTPModal } from "@/components/OTPModal";
-import { Check, ArrowLeft } from "lucide-react";
+import { PartnerAuthModal } from "@/components/PartnerAuthModal";
 
 interface Partner {
   id: string;
   name: string;
-  status: "Authorized" | "Authorize";
-  mobileNumber?: string;
-}
-
-interface PartnerData {
-  fullName: string;
-  emiratesId: string;
-  dateOfBirth: string;
-  gender: string;
+  mobile: string;
   email: string;
-  mobileNumber: string;
-  countryCode: string;
-  addressLine1: string;
-  street: string;
-  poBox: string;
-  area: string;
-  town: string;
-  consent: boolean;
+  sharePercentage: string;
+  aecbScore?: string;
+  status: 'pending' | 'completed' | 'failed';
 }
 
 export const AECBScore = () => {
   const navigate = useNavigate();
   const [partners, setPartners] = useState<Partner[]>([
-    { id: "1", name: "Jane Cooper", status: "Authorized" },
-    { id: "2", name: "Esther Howard", status: "Authorize" }
+    {
+      id: '1',
+      name: 'John Doe',
+      mobile: '+971 123 456 7890',
+      email: 'john.doe@example.com',
+      sharePercentage: '60',
+      aecbScore: '720',
+      status: 'completed'
+    }
   ]);
-  const [isPartnerModalOpen, setIsPartnerModalOpen] = useState(false);
-  const [isOTPModalOpen, setIsOTPModalOpen] = useState(false);
-  const [currentPartnerData, setCurrentPartnerData] = useState<PartnerData | null>(null);
+  const [showOTPModal, setShowOTPModal] = useState(false);
+  const [showPartnerModal, setShowPartnerModal] = useState(false);
+  const [selectedPartner, setSelectedPartner] = useState<Partner | null>(null);
+
+  const handleBack = () => {
+    navigate("/bank-statements");
+  };
 
   const handleContinue = () => {
     navigate("/analysis-loading");
   };
 
-  const handleBack = () => {
-    navigate(-1);
+  const handleAddPartner = () => {
+    const newPartner: Partner = {
+      id: Date.now().toString(),
+      name: '',
+      mobile: '',
+      email: '',
+      sharePercentage: '',
+      status: 'pending'
+    };
+    setPartners([...partners, newPartner]);
   };
 
-  const handleAuthorize = (id: string) => {
-    const partner = partners.find(p => p.id === id);
-    if (partner && partner.status === "Authorize") {
-      setIsPartnerModalOpen(true);
-    }
+  const handleRemovePartner = (id: string) => {
+    setPartners(partners.filter(p => p.id !== id));
   };
 
-  const addPartner = () => {
-    setIsPartnerModalOpen(true);
+  const handlePartnerChange = (id: string, field: keyof Partner, value: string) => {
+    setPartners(partners.map(p => 
+      p.id === id ? { ...p, [field]: value } : p
+    ));
   };
 
-  const handlePartnerSubmit = (data: PartnerData) => {
-    setCurrentPartnerData(data);
-    setIsPartnerModalOpen(false);
-    setIsOTPModalOpen(true);
-  };
-
-  const handleOTPVerify = (otp: string) => {
-    if (currentPartnerData) {
-      const newPartner: Partner = {
-        id: Date.now().toString(),
-        name: currentPartnerData.fullName,
-        status: "Authorized",
-        mobileNumber: `${currentPartnerData.countryCode}${currentPartnerData.mobileNumber}`
-      };
-      
-      setPartners(prev => [...prev, newPartner]);
-      setIsOTPModalOpen(false);
-      setCurrentPartnerData(null);
-    }
+  const handleCheckAECB = (partner: Partner) => {
+    setSelectedPartner(partner);
+    setShowPartnerModal(true);
   };
 
   const steps = [
@@ -127,9 +117,14 @@ export const AECBScore = () => {
         </div>
 
         <div className="flex gap-8">
-          <div className="w-80 bg-gradient-to-br from-blue-600 to-blue-800 rounded-lg p-6 text-white relative overflow-hidden">
+          <div className="w-80 bg-gradient-to-br from-blue-600 to-blue-800 rounded-lg relative overflow-hidden">
+            <img 
+              src="/lovable-uploads/c1dc414f-1d31-4eb0-83cf-c75066ea23c9.png" 
+              alt="Woman working on laptop" 
+              className="absolute inset-0 w-full h-full object-cover"
+            />
             <div className="absolute inset-0 bg-black opacity-20"></div>
-            <div className="relative z-10">
+            <div className="relative z-10 p-6 text-white">
               <div className="mb-4">
                 <p className="text-sm uppercase tracking-wide opacity-90">EMPOWERING YOUR FINANCIAL JOURNEY</p>
                 <h2 className="text-xl font-bold mt-2">Loans crafted for all your aspirations</h2>
@@ -159,49 +154,102 @@ export const AECBScore = () => {
                 Back
               </Button>
 
-              <div className="mb-8">
-                <h2 className="text-xl font-semibold mb-4">Credit Report</h2>
-                <div className="bg-blue-50 p-4 rounded-lg mb-6">
-                  <div className="flex items-center space-x-2 text-blue-600">
-                    <div className="w-4 h-4 bg-blue-600 rounded"></div>
-                    <p className="text-sm">
-                      Verification code will be sent to partners' mobile number. Please keep all your partner's mobile nearby for verification.
-                    </p>
-                  </div>
-                </div>
-              </div>
+              <h2 className="text-xl font-semibold mb-2">AECB Score</h2>
+              <h3 className="text-lg font-medium mb-2">Add partners</h3>
+              <p className="text-gray-600 mb-6">Add all partners and shareholders to check their AECB credit scores.</p>
 
-              <div className="mb-8">
-                <h3 className="text-lg font-medium mb-6">Private Limited (Pvt Ltd)</h3>
-                
-                <div className="space-y-4">
-                  {partners.map((partner) => (
-                    <div key={partner.id} className="flex items-center justify-between p-4 border border-gray-200 rounded-lg">
-                      <span className="font-medium">{partner.name}</span>
-                      {partner.status === "Authorized" ? (
-                        <span className="px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm font-medium">
-                          Authorized
-                        </span>
-                      ) : (
-                        <Button 
-                          onClick={() => handleAuthorize(partner.id)}
-                          className="text-blue-600 hover:text-blue-700"
+              <div className="space-y-6 mb-6">
+                {partners.map((partner, index) => (
+                  <div key={partner.id} className="border border-gray-200 rounded-lg p-4">
+                    <div className="flex items-center justify-between mb-4">
+                      <div className="flex items-center space-x-3">
+                        <div className="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center">
+                          <User className="w-5 h-5 text-blue-600" />
+                        </div>
+                        <h4 className="font-medium">Partner {index + 1}</h4>
+                      </div>
+                      {partners.length > 1 && (
+                        <Button
                           variant="ghost"
+                          size="sm"
+                          onClick={() => handleRemovePartner(partner.id)}
                         >
-                          Authorize →
+                          <Trash2 className="w-4 h-4 text-red-500" />
                         </Button>
                       )}
                     </div>
-                  ))}
-                </div>
 
-                <button 
-                  onClick={addPartner}
-                  className="text-blue-600 hover:text-blue-700 font-medium mt-4"
-                >
-                  + Add another partner
-                </button>
+                    <div className="grid grid-cols-2 gap-4 mb-4">
+                      <div>
+                        <label className="block text-sm font-medium mb-2">Full Name*</label>
+                        <Input
+                          value={partner.name}
+                          onChange={(e) => handlePartnerChange(partner.id, 'name', e.target.value)}
+                          placeholder="Enter full name"
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-sm font-medium mb-2">Mobile Number*</label>
+                        <Input
+                          value={partner.mobile}
+                          onChange={(e) => handlePartnerChange(partner.id, 'mobile', e.target.value)}
+                          placeholder="+971 xxx xxx xxxx"
+                        />
+                      </div>
+                    </div>
+
+                    <div className="grid grid-cols-2 gap-4 mb-4">
+                      <div>
+                        <label className="block text-sm font-medium mb-2">Email ID*</label>
+                        <Input
+                          type="email"
+                          value={partner.email}
+                          onChange={(e) => handlePartnerChange(partner.id, 'email', e.target.value)}
+                          placeholder="Enter email address"
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-sm font-medium mb-2">Share Percentage*</label>
+                        <Input
+                          value={partner.sharePercentage}
+                          onChange={(e) => handlePartnerChange(partner.id, 'sharePercentage', e.target.value)}
+                          placeholder="Enter percentage"
+                        />
+                      </div>
+                    </div>
+
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center space-x-3">
+                        {partner.status === 'completed' && partner.aecbScore && (
+                          <div className="text-green-600 font-medium">
+                            AECB Score: {partner.aecbScore}
+                          </div>
+                        )}
+                        {partner.status === 'pending' && (
+                          <div className="text-gray-500">
+                            AECB Score: Not checked
+                          </div>
+                        )}
+                      </div>
+                      <Button
+                        onClick={() => handleCheckAECB(partner)}
+                        disabled={!partner.name || !partner.mobile || !partner.email}
+                        className="bg-blue-600 hover:bg-blue-700"
+                      >
+                        Check AECB Score
+                      </Button>
+                    </div>
+                  </div>
+                ))}
               </div>
+
+              <button
+                onClick={handleAddPartner}
+                className="flex items-center space-x-2 text-blue-600 hover:text-blue-700 font-medium mb-8"
+              >
+                <Plus className="w-4 h-4" />
+                <span>Add more partners</span>
+              </button>
 
               <Button onClick={handleContinue} className="bg-blue-600 hover:bg-blue-700">
                 Save and Proceed
@@ -211,17 +259,24 @@ export const AECBScore = () => {
         </div>
       </div>
 
-      <PartnerAuthModal
-        isOpen={isPartnerModalOpen}
-        onClose={() => setIsPartnerModalOpen(false)}
-        onSubmit={handlePartnerSubmit}
+      <OTPModal
+        isOpen={showOTPModal}
+        onClose={() => setShowOTPModal(false)}
+        onVerify={() => {
+          setShowOTPModal(false);
+          // Handle OTP verification logic
+        }}
+        phoneNumber={selectedPartner?.mobile || ''}
       />
 
-      <OTPModal
-        isOpen={isOTPModalOpen}
-        onClose={() => setIsOTPModalOpen(false)}
-        onVerify={handleOTPVerify}
-        mobileNumber={currentPartnerData ? `${currentPartnerData.countryCode}${currentPartnerData.mobileNumber}` : ""}
+      <PartnerAuthModal
+        isOpen={showPartnerModal}
+        onClose={() => setShowPartnerModal(false)}
+        onSuccess={() => {
+          setShowPartnerModal(false);
+          setShowOTPModal(true);
+        }}
+        partner={selectedPartner}
       />
     </div>
   );

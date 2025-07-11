@@ -87,7 +87,7 @@ export const ApplicantDetails = () => {
         <div className="flex gap-8">
           <div className="w-80 bg-gradient-to-br from-blue-600 to-blue-800 rounded-lg relative overflow-hidden">
             <img 
-              src="/lovable-uploads/d54f9bf9-16da-4800-a139-a15aa258700a.png" 
+              src="/lovable-uploads/c1dc414f-1d31-4eb0-83cf-c75066ea23c9.png" 
               alt="Woman working on laptop" 
               className="absolute inset-0 w-full h-full object-cover"
             />
