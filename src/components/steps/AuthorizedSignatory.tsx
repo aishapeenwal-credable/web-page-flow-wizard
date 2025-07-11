@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { Upload, FileText, Eye, Trash2, Plus, ChevronDown, ArrowLeft, Save } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -113,9 +114,13 @@ export const AuthorizedSignatory = ({ onNext, onPrev }: AuthorizedSignatoryProps
     }]);
   };
 
-  const updateSignatory = (index: number, field: keyof SignatoryData, value: string) => {
+  const updateSignatory = (index: number, field: keyof SignatoryData, value: string | boolean) => {
     const updated = [...signatories];
-    updated[index][field] = value as any;
+    if (field === 'saved') {
+      updated[index][field] = value as boolean;
+    } else {
+      updated[index][field] = value as string;
+    }
     setSignatories(updated);
   };
 
@@ -134,9 +139,13 @@ export const AuthorizedSignatory = ({ onNext, onPrev }: AuthorizedSignatoryProps
     }]);
   };
 
-  const updateGuarantor = (index: number, field: keyof GuarantorData, value: string) => {
+  const updateGuarantor = (index: number, field: keyof GuarantorData, value: string | boolean) => {
     const updated = [...guarantors];
-    updated[index][field] = value as any;
+    if (field === 'saved') {
+      updated[index][field] = value as boolean;
+    } else {
+      updated[index][field] = value as string;
+    }
     setGuarantors(updated);
   };
 
