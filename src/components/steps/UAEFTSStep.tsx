@@ -3,6 +3,7 @@ import { useState } from "react";
 import { ArrowLeft, Info, CreditCard, MousePointer, CheckCircle2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { SidePanel } from "../SidePanel";
+import { OTPModal } from "../OTPModal";
 
 interface UAEFTSStepProps {
   onNext: () => void;
@@ -11,8 +12,15 @@ interface UAEFTSStepProps {
 
 export const UAEFTSStep = ({ onNext, onPrev }: UAEFTSStepProps) => {
   const [currentState, setCurrentState] = useState<'initial' | 'loading' | 'completed'>('initial');
+  const [showOTPModal, setShowOTPModal] = useState(false);
 
   const handleInitiateFTS = () => {
+    setShowOTPModal(true);
+  };
+
+  const handleOTPVerify = (otp: string) => {
+    console.log('OTP verified:', otp);
+    setShowOTPModal(false);
     setCurrentState('loading');
     // Simulate loading time
     setTimeout(() => {
@@ -22,6 +30,10 @@ export const UAEFTSStep = ({ onNext, onPrev }: UAEFTSStepProps) => {
         onNext();
       }, 2000);
     }, 3000);
+  };
+
+  const handleCloseOTP = () => {
+    setShowOTPModal(false);
   };
 
   const renderContent = () => {
@@ -170,6 +182,13 @@ export const UAEFTSStep = ({ onNext, onPrev }: UAEFTSStepProps) => {
           {renderContent()}
         </div>
       </div>
+
+      <OTPModal
+        isOpen={showOTPModal}
+        onClose={handleCloseOTP}
+        onVerify={handleOTPVerify}
+        mobileNumber="+91 6038299494"
+      />
     </div>
   );
 };
