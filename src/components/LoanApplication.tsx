@@ -11,6 +11,7 @@ import { LoanOffer } from "./steps/LoanOffer";
 import { AuthorizedSignatory } from "./steps/AuthorizedSignatory";
 import { KYCVerification } from "./steps/KYCVerification";
 import { BankAccountVerification } from "./steps/BankAccountVerification";
+import { UAEFTSStep } from "./steps/UAEFTSStep";
 import { AgreementSigning } from "./steps/AgreementSigning";
 
 export const LoanApplication = () => {
@@ -60,7 +61,7 @@ export const LoanApplication = () => {
       case 6:
         return <BankAccountVerification onNext={handleNextStep} onPrev={handlePrevStep} />;
       case 7:
-        return <BankAccountVerification onNext={handleNextStep} onPrev={handlePrevStep} />;
+        return <UAEFTSStep onNext={handleNextStep} onPrev={handlePrevStep} />;
       case 8:
         return <AgreementSigning onNext={handleNextStep} onPrev={handlePrevStep} />;
       default:
