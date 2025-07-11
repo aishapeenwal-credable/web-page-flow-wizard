@@ -219,74 +219,99 @@ export const AuthorizedSignatory = ({ onNext, onPrev }: AuthorizedSignatoryProps
               </div>
             </div>
 
+            {/* Display completed signatories in compact format */}
             {signatories.map((signatory, index) => {
               const isComplete = isSignatoryComplete(signatory);
-              return (
-              <div key={index} className="mb-4">
-                <div className={`flex items-center justify-between p-4 rounded-lg border ${isComplete ? 'bg-green-50 border-green-200' : 'border-gray-200'}`}>
-                  <span className="font-medium">Authorised Signatory {index + 2}</span>
-                  <div className="flex items-center gap-2">
-                    {isComplete && (
+              if (isComplete) {
+                return (
+                  <div key={index} className="mb-4">
+                    <div className="flex items-center justify-between p-4 bg-green-50 rounded-lg border border-green-200">
+                      <div>
+                        <span className="text-sm text-gray-600">Authorised Signatory {index + 2}</span>
+                        <div className="font-medium">{signatory.name}</div>
+                      </div>
                       <div className="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center">
                         <div className="w-2 h-2 bg-white rounded-full"></div>
                       </div>
-                    )}
-                    <ChevronDown className="w-4 h-4" />
-                  </div>
-                </div>
-                <div className={`p-4 border-l border-r border-b rounded-b-lg space-y-4 ${isComplete ? 'border-green-200' : 'border-gray-200'}`}>
-                  <div className="grid grid-cols-2 gap-4">
-                    <div>
-                      <label className="block text-sm font-medium mb-1">Authorised Signatory Name</label>
-                      <Input
-                        value={signatory.name}
-                        onChange={(e) => updateSignatory(index, 'name', e.target.value)}
-                      />
-                    </div>
-                    <div>
-                      <label className="block text-sm font-medium mb-1">Designation</label>
-                      <Input
-                        value={signatory.designation}
-                        onChange={(e) => updateSignatory(index, 'designation', e.target.value)}
-                      />
                     </div>
                   </div>
-                  <div className="grid grid-cols-2 gap-4">
-                    <div>
-                      <label className="block text-sm font-medium mb-1">Email ID</label>
-                      <Input
-                        type="email"
-                        value={signatory.email}
-                        onChange={(e) => updateSignatory(index, 'email', e.target.value)}
-                      />
+                );
+              }
+              return null;
+            })}
+
+            {/* Display incomplete signatories with form */}
+            {signatories.map((signatory, index) => {
+              const isComplete = isSignatoryComplete(signatory);
+              if (!isComplete) {
+                return (
+                <div key={index} className="mb-4">
+                  <div className={`flex items-center justify-between p-4 rounded-lg border ${isComplete ? 'bg-green-50 border-green-200' : 'border-gray-200'}`}>
+                    <span className="font-medium">Authorised Signatory {index + 2}</span>
+                    <div className="flex items-center gap-2">
+                      {isComplete && (
+                        <div className="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center">
+                          <div className="w-2 h-2 bg-white rounded-full"></div>
+                        </div>
+                      )}
+                      <ChevronDown className="w-4 h-4" />
                     </div>
-                    <div>
-                      <label className="block text-sm font-medium mb-1">Mobile Number</label>
-                      <div className="flex">
-                        <Select defaultValue="+971">
-                          <SelectTrigger className="w-20">
-                            <SelectValue />
-                          </SelectTrigger>
-                          <SelectContent>
-                            <SelectItem value="+971">+971</SelectItem>
-                            <SelectItem value="+1">+1</SelectItem>
-                            <SelectItem value="+44">+44</SelectItem>
-                            <SelectItem value="+91">+91</SelectItem>
-                            <SelectItem value="+33">+33</SelectItem>
-                            <SelectItem value="+49">+49</SelectItem>
-                          </SelectContent>
-                        </Select>
+                  </div>
+                  <div className={`p-4 border-l border-r border-b rounded-b-lg space-y-4 ${isComplete ? 'border-green-200' : 'border-gray-200'}`}>
+                    <div className="grid grid-cols-2 gap-4">
+                      <div>
+                        <label className="block text-sm font-medium mb-1">Authorised Signatory Name</label>
                         <Input
-                          className="flex-1 ml-2"
-                          value={signatory.mobile}
-                          onChange={(e) => updateSignatory(index, 'mobile', e.target.value)}
+                          value={signatory.name}
+                          onChange={(e) => updateSignatory(index, 'name', e.target.value)}
                         />
+                      </div>
+                      <div>
+                        <label className="block text-sm font-medium mb-1">Designation</label>
+                        <Input
+                          value={signatory.designation}
+                          onChange={(e) => updateSignatory(index, 'designation', e.target.value)}
+                        />
+                      </div>
+                    </div>
+                    <div className="grid grid-cols-2 gap-4">
+                      <div>
+                        <label className="block text-sm font-medium mb-1">Email ID</label>
+                        <Input
+                          type="email"
+                          value={signatory.email}
+                          onChange={(e) => updateSignatory(index, 'email', e.target.value)}
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-sm font-medium mb-1">Mobile Number</label>
+                        <div className="flex">
+                          <Select defaultValue="+971">
+                            <SelectTrigger className="w-20">
+                              <SelectValue />
+                            </SelectTrigger>
+                            <SelectContent>
+                              <SelectItem value="+971">+971</SelectItem>
+                              <SelectItem value="+1">+1</SelectItem>
+                              <SelectItem value="+44">+44</SelectItem>
+                              <SelectItem value="+91">+91</SelectItem>
+                              <SelectItem value="+33">+33</SelectItem>
+                              <SelectItem value="+49">+49</SelectItem>
+                            </SelectContent>
+                          </Select>
+                          <Input
+                            className="flex-1 ml-2"
+                            value={signatory.mobile}
+                            onChange={(e) => updateSignatory(index, 'mobile', e.target.value)}
+                          />
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
-              </div>
-              );
+                );
+              }
+              return null;
             })}
 
             <button 
@@ -311,62 +336,89 @@ export const AuthorizedSignatory = ({ onNext, onPrev }: AuthorizedSignatoryProps
               )}
             </div>
             
+            {/* Display completed guarantors in compact format */}
             {guarantors.map((guarantor, index) => {
               const isComplete = isGuarantorComplete(guarantor);
               const isFirstGuarantor = index === 0;
               
-              return (
-              <div key={index} className="mb-4">
-                <div className={`flex items-center justify-between p-4 rounded-lg border ${(isComplete || isFirstGuarantor) ? 'bg-green-50 border-green-200' : 'border-gray-200'}`}>
-                  <span className="font-medium">Personal Guarantor {index + 1}</span>
-                  <div className={`w-6 h-6 rounded-full flex items-center justify-center ${(isComplete || isFirstGuarantor) ? 'bg-green-500' : 'bg-gray-300'}`}>
-                    <div className={`w-2 h-2 rounded-full ${(isComplete || isFirstGuarantor) ? 'bg-white' : 'bg-gray-600'}`}></div>
+              if (isComplete || isFirstGuarantor) {
+                return (
+                  <div key={index} className="mb-4">
+                    <div className="flex items-center justify-between p-4 bg-green-50 rounded-lg border border-green-200">
+                      <div>
+                        <span className="text-sm text-gray-600">Personal Guarantor {index + 1}</span>
+                        <div className="font-medium">{guarantor.name}</div>
+                      </div>
+                      <div className="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center">
+                        <div className="w-2 h-2 bg-white rounded-full"></div>
+                      </div>
+                    </div>
                   </div>
-                </div>
-                <div className={`p-4 border-l border-r border-b rounded-b-lg space-y-4 ${(isComplete || isFirstGuarantor) ? 'border-green-200' : 'border-gray-200'}`}>
-                  <div>
-                    <label className="block text-sm font-medium mb-1">Personal Guarantor Name</label>
-                    <Input
-                      value={guarantor.name}
-                      onChange={(e) => updateGuarantor(index, 'name', e.target.value)}
-                    />
+                );
+              }
+              return null;
+            })}
+
+            {/* Display incomplete guarantors with form */}
+            {guarantors.map((guarantor, index) => {
+              const isComplete = isGuarantorComplete(guarantor);
+              const isFirstGuarantor = index === 0;
+              
+              if (!isComplete && !isFirstGuarantor) {
+                return (
+                <div key={index} className="mb-4">
+                  <div className={`flex items-center justify-between p-4 rounded-lg border ${(isComplete || isFirstGuarantor) ? 'bg-green-50 border-green-200' : 'border-gray-200'}`}>
+                    <span className="font-medium">Personal Guarantor {index + 1}</span>
+                    <div className={`w-6 h-6 rounded-full flex items-center justify-center ${(isComplete || isFirstGuarantor) ? 'bg-green-500' : 'bg-gray-300'}`}>
+                      <div className={`w-2 h-2 rounded-full ${(isComplete || isFirstGuarantor) ? 'bg-white' : 'bg-gray-600'}`}></div>
+                    </div>
                   </div>
-                  <div className="grid grid-cols-2 gap-4">
+                  <div className={`p-4 border-l border-r border-b rounded-b-lg space-y-4 ${(isComplete || isFirstGuarantor) ? 'border-green-200' : 'border-gray-200'}`}>
                     <div>
-                      <label className="block text-sm font-medium mb-1">Email ID</label>
+                      <label className="block text-sm font-medium mb-1">Personal Guarantor Name</label>
                       <Input
-                        type="email"
-                        value={guarantor.email}
-                        onChange={(e) => updateGuarantor(index, 'email', e.target.value)}
+                        value={guarantor.name}
+                        onChange={(e) => updateGuarantor(index, 'name', e.target.value)}
                       />
                     </div>
-                    <div>
-                      <label className="block text-sm font-medium mb-1">Mobile Number</label>
-                      <div className="flex">
-                        <Select defaultValue="+971">
-                          <SelectTrigger className="w-20">
-                            <SelectValue />
-                          </SelectTrigger>
-                          <SelectContent>
-                            <SelectItem value="+971">+971</SelectItem>
-                            <SelectItem value="+1">+1</SelectItem>
-                            <SelectItem value="+44">+44</SelectItem>
-                            <SelectItem value="+91">+91</SelectItem>
-                            <SelectItem value="+33">+33</SelectItem>
-                            <SelectItem value="+49">+49</SelectItem>
-                          </SelectContent>
-                        </Select>
+                    <div className="grid grid-cols-2 gap-4">
+                      <div>
+                        <label className="block text-sm font-medium mb-1">Email ID</label>
                         <Input
-                          className="flex-1 ml-2"
-                          value={guarantor.mobile}
-                          onChange={(e) => updateGuarantor(index, 'mobile', e.target.value)}
+                          type="email"
+                          value={guarantor.email}
+                          onChange={(e) => updateGuarantor(index, 'email', e.target.value)}
                         />
+                      </div>
+                      <div>
+                        <label className="block text-sm font-medium mb-1">Mobile Number</label>
+                        <div className="flex">
+                          <Select defaultValue="+971">
+                            <SelectTrigger className="w-20">
+                              <SelectValue />
+                            </SelectTrigger>
+                            <SelectContent>
+                              <SelectItem value="+971">+971</SelectItem>
+                              <SelectItem value="+1">+1</SelectItem>
+                              <SelectItem value="+44">+44</SelectItem>
+                              <SelectItem value="+91">+91</SelectItem>
+                              <SelectItem value="+33">+33</SelectItem>
+                              <SelectItem value="+49">+49</SelectItem>
+                            </SelectContent>
+                          </Select>
+                          <Input
+                            className="flex-1 ml-2"
+                            value={guarantor.mobile}
+                            onChange={(e) => updateGuarantor(index, 'mobile', e.target.value)}
+                          />
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
-              </div>
-              );
+                );
+              }
+              return null;
             })}
 
             <button 
