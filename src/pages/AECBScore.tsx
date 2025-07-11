@@ -36,7 +36,7 @@ export const AECBScore = () => {
   };
 
   const handleContinue = () => {
-    navigate("/analysis-loading");
+    navigate("/loan-application");
   };
 
   const handleAuthorize = (partner: Partner) => {
@@ -58,6 +58,9 @@ export const AECBScore = () => {
     setShowOTPModal(false);
     setSelectedPartner(null);
   };
+
+  // Check if all partners are authorized
+  const allPartnersAuthorized = partners.every(partner => partner.status === 'authorized');
 
   const steps = [
     { id: 1, name: "Applicant Detail", description: "Just a few Personal details.", completed: true },
@@ -180,8 +183,12 @@ export const AECBScore = () => {
 
               <Button 
                 onClick={handleContinue} 
-                className="bg-gray-300 hover:bg-gray-400 text-gray-600"
-                disabled
+                className={`${
+                  allPartnersAuthorized 
+                    ? 'bg-blue-600 hover:bg-blue-700 text-white' 
+                    : 'bg-gray-300 hover:bg-gray-400 text-gray-600'
+                }`}
+                disabled={!allPartnersAuthorized}
               >
                 Save and Proceed
               </Button>
