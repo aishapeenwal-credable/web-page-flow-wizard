@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -84,9 +85,14 @@ export const ApplicantDetails = () => {
         </div>
 
         <div className="flex gap-8">
-          <div className="w-80 bg-gradient-to-br from-blue-600 to-blue-800 rounded-lg p-6 text-white relative overflow-hidden">
+          <div className="w-80 bg-gradient-to-br from-blue-600 to-blue-800 rounded-lg relative overflow-hidden">
+            <img 
+              src="/lovable-uploads/d54f9bf9-16da-4800-a139-a15aa258700a.png" 
+              alt="Woman working on laptop" 
+              className="absolute inset-0 w-full h-full object-cover"
+            />
             <div className="absolute inset-0 bg-black opacity-20"></div>
-            <div className="relative z-10">
+            <div className="relative z-10 p-6 text-white">
               <div className="mb-4">
                 <p className="text-sm uppercase tracking-wide opacity-90">EMPOWERING YOUR FINANCIAL JOURNEY</p>
                 <h2 className="text-xl font-bold mt-2">Loans crafted for all your aspirations</h2>
