@@ -118,6 +118,22 @@ export const AuthorizedSignatory = ({ onNext, onPrev }: AuthorizedSignatoryProps
     setGuarantors(updated);
   };
 
+  // Get completed signatories names
+  const getCompletedSignatoriesNames = (): string[] => {
+    const completed = [signatory1.name]; // Always include the first completed signatory
+    const additionalCompleted = signatories
+      .filter(isSignatoryComplete)
+      .map(s => s.name);
+    return [...completed, ...additionalCompleted];
+  };
+
+  // Get completed guarantors names
+  const getCompletedGuarantorsNames = (): string[] => {
+    return guarantors
+      .filter(isGuarantorComplete)
+      .map(g => g.name);
+  };
+
   return (
     <div className="flex gap-8">
       <SidePanel />
@@ -179,7 +195,17 @@ export const AuthorizedSignatory = ({ onNext, onPrev }: AuthorizedSignatoryProps
           )}
 
           <div className="mb-8">
-            <h3 className="text-lg font-medium mb-4">Authorised Signatory</h3>
+            <div className="flex items-center justify-between mb-4">
+              <h3 className="text-lg font-medium">Authorised Signatory</h3>
+              {getCompletedSignatoriesNames().length > 0 && (
+                <div className="flex items-center gap-2 text-sm text-gray-600">
+                  <span>Completed:</span>
+                  <span className="font-medium text-green-600">
+                    {getCompletedSignatoriesNames().join(', ')}
+                  </span>
+                </div>
+              )}
+            </div>
             
             <div className="mb-6">
               <div className="flex items-center justify-between p-4 bg-green-50 rounded-lg border border-green-200">
@@ -273,7 +299,17 @@ export const AuthorizedSignatory = ({ onNext, onPrev }: AuthorizedSignatoryProps
           </div>
 
           <div className="mb-8">
-            <h3 className="text-lg font-medium mb-4">Personal Guarantor</h3>
+            <div className="flex items-center justify-between mb-4">
+              <h3 className="text-lg font-medium">Personal Guarantor</h3>
+              {getCompletedGuarantorsNames().length > 0 && (
+                <div className="flex items-center gap-2 text-sm text-gray-600">
+                  <span>Completed:</span>
+                  <span className="font-medium text-green-600">
+                    {getCompletedGuarantorsNames().join(', ')}
+                  </span>
+                </div>
+              )}
+            </div>
             
             {guarantors.map((guarantor, index) => {
               const isComplete = isGuarantorComplete(guarantor);
