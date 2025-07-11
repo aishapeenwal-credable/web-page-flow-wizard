@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -18,7 +17,6 @@ export const SignUp = () => {
     securityCode: "etsans"
   });
   const [agreeTerms, setAgreeTerms] = useState(true);
-  const [selectedCountryCode, setSelectedCountryCode] = useState("+971");
 
   const handleInputChange = (field: string, value: string) => {
     setFormData(prev => ({ ...prev, [field]: value }));
@@ -36,11 +34,6 @@ export const SignUp = () => {
     <div className="min-h-screen bg-gray-50 flex">
       <div className="flex-1 flex items-center justify-center p-8">
         <div className="relative w-96 h-96 bg-gradient-to-br from-gray-700 to-gray-900 rounded-lg overflow-hidden">
-          <img 
-            src="/lovable-uploads/aeea3da9-e3cd-46bb-8fb6-b44431ba9f35.png" 
-            alt="Person working with laptop"
-            className="absolute inset-0 w-full h-full object-cover"
-          />
           <div className="absolute inset-0 bg-black bg-opacity-40"></div>
           <div className="relative z-10 p-8 text-white h-full flex flex-col justify-center">
             <h2 className="text-2xl font-bold mb-8">Improve your working capital with digital financing</h2>
@@ -85,7 +78,7 @@ export const SignUp = () => {
               <span className="text-xl font-bold text-blue-600">Ideal Bank</span>
             </div>
             <div className="flex items-center space-x-4">
-              <select className="text-sm text-blue-600 bg-transparent border-none">
+              <select className="text-sm text-blue-600">
                 <option>English</option>
                 <option>العربية</option>
               </select>
@@ -118,23 +111,8 @@ export const SignUp = () => {
               <div>
                 <Label htmlFor="mobile">Mobile Number</Label>
                 <div className="flex">
-                  <select 
-                    className="px-3 py-2 border border-r-0 rounded-l-md bg-gray-50 text-sm"
-                    value={selectedCountryCode}
-                    onChange={(e) => setSelectedCountryCode(e.target.value)}
-                  >
-                    <option value="+971">🇦🇪 +971</option>
-                    <option value="+1">🇺🇸 +1</option>
-                    <option value="+44">🇬🇧 +44</option>
-                    <option value="+91">🇮🇳 +91</option>
-                    <option value="+966">🇸🇦 +966</option>
-                    <option value="+965">🇰🇼 +965</option>
-                    <option value="+973">🇧🇭 +973</option>
-                    <option value="+974">🇶🇦 +974</option>
-                    <option value="+968">🇴🇲 +968</option>
-                    <option value="+961">🇱🇧 +961</option>
-                    <option value="+962">🇯🇴 +962</option>
-                    <option value="+20">🇪🇬 +20</option>
+                  <select className="px-3 py-2 border border-r-0 rounded-l-md bg-gray-50">
+                    <option>+971</option>
                   </select>
                   <Input
                     id="mobile"

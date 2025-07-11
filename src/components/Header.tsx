@@ -12,7 +12,7 @@ export const Header = () => {
           <span className="text-xl font-bold text-blue-600">Ideal Bank</span>
         </div>
         <div className="flex items-center space-x-4">
-          <select className="text-sm text-blue-600 bg-transparent border-none">
+          <select className="border border-gray-300 rounded px-3 py-1 text-sm">
             <option>English</option>
             <option>العربية</option>
           </select>
