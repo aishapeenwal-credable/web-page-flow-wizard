@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Upload, FileText, Eye, Trash2, Plus, ChevronDown, ArrowLeft } from "lucide-react";
+import { Upload, FileText, Eye, Trash2, Plus, ChevronDown, ArrowLeft, Save } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
@@ -21,12 +21,14 @@ interface SignatoryData {
   designation: string;
   email: string;
   mobile: string;
+  saved: boolean;
 }
 
 interface GuarantorData {
   name: string;
   email: string;
   mobile: string;
+  saved: boolean;
 }
 
 export const AuthorizedSignatory = ({ onNext, onPrev }: AuthorizedSignatoryProps) => {
@@ -46,7 +48,8 @@ export const AuthorizedSignatory = ({ onNext, onPrev }: AuthorizedSignatoryProps
       name: "",
       designation: "",
       email: "",
-      mobile: ""
+      mobile: "",
+      saved: false
     }
   ]);
 
@@ -54,7 +57,8 @@ export const AuthorizedSignatory = ({ onNext, onPrev }: AuthorizedSignatoryProps
     {
       name: "Jane Cooper",
       email: "jane.cooper@idealbrothers.ae",
-      mobile: "773 947 253"
+      mobile: "773 947 253",
+      saved: true
     }
   ]);
 
@@ -71,6 +75,16 @@ export const AuthorizedSignatory = ({ onNext, onPrev }: AuthorizedSignatoryProps
     return guarantor.name.trim() !== '' && 
            guarantor.email.trim() !== '' && 
            guarantor.mobile.trim() !== '';
+  };
+
+  // Helper function to check if signatory can be saved
+  const canSaveSignatory = (signatory: SignatoryData): boolean => {
+    return isSignatoryComplete(signatory) && !signatory.saved;
+  };
+
+  // Helper function to check if guarantor can be saved
+  const canSaveGuarantor = (guarantor: GuarantorData): boolean => {
+    return isGuarantorComplete(guarantor) && !guarantor.saved;
   };
 
   const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -94,13 +108,20 @@ export const AuthorizedSignatory = ({ onNext, onPrev }: AuthorizedSignatoryProps
       name: "",
       designation: "",
       email: "",
-      mobile: ""
+      mobile: "",
+      saved: false
     }]);
   };
 
   const updateSignatory = (index: number, field: keyof SignatoryData, value: string) => {
     const updated = [...signatories];
-    updated[index][field] = value;
+    updated[index][field] = value as any;
+    setSignatories(updated);
+  };
+
+  const saveSignatory = (index: number) => {
+    const updated = [...signatories];
+    updated[index].saved = true;
     setSignatories(updated);
   };
 
@@ -108,13 +129,20 @@ export const AuthorizedSignatory = ({ onNext, onPrev }: AuthorizedSignatoryProps
     setGuarantors([...guarantors, {
       name: "",
       email: "",
-      mobile: ""
+      mobile: "",
+      saved: false
     }]);
   };
 
   const updateGuarantor = (index: number, field: keyof GuarantorData, value: string) => {
     const updated = [...guarantors];
-    updated[index][field] = value;
+    updated[index][field] = value as any;
+    setGuarantors(updated);
+  };
+
+  const saveGuarantor = (index: number) => {
+    const updated = [...guarantors];
+    updated[index].saved = true;
     setGuarantors(updated);
   };
 
@@ -122,7 +150,7 @@ export const AuthorizedSignatory = ({ onNext, onPrev }: AuthorizedSignatoryProps
   const getCompletedSignatoriesNames = (): string[] => {
     const completed = [signatory1.name]; // Always include the first completed signatory
     const additionalCompleted = signatories
-      .filter(isSignatoryComplete)
+      .filter(s => s.saved)
       .map(s => s.name);
     return [...completed, ...additionalCompleted];
   };
@@ -130,7 +158,7 @@ export const AuthorizedSignatory = ({ onNext, onPrev }: AuthorizedSignatoryProps
   // Get completed guarantors names
   const getCompletedGuarantorsNames = (): string[] => {
     return guarantors
-      .filter(isGuarantorComplete)
+      .filter(g => g.saved)
       .map(g => g.name);
   };
 
@@ -219,10 +247,9 @@ export const AuthorizedSignatory = ({ onNext, onPrev }: AuthorizedSignatoryProps
               </div>
             </div>
 
-            {/* Display completed signatories in compact format */}
+            {/* Display saved/completed signatories in compact format */}
             {signatories.map((signatory, index) => {
-              const isComplete = isSignatoryComplete(signatory);
-              if (isComplete) {
+              if (signatory.saved) {
                 return (
                   <div key={index} className="mb-4">
                     <div className="flex items-center justify-between p-4 bg-green-50 rounded-lg border border-green-200">
@@ -240,24 +267,16 @@ export const AuthorizedSignatory = ({ onNext, onPrev }: AuthorizedSignatoryProps
               return null;
             })}
 
-            {/* Display incomplete signatories with form */}
+            {/* Display unsaved signatories with form */}
             {signatories.map((signatory, index) => {
-              const isComplete = isSignatoryComplete(signatory);
-              if (!isComplete) {
+              if (!signatory.saved) {
                 return (
                 <div key={index} className="mb-4">
-                  <div className={`flex items-center justify-between p-4 rounded-lg border ${isComplete ? 'bg-green-50 border-green-200' : 'border-gray-200'}`}>
+                  <div className="flex items-center justify-between p-4 rounded-lg border border-gray-200">
                     <span className="font-medium">Authorised Signatory {index + 2}</span>
-                    <div className="flex items-center gap-2">
-                      {isComplete && (
-                        <div className="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center">
-                          <div className="w-2 h-2 bg-white rounded-full"></div>
-                        </div>
-                      )}
-                      <ChevronDown className="w-4 h-4" />
-                    </div>
+                    <ChevronDown className="w-4 h-4" />
                   </div>
-                  <div className={`p-4 border-l border-r border-b rounded-b-lg space-y-4 ${isComplete ? 'border-green-200' : 'border-gray-200'}`}>
+                  <div className="p-4 border-l border-r border-b rounded-b-lg space-y-4 border-gray-200">
                     <div className="grid grid-cols-2 gap-4">
                       <div>
                         <label className="block text-sm font-medium mb-1">Authorised Signatory Name</label>
@@ -307,6 +326,17 @@ export const AuthorizedSignatory = ({ onNext, onPrev }: AuthorizedSignatoryProps
                         </div>
                       </div>
                     </div>
+                    {canSaveSignatory(signatory) && (
+                      <div className="flex justify-end pt-4">
+                        <Button
+                          onClick={() => saveSignatory(index)}
+                          className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700"
+                        >
+                          <Save className="w-4 h-4" />
+                          Save Details
+                        </Button>
+                      </div>
+                    )}
                   </div>
                 </div>
                 );
@@ -336,12 +366,9 @@ export const AuthorizedSignatory = ({ onNext, onPrev }: AuthorizedSignatoryProps
               )}
             </div>
             
-            {/* Display completed guarantors in compact format */}
+            {/* Display saved/completed guarantors in compact format */}
             {guarantors.map((guarantor, index) => {
-              const isComplete = isGuarantorComplete(guarantor);
-              const isFirstGuarantor = index === 0;
-              
-              if (isComplete || isFirstGuarantor) {
+              if (guarantor.saved) {
                 return (
                   <div key={index} className="mb-4">
                     <div className="flex items-center justify-between p-4 bg-green-50 rounded-lg border border-green-200">
@@ -359,21 +386,18 @@ export const AuthorizedSignatory = ({ onNext, onPrev }: AuthorizedSignatoryProps
               return null;
             })}
 
-            {/* Display incomplete guarantors with form */}
+            {/* Display unsaved guarantors with form */}
             {guarantors.map((guarantor, index) => {
-              const isComplete = isGuarantorComplete(guarantor);
-              const isFirstGuarantor = index === 0;
-              
-              if (!isComplete && !isFirstGuarantor) {
+              if (!guarantor.saved) {
                 return (
                 <div key={index} className="mb-4">
-                  <div className={`flex items-center justify-between p-4 rounded-lg border ${(isComplete || isFirstGuarantor) ? 'bg-green-50 border-green-200' : 'border-gray-200'}`}>
+                  <div className="flex items-center justify-between p-4 rounded-lg border border-gray-200">
                     <span className="font-medium">Personal Guarantor {index + 1}</span>
-                    <div className={`w-6 h-6 rounded-full flex items-center justify-center ${(isComplete || isFirstGuarantor) ? 'bg-green-500' : 'bg-gray-300'}`}>
-                      <div className={`w-2 h-2 rounded-full ${(isComplete || isFirstGuarantor) ? 'bg-white' : 'bg-gray-600'}`}></div>
+                    <div className="w-6 h-6 bg-gray-300 rounded-full flex items-center justify-center">
+                      <div className="w-2 h-2 bg-gray-600 rounded-full"></div>
                     </div>
                   </div>
-                  <div className={`p-4 border-l border-r border-b rounded-b-lg space-y-4 ${(isComplete || isFirstGuarantor) ? 'border-green-200' : 'border-gray-200'}`}>
+                  <div className="p-4 border-l border-r border-b rounded-b-lg space-y-4 border-gray-200">
                     <div>
                       <label className="block text-sm font-medium mb-1">Personal Guarantor Name</label>
                       <Input
@@ -414,6 +438,17 @@ export const AuthorizedSignatory = ({ onNext, onPrev }: AuthorizedSignatoryProps
                         </div>
                       </div>
                     </div>
+                    {canSaveGuarantor(guarantor) && (
+                      <div className="flex justify-end pt-4">
+                        <Button
+                          onClick={() => saveGuarantor(index)}
+                          className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700"
+                        >
+                          <Save className="w-4 h-4" />
+                          Save Details
+                        </Button>
+                      </div>
+                    )}
                   </div>
                 </div>
                 );
