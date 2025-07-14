@@ -29,32 +29,10 @@ export const Login = () => {
     <div className="min-h-screen bg-gray-50 flex">
       <div className="flex-1 relative overflow-hidden">
         <img 
-          src="/lovable-uploads/cae65144-fe26-486f-82c1-901c5a2c3b39.png" 
+          src="/lovable-uploads/aea4b6ec-9975-45c6-acaf-d3be7aed186c.png" 
           alt="Digital financing illustration" 
-          className="absolute inset-0 w-full h-full object-cover"
+          className="w-full h-full object-cover"
         />
-        <div className="absolute inset-0 bg-black bg-opacity-50"></div>
-        <div className="relative z-10 p-12 text-white h-full flex flex-col justify-center max-w-lg">
-          <h1 className="text-4xl font-bold mb-8 leading-tight">Improve your working capital with digital financing</h1>
-          <div className="space-y-6">
-            <div className="flex items-center space-x-3">
-              <div className="w-3 h-3 bg-white rounded-full flex-shrink-0"></div>
-              <span className="text-lg">Collateral free financing</span>
-            </div>
-            <div className="flex items-center space-x-3">
-              <div className="w-3 h-3 bg-white rounded-full flex-shrink-0"></div>
-              <span className="text-lg">Instant eligibility confirmation</span>
-            </div>
-            <div className="flex items-center space-x-3">
-              <div className="w-3 h-3 bg-white rounded-full flex-shrink-0"></div>
-              <span className="text-lg">Credit Limit as per requirement</span>
-            </div>
-            <div className="flex items-center space-x-3">
-              <div className="w-3 h-3 bg-white rounded-full flex-shrink-0"></div>
-              <span className="text-lg">Hassle-free disbursal in account</span>
-            </div>
-          </div>
-        </div>
       </div>
 
       <div className="flex-1 flex items-center justify-center p-8">
