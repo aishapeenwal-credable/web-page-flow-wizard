@@ -99,7 +99,7 @@ export const ApplicantDetails = () => {
               className="absolute inset-0 w-full h-full object-cover"
             />
             <div className="absolute inset-0 bg-black opacity-20"></div>
-            <div className="relative z-10 p-6 text-white">
+            <div className="relative z-10 p-6 text-white h-full flex flex-col justify-center">
               <div className="mb-4">
                 <p className="text-sm uppercase tracking-wide opacity-90">EMPOWERING YOUR FINANCIAL JOURNEY</p>
                 <h2 className="text-xl font-bold mt-2">Loans crafted for all your aspirations</h2>
