@@ -27,33 +27,31 @@ export const Login = () => {
 
   return (
     <div className="min-h-screen bg-gray-50 flex">
-      <div className="flex-1 flex items-center justify-center p-8">
-        <div className="relative w-96 h-96 bg-gradient-to-br from-gray-700 to-gray-900 rounded-lg overflow-hidden">
-          <img 
-            src="/lovable-uploads/2649b397-eebb-483d-9680-f00c29bd6a95.png" 
-            alt="Digital financing illustration" 
-            className="absolute inset-0 w-full h-full object-cover"
-          />
-          <div className="absolute inset-0 bg-black bg-opacity-40"></div>
-          <div className="relative z-10 p-8 text-white h-full flex flex-col justify-center">
-            <h2 className="text-2xl font-bold mb-8">Improve your working capital with digital financing</h2>
-            <div className="space-y-4">
-              <div className="flex items-center space-x-3">
-                <div className="w-2 h-2 bg-white rounded-full"></div>
-                <span className="text-sm">Collateral free financing</span>
-              </div>
-              <div className="flex items-center space-x-3">
-                <div className="w-2 h-2 bg-white rounded-full"></div>
-                <span className="text-sm">Instant eligibility confirmation</span>
-              </div>
-              <div className="flex items-center space-x-3">
-                <div className="w-2 h-2 bg-white rounded-full"></div>
-                <span className="text-sm">Credit Limit as per requirement</span>
-              </div>
-              <div className="flex items-center space-x-3">
-                <div className="w-2 h-2 bg-white rounded-full"></div>
-                <span className="text-sm">Hassle-free disbursal in account</span>
-              </div>
+      <div className="flex-1 relative overflow-hidden">
+        <img 
+          src="/lovable-uploads/cae65144-fe26-486f-82c1-901c5a2c3b39.png" 
+          alt="Digital financing illustration" 
+          className="absolute inset-0 w-full h-full object-cover"
+        />
+        <div className="absolute inset-0 bg-black bg-opacity-50"></div>
+        <div className="relative z-10 p-12 text-white h-full flex flex-col justify-center max-w-lg">
+          <h1 className="text-4xl font-bold mb-8 leading-tight">Improve your working capital with digital financing</h1>
+          <div className="space-y-6">
+            <div className="flex items-center space-x-3">
+              <div className="w-3 h-3 bg-white rounded-full flex-shrink-0"></div>
+              <span className="text-lg">Collateral free financing</span>
+            </div>
+            <div className="flex items-center space-x-3">
+              <div className="w-3 h-3 bg-white rounded-full flex-shrink-0"></div>
+              <span className="text-lg">Instant eligibility confirmation</span>
+            </div>
+            <div className="flex items-center space-x-3">
+              <div className="w-3 h-3 bg-white rounded-full flex-shrink-0"></div>
+              <span className="text-lg">Credit Limit as per requirement</span>
+            </div>
+            <div className="flex items-center space-x-3">
+              <div className="w-3 h-3 bg-white rounded-full flex-shrink-0"></div>
+              <span className="text-lg">Hassle-free disbursal in account</span>
             </div>
           </div>
         </div>
