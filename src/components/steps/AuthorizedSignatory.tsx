@@ -5,7 +5,6 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { SidePanel } from "../SidePanel";
-import { PromotionalSection } from "@/components/PromotionalSection";
 
 interface AuthorizedSignatoryProps {
   onNext: () => void;
@@ -486,11 +485,6 @@ export const AuthorizedSignatory = ({ onNext, onPrev }: AuthorizedSignatoryProps
           <Button onClick={handleNext} className="bg-blue-600 hover:bg-blue-700">
             Save and Proceed
           </Button>
-        </div>
-
-        {/* Promotional Section */}
-        <div className="mt-8">
-          <PromotionalSection />
         </div>
       </div>
     </div>

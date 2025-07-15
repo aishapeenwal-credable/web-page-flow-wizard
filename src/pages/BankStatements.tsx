@@ -6,7 +6,6 @@ import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Header } from "@/components/Header";
 import { ArrowLeft, Upload, Plus, FileText, Eye, Trash2, Check } from "lucide-react";
-import { PromotionalSection } from "@/components/PromotionalSection";
 
 interface UploadedFile {
   id: string;
@@ -245,11 +244,6 @@ export const BankStatements = () => {
                 Save and Proceed
               </Button>
             </div>
-          </div>
-
-          {/* Promotional Section */}
-          <div className="mt-8">
-            <PromotionalSection />
           </div>
         </div>
       </div>

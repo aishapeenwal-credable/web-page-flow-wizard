@@ -6,7 +6,6 @@ import { Header } from "@/components/Header";
 import { ArrowLeft, Check } from "lucide-react";
 import { OTPModal } from "@/components/OTPModal";
 import { PartnerAuthModal } from "@/components/PartnerAuthModal";
-import { PromotionalSection } from "@/components/PromotionalSection";
 
 interface Partner {
   id: string;
@@ -196,11 +195,6 @@ export const AECBScore = () => {
                 Save and Proceed
               </Button>
             </div>
-          </div>
-
-          {/* Promotional Section */}
-          <div className="mt-8">
-            <PromotionalSection />
           </div>
         </div>
       </div>

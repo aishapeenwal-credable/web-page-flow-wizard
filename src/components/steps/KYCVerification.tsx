@@ -4,7 +4,6 @@ import { Upload, FileText, Eye, Trash2, ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { SidePanel } from "../SidePanel";
-import { PromotionalSection } from "@/components/PromotionalSection";
 
 interface KYCVerificationProps {
   onNext: () => void;
@@ -175,11 +174,6 @@ export const KYCVerification = ({ onNext, onPrev }: KYCVerificationProps) => {
           <Button onClick={handleNext} className="bg-blue-600 hover:bg-blue-700">
             Save and Proceed
           </Button>
-        </div>
-
-        {/* Promotional Section */}
-        <div className="mt-8">
-          <PromotionalSection />
         </div>
       </div>
     </div>
