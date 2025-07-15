@@ -486,6 +486,11 @@ export const AuthorizedSignatory = ({ onNext, onPrev }: AuthorizedSignatoryProps
             Save and Proceed
           </Button>
         </div>
+
+        {/* Promotional Section */}
+        <div className="mt-8">
+          <PromotionalSection />
+        </div>
       </div>
     </div>
   );

@@ -245,6 +245,11 @@ export const BankStatements = () => {
               </Button>
             </div>
           </div>
+
+          {/* Promotional Section */}
+          <div className="mt-8">
+            <PromotionalSection />
+          </div>
         </div>
       </div>
     </div>

@@ -365,6 +365,11 @@ export const ApplicantDetails = () => {
             </div>
           </div>
         </div>
+
+        {/* Promotional Section */}
+        <div className="lg:w-1/3">
+          <PromotionalSection />
+        </div>
       </div>
     </div>
   );
