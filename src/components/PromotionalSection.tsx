@@ -1,5 +1,5 @@
 export const PromotionalSection = () => {
-  return <div className="w-80 h-96 rounded-lg overflow-hidden">
-      <img alt="Financial Journey" src="/lovable-uploads/85a615c6-4d3c-4f0e-80ef-6fc4cd252df2.png" className="w-full h-full object-fill" />
+  return <div className="w-80 min-h-96 max-h-screen rounded-lg overflow-hidden flex-shrink-0">
+      <img alt="Financial Journey" src="/lovable-uploads/197f1e6c-1998-4962-8698-d4bce00c561b.png" className="w-full h-full object-cover" />
     </div>;
 };
