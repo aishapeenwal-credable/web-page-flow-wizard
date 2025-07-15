@@ -11,6 +11,15 @@ import { ApplicantDetails } from "./pages/ApplicantDetails";
 import { BankStatements } from "./pages/BankStatements";
 import { AECBScore } from "./pages/AECBScore";
 import { AnalysisLoading } from "./pages/AnalysisLoading";
+import { VATReturns } from "./pages/VATReturns";
+import { ProcessingStep } from "./pages/ProcessingStep";
+import { LoanOffer } from "./pages/LoanOffer";
+import { AuthorizedSignatory } from "./pages/AuthorizedSignatory";
+import { VideoVerification } from "./pages/VideoVerification";
+import { BankAccountVerification } from "./pages/BankAccountVerification";
+import { UAEFTSStep } from "./pages/UAEFTSStep";
+import { AgreementSigning } from "./pages/AgreementSigning";
+import { ThankYou } from "./pages/ThankYou";
 import { LoanApplication } from "./components/LoanApplication";
 import NotFound from "./pages/NotFound";
 
@@ -46,6 +55,15 @@ const App = () => (
           <Route path="/aecb-score" element={<AECBScore />} />
           <Route path="/analysis-loading" element={<AnalysisLoading />} />
           <Route path="/loan-application" element={<LoanApplication />} />
+          <Route path="/loan-application/vat-returns" element={<VATReturns />} />
+          <Route path="/loan-application/processing" element={<ProcessingStep />} />
+          <Route path="/loan-application/loan-offer" element={<LoanOffer />} />
+          <Route path="/loan-application/authorized-signatory" element={<AuthorizedSignatory />} />
+          <Route path="/loan-application/video-verification" element={<VideoVerification />} />
+          <Route path="/loan-application/bank-account" element={<BankAccountVerification />} />
+          <Route path="/loan-application/uae-fts" element={<UAEFTSStep />} />
+          <Route path="/loan-application/agreement-signing" element={<AgreementSigning />} />
+          <Route path="/loan-application/thank-you" element={<ThankYou />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
