@@ -34,6 +34,17 @@ export const SignUp = () => {
 
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col">
+      {/* Back button - fixed at top left */}
+      <div className="fixed top-4 left-4 z-50">
+        <Button 
+          variant="ghost" 
+          onClick={handleBack} 
+          className="flex items-center gap-2 bg-white/90 backdrop-blur-sm hover:bg-white shadow-sm"
+        >
+          <ArrowLeft className="w-4 h-4" />
+          Back
+        </Button>
+      </div>
       <div className="flex flex-1">
         <div className="flex-1 relative overflow-hidden">
           <img 
@@ -45,14 +56,6 @@ export const SignUp = () => {
 
         <div className="flex-1 flex items-center justify-center p-8">
           <div className="w-full max-w-md">
-            <Button 
-              variant="ghost" 
-              onClick={handleBack} 
-              className="mb-4 flex items-center gap-2"
-            >
-              <ArrowLeft className="w-4 h-4" />
-              Back
-            </Button>
 
             <div className="flex items-center justify-between mb-8">
               <div className="flex items-center space-x-2">
