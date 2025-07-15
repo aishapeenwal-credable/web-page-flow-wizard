@@ -4,6 +4,7 @@ import { Upload, Plus, FileText, Eye, Trash2, ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { SidePanel } from "../SidePanel";
+import { PromotionalSection } from "@/components/PromotionalSection";
 
 interface VATReturnsProps {
   onNext: () => void;

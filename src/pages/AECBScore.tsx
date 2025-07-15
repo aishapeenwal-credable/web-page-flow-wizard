@@ -6,6 +6,7 @@ import { Header } from "@/components/Header";
 import { ArrowLeft, Check } from "lucide-react";
 import { OTPModal } from "@/components/OTPModal";
 import { PartnerAuthModal } from "@/components/PartnerAuthModal";
+import { PromotionalSection } from "@/components/PromotionalSection";
 
 interface Partner {
   id: string;

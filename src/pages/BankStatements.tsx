@@ -6,6 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Header } from "@/components/Header";
 import { ArrowLeft, Upload, Plus, FileText, Eye, Trash2, Check } from "lucide-react";
+import { PromotionalSection } from "@/components/PromotionalSection";
 
 interface UploadedFile {
   id: string;

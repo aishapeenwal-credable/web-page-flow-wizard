@@ -6,6 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Header } from "@/components/Header";
 import { Check, ArrowLeft } from "lucide-react";
+import { PromotionalSection } from "@/components/PromotionalSection";
 
 export const ApplicantDetails = () => {
   const navigate = useNavigate();

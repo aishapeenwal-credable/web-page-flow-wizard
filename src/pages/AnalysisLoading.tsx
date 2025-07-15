@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, Check } from "lucide-react";
 import { Header } from "@/components/Header";
+import { PromotionalSection } from "@/components/PromotionalSection";
 
 export const AnalysisLoading = () => {
   const navigate = useNavigate();
