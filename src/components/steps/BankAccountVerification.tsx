@@ -19,6 +19,10 @@ export const BankAccountVerification = ({ onNext, onPrev }: BankAccountVerificat
     setIsVerified(true);
     // Simulate verification delay
     setTimeout(() => {
+      // Scroll to top when navigating to next step
+      window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+      document.documentElement.scrollTop = 0;
+      document.body.scrollTop = 0;
       onNext();
     }, 1500);
   };

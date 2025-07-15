@@ -42,6 +42,10 @@ export const AgreementSigning = ({ onNext, onPrev }: AgreementSigningProps) => {
     );
     setSignedAgreements(new Set(allAgreementIds));
     setShowModal(false);
+    // Scroll to top when navigating to next step
+    window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+    document.documentElement.scrollTop = 0;
+    document.body.scrollTop = 0;
     onNext();
   };
 

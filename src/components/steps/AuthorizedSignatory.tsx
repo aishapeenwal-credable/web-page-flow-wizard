@@ -171,6 +171,14 @@ export const AuthorizedSignatory = ({ onNext, onPrev }: AuthorizedSignatoryProps
       .map(g => g.name);
   };
 
+  const handleNext = () => {
+    // Scroll to top when navigating to next step
+    window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+    document.documentElement.scrollTop = 0;
+    document.body.scrollTop = 0;
+    onNext();
+  };
+
   return (
     <div className="flex gap-8">
       <SidePanel />
@@ -474,7 +482,7 @@ export const AuthorizedSignatory = ({ onNext, onPrev }: AuthorizedSignatoryProps
             </button>
           </div>
 
-          <Button onClick={onNext} className="bg-blue-600 hover:bg-blue-700">
+          <Button onClick={handleNext} className="bg-blue-600 hover:bg-blue-700">
             Save and Proceed
           </Button>
         </div>

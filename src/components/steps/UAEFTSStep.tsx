@@ -27,6 +27,10 @@ export const UAEFTSStep = ({ onNext, onPrev }: UAEFTSStepProps) => {
       setCurrentState('completed');
       // Auto-proceed after showing completion for 2 seconds
       setTimeout(() => {
+        // Scroll to top when navigating to next step
+        window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+        document.documentElement.scrollTop = 0;
+        document.body.scrollTop = 0;
         onNext();
       }, 2000);
     }, 3000);
