@@ -16,11 +16,11 @@ export const AuthFooter = () => {
         
         <div className="flex items-center space-x-2 text-gray-500">
           <span>Powered by</span>
-          <div className="flex items-center space-x-1">
-            <span className="font-semibold text-gray-700">CRED</span>
-            <span className="text-orange-500 font-bold">A</span>
-            <span className="font-semibold text-gray-700">BLE</span>
-          </div>
+          <img 
+            src="/lovable-uploads/25534ba6-4fcc-4c80-b18e-9586e050258e.png" 
+            alt="CredAble" 
+            className="h-4"
+          />
         </div>
         
         <div className="flex items-center space-x-2">

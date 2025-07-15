@@ -59,10 +59,11 @@ export const SignUp = () => {
 
             <div className="flex items-center justify-between mb-8">
               <div className="flex items-center space-x-2">
-                <div className="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center">
-                  <span className="text-white font-bold text-sm">i</span>
-                </div>
-                <span className="text-xl font-bold text-blue-600">Ideal Bank</span>
+                <img 
+                  src="/lovable-uploads/83e2b8f5-c059-4834-a41d-540e2cd6fe2e.png" 
+                  alt="Ideal Bank" 
+                  className="h-8"
+                />
               </div>
               <div className="flex items-center space-x-4">
                 <select className="text-sm text-blue-600">

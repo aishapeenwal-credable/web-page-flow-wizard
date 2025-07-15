@@ -6,10 +6,11 @@ export const Header = () => {
     <header className="bg-white border-b border-gray-200">
       <div className="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
         <div className="flex items-center space-x-2">
-          <div className="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center">
-            <span className="text-white font-bold text-sm">i</span>
-          </div>
-          <span className="text-xl font-bold text-blue-600">Ideal Bank</span>
+          <img 
+            src="/lovable-uploads/83e2b8f5-c059-4834-a41d-540e2cd6fe2e.png" 
+            alt="Ideal Bank" 
+            className="h-8"
+          />
         </div>
         <div className="flex items-center space-x-4">
           <select className="border border-gray-300 rounded px-3 py-1 text-sm">
