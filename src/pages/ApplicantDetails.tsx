@@ -43,9 +43,6 @@ export const ApplicantDetails = () => {
     navigate("/bank-statements");
   };
 
-  const handleBack = () => {
-    navigate("/login");
-  };
 
   const steps = [
     { id: 1, name: "Applicant Detail", description: "Just a few Personal details.", completed: false, active: true },
@@ -58,17 +55,6 @@ export const ApplicantDetails = () => {
   return (
     <div className="min-h-screen bg-gray-50">
       <Header />
-      {/* Back button - fixed at top left */}
-      <div className="fixed top-4 left-4 z-50">
-        <Button 
-          variant="ghost" 
-          onClick={handleBack} 
-          className="flex items-center gap-2 bg-white/90 backdrop-blur-sm hover:bg-white shadow-sm"
-        >
-          <ArrowLeft className="w-4 h-4" />
-          Back to Login
-        </Button>
-      </div>
       <div className="max-w-7xl mx-auto px-4 py-8">
         <h1 className="text-2xl font-semibold mb-8">Your loan application</h1>
         

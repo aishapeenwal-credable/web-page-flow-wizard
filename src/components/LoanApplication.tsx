@@ -44,9 +44,6 @@ export const LoanApplication = () => {
     setCurrentStep(prev => Math.max(prev - 1, 1));
   };
 
-  const handleBack = () => {
-    navigate("/analysis-loading");
-  };
 
   const renderCurrentStep = () => {
     switch (currentStep) {
@@ -81,17 +78,6 @@ export const LoanApplication = () => {
   return (
     <div className="min-h-screen bg-gray-50">
       <Header />
-      {/* Back button - fixed at top left */}
-      <div className="fixed top-4 left-4 z-50">
-        <Button 
-          variant="ghost" 
-          onClick={handleBack} 
-          className="flex items-center gap-2 bg-white/90 backdrop-blur-sm hover:bg-white shadow-sm"
-        >
-          <ArrowLeft className="w-4 h-4" />
-          Back
-        </Button>
-      </div>
       <div className="max-w-7xl mx-auto px-4 py-8">
         <h1 className="text-2xl font-semibold mb-8">Your loan application</h1>
         <ProgressIndicator 
