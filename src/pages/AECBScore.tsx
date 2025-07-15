@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Header } from "@/components/Header";
 import { PromotionalSection } from "@/components/PromotionalSection";
+import { PageFooter } from "@/components/PageFooter";
 import { ArrowLeft, Check } from "lucide-react";
 import { OTPModal } from "@/components/OTPModal";
 import { PartnerAuthModal } from "@/components/PartnerAuthModal";
@@ -175,6 +176,7 @@ export const AECBScore = () => {
           </div>
         </div>
       </div>
+      <PageFooter />
 
       <OTPModal
         isOpen={showOTPModal}

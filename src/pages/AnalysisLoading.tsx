@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { PromotionalSection } from "@/components/PromotionalSection";
+import { PageFooter } from "@/components/PageFooter";
 import { ArrowLeft, Check } from "lucide-react";
 import { Header } from "@/components/Header";
 
@@ -99,6 +100,7 @@ export const AnalysisLoading = () => {
           </div>
         </div>
       </div>
+      <PageFooter />
     </div>
   );
 };

@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
 import { Header } from "./Header";
 import { ProgressIndicator } from "./ProgressIndicator";
+import { PageFooter } from "./PageFooter";
 import { VATReturns } from "./steps/VATReturns";
 import { ProcessingStep } from "./steps/ProcessingStep";
 import { LoanOffer } from "./steps/LoanOffer";
@@ -101,6 +102,7 @@ export const LoanApplication = () => {
           {renderCurrentStep()}
         </div>
       </div>
+      <PageFooter />
     </div>
   );
 };

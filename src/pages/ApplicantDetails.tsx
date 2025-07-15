@@ -6,6 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Header } from "@/components/Header";
 import { PromotionalSection } from "@/components/PromotionalSection";
+import { PageFooter } from "@/components/PageFooter";
 import { Check, ArrowLeft } from "lucide-react";
 
 export const ApplicantDetails = () => {
@@ -343,6 +344,7 @@ export const ApplicantDetails = () => {
           </div>
         </div>
       </div>
+      <PageFooter />
     </div>
   );
 };

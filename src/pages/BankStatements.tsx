@@ -6,6 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Header } from "@/components/Header";
 import { PromotionalSection } from "@/components/PromotionalSection";
+import { PageFooter } from "@/components/PageFooter";
 import { ArrowLeft, Upload, Plus, FileText, Eye, Trash2, Check } from "lucide-react";
 
 interface UploadedFile {
@@ -224,6 +225,7 @@ export const BankStatements = () => {
           </div>
         </div>
       </div>
+      <PageFooter />
     </div>
   );
 };
