@@ -2,7 +2,7 @@
 import { useState } from "react";
 import { ArrowLeft, Info, CreditCard, MousePointer, CheckCircle2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { SidePanel } from "../SidePanel";
+import { PromotionalSection } from "../PromotionalSection";
 import { OTPModal } from "../OTPModal";
 
 interface UAEFTSStepProps {
@@ -169,7 +169,7 @@ export const UAEFTSStep = ({ onNext, onPrev }: UAEFTSStepProps) => {
 
   return (
     <div className="flex gap-8">
-      <SidePanel />
+      <PromotionalSection />
       <div className="flex-1">
         <div className="bg-white rounded-lg shadow-sm p-6">
           {currentState === 'initial' && (

@@ -3,7 +3,7 @@ import { Check, ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { SidePanel } from "../SidePanel";
+import { PromotionalSection } from "../PromotionalSection";
 
 interface BankAccountVerificationProps {
   onNext: () => void;
@@ -29,7 +29,7 @@ export const BankAccountVerification = ({ onNext, onPrev }: BankAccountVerificat
 
   return (
     <div className="flex gap-8">
-      <SidePanel />
+      <PromotionalSection />
       <div className="flex-1">
         <div className="bg-white rounded-lg shadow-sm p-6">
           <Button 

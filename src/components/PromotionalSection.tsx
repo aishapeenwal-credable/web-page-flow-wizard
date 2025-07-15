@@ -1,7 +1,6 @@
-
 import { Check } from "lucide-react";
 
-export const SidePanel = () => {
+export const PromotionalSection = () => {
   return (
     <div className="w-80 bg-gradient-to-br from-blue-600 to-blue-800 rounded-lg relative overflow-hidden">
       <img 

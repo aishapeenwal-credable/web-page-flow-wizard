@@ -3,7 +3,7 @@ import { useState, useRef } from "react";
 import { Upload, Plus, FileText, Eye, Trash2, ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { SidePanel } from "../SidePanel";
+import { PromotionalSection } from "../PromotionalSection";
 
 interface VATReturnsProps {
   onNext: () => void;
@@ -64,7 +64,7 @@ export const VATReturns = ({ onNext, onPrev }: VATReturnsProps) => {
 
   return (
     <div className="flex gap-8">
-      <SidePanel />
+      <PromotionalSection />
       <div className="flex-1">
         <div className="bg-white rounded-lg shadow-sm p-6">
           {onPrev && (
