@@ -172,16 +172,6 @@ export const UAEFTSStep = ({ onNext, onPrev }: UAEFTSStepProps) => {
       <PromotionalSection />
       <div className="flex-1">
         <div className="bg-white rounded-lg shadow-sm p-6">
-          {currentState === 'initial' && (
-            <Button 
-              variant="ghost" 
-              onClick={onPrev} 
-              className="mb-4 flex items-center gap-2"
-            >
-              <ArrowLeft className="w-4 h-4" />
-              Back
-            </Button>
-          )}
 
           {renderContent()}
         </div>

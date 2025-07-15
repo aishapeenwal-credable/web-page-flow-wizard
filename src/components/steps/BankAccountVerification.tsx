@@ -32,14 +32,6 @@ export const BankAccountVerification = ({ onNext, onPrev }: BankAccountVerificat
       <PromotionalSection />
       <div className="flex-1">
         <div className="bg-white rounded-lg shadow-sm p-6">
-          <Button 
-            variant="ghost" 
-            onClick={onPrev} 
-            className="mb-4 flex items-center gap-2"
-          >
-            <ArrowLeft className="w-4 h-4" />
-            Back
-          </Button>
 
           <h2 className="text-xl font-semibold mb-6">Bank Account Verification</h2>
           
