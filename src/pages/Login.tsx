@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -5,25 +6,32 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { User, ArrowLeft } from "lucide-react";
 import { AuthFooter } from "@/components/AuthFooter";
+
 export const Login = () => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     email: "john.doe@idealbrothers.ae",
     password: "********"
   });
+
   const handleInputChange = (field: string, value: string) => {
-    setFormData(prev => ({
-      ...prev,
-      [field]: value
-    }));
+    setFormData(prev => ({ ...prev, [field]: value }));
   };
+
   const handleLogin = () => {
     navigate("/applicant-details");
   };
-  return <div className="min-h-screen bg-gray-50 flex flex-col">
+
+
+  return (
+    <div className="min-h-screen bg-gray-50 flex flex-col">
       <div className="flex flex-1">
         <div className="flex-1 relative overflow-hidden">
-          <img src="/lovable-uploads/aea4b6ec-9975-45c6-acaf-d3be7aed186c.png" alt="Digital financing illustration" className="w-full h-full object-cover" />
+          <img 
+            src="/lovable-uploads/aea4b6ec-9975-45c6-acaf-d3be7aed186c.png" 
+            alt="Digital financing illustration" 
+            className="w-full h-full object-cover"
+          />
         </div>
 
         <div className="flex-1 flex items-center justify-center p-8">
@@ -31,10 +39,11 @@ export const Login = () => {
 
             <div className="flex items-center justify-between mb-8">
               <div className="flex items-center space-x-2">
-                <div className="flex flex-col items-start space-y-2">
-                  <img alt="Ajman Free Zone" src="/lovable-uploads/a017415a-6f57-408c-9375-0104f656fe16.png" className="h-20" />
-                  <img src="/lovable-uploads/83e2b8f5-c059-4834-a41d-540e2cd6fe2e.png" alt="Ideal Bank" className="h-8" />
-                </div>
+                <img 
+                  src="/lovable-uploads/83e2b8f5-c059-4834-a41d-540e2cd6fe2e.png" 
+                  alt="Ideal Bank" 
+                  className="h-8"
+                />
               </div>
               <div className="flex items-center space-x-4">
                 <select className="text-sm text-blue-600">
@@ -59,12 +68,22 @@ export const Login = () => {
 
               <div>
                 <Label htmlFor="email">E-mail Address</Label>
-                <Input id="email" type="email" value={formData.email} onChange={e => handleInputChange('email', e.target.value)} />
+                <Input
+                  id="email"
+                  type="email"
+                  value={formData.email}
+                  onChange={(e) => handleInputChange('email', e.target.value)}
+                />
               </div>
 
               <div>
                 <Label htmlFor="password">Password</Label>
-                <Input id="password" type="password" value={formData.password} onChange={e => handleInputChange('password', e.target.value)} />
+                <Input
+                  id="password"
+                  type="password"
+                  value={formData.password}
+                  onChange={(e) => handleInputChange('password', e.target.value)}
+                />
               </div>
 
               <div className="flex items-center justify-between">
@@ -75,14 +94,20 @@ export const Login = () => {
                 <a href="#" className="text-sm text-blue-600 hover:underline">Forgot password?</a>
               </div>
 
-              <Button onClick={handleLogin} className="w-full bg-blue-600 hover:bg-blue-700">
+              <Button 
+                onClick={handleLogin} 
+                className="w-full bg-blue-600 hover:bg-blue-700"
+              >
                 Login
               </Button>
 
               <div className="text-center">
                 <span className="text-sm text-gray-600">
                   Don't have an account?{" "}
-                  <button onClick={() => navigate("/signup")} className="text-blue-600 hover:underline">
+                  <button 
+                    onClick={() => navigate("/signup")}
+                    className="text-blue-600 hover:underline"
+                  >
                     Sign up
                   </button>
                 </span>
@@ -104,5 +129,6 @@ export const Login = () => {
         </div>
       </div>
       <AuthFooter />
-    </div>;
+    </div>
+  );
 };
