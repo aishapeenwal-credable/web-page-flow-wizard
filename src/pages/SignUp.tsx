@@ -38,7 +38,7 @@ export const SignUp = () => {
             <div className="flex items-center justify-between mb-8">
               <div className="flex items-center space-x-2">
                 <div className="flex flex-col space-y-2">
-                  
+                  <img src="/lovable-uploads/ffbc0f0e-0795-4871-acdd-aa439ccf3007.png" alt="Ajman Free Zone" className="h-20" />
                   <img src="/lovable-uploads/83e2b8f5-c059-4834-a41d-540e2cd6fe2e.png" alt="Ideal Bank" className="h-8" />
                 </div>
               </div>
