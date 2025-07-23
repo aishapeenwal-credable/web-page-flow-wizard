@@ -32,7 +32,7 @@ export const Login = () => {
             <div className="flex items-center justify-between mb-8">
               <div className="flex items-center space-x-2">
                 <div className="flex flex-col items-start space-y-2">
-                  <img alt="Ajman Free Zone" src="/lovable-uploads/a017415a-6f57-408c-9375-0104f656fe16.png" className="h-20" />
+                  
                   <img src="/lovable-uploads/83e2b8f5-c059-4834-a41d-540e2cd6fe2e.png" alt="Ideal Bank" className="h-8" />
                 </div>
               </div>
