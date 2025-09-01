@@ -43,11 +43,25 @@ export const AECBScore = () => {
     setShowPartnerModal(true);
   };
 
+  const handleAddPartner = () => {
+    setSelectedPartner(null);
+    setShowPartnerModal(true);
+  };
+
   const handlePartnerSubmit = (data: any) => {
     if (selectedPartner) {
+      // Editing existing partner
       setPartners(partners.map(p => 
         p.id === selectedPartner.id ? { ...p, status: 'authorized' } : p
       ));
+    } else {
+      // Adding new partner
+      const newPartner: Partner = {
+        id: Date.now().toString(),
+        name: data.partnerName,
+        status: 'authorized'
+      };
+      setPartners([...partners, newPartner]);
     }
     setShowPartnerModal(false);
     setSelectedPartner(null);
@@ -143,8 +157,16 @@ export const AECBScore = () => {
                       </Button>
                     </div>
                   ))}
-                </div>
-              </div>
+                 </div>
+                 
+                 <Button
+                   onClick={handleAddPartner}
+                   variant="outline"
+                   className="w-full border-dashed border-2 border-gray-300 text-gray-600 hover:border-blue-400 hover:text-blue-600"
+                 >
+                   + Add More Partners
+                 </Button>
+               </div>
 
               <Button 
                 onClick={handleContinue} 
