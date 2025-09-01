@@ -300,7 +300,7 @@ export const PartnerAuthModal = ({ isOpen, onClose, onSubmit }: PartnerAuthModal
           <div className="flex justify-end">
             <Button 
               onClick={handleSubmit}
-              className="bg-blue-600 hover:bg-blue-700"
+              className="bg-primary hover:bg-primary/90 text-primary-foreground"
             >
               Save
             </Button>

@@ -17,7 +17,8 @@ All colors MUST be HSL.
     --popover: 0 0% 100%;
     --popover-foreground: 0 0% 13%;
 
-    --primary: 0 85% 49%;
+    /* ADCB Brand Colors */
+    --primary: 214 100% 27%; /* ADCB Navy Blue */
     --primary-foreground: 0 0% 98%;
 
     --secondary: 0 0% 96%;
@@ -26,7 +27,7 @@ All colors MUST be HSL.
     --muted: 0 0% 96%;
     --muted-foreground: 0 0% 45%;
 
-    --accent: 20 85% 60%;
+    --accent: 195 100% 50%; /* ADCB Light Blue */
     --accent-foreground: 0 0% 13%;
 
     --destructive: 0 84% 60%;
@@ -34,7 +35,14 @@ All colors MUST be HSL.
 
     --border: 0 0% 90%;
     --input: 0 0% 90%;
-    --ring: 0 85% 49%;
+    --ring: 214 100% 27%; /* ADCB Navy Blue */
+
+    /* ADCB Brand Specific Colors */
+    --adcb-navy: 214 100% 27%; /* Deep navy blue */
+    --adcb-light-blue: 195 100% 50%; /* Bright blue */
+    --adcb-gold: 43 87% 58%; /* ADCB gold accent */
+    --adcb-success: 142 76% 36%; /* Success green */
+    --adcb-warning: 43 96% 56%; /* Warning yellow */
 
     --radius: 0.5rem;
 
@@ -65,7 +73,7 @@ All colors MUST be HSL.
     --popover: 0 0% 9%;
     --popover-foreground: 0 0% 95%;
 
-    --primary: 0 85% 55%;
+    --primary: 214 100% 35%; /* Slightly lighter for dark mode */
     --primary-foreground: 0 0% 98%;
 
     --secondary: 0 0% 14%;
@@ -74,7 +82,7 @@ All colors MUST be HSL.
     --muted: 0 0% 14%;
     --muted-foreground: 0 0% 65%;
 
-    --accent: 20 85% 65%;
+    --accent: 195 100% 60%; /* Brighter for dark mode */
     --accent-foreground: 0 0% 95%;
 
     --destructive: 0 62% 45%;
@@ -82,7 +90,14 @@ All colors MUST be HSL.
 
     --border: 0 0% 14%;
     --input: 0 0% 14%;
-    --ring: 0 85% 55%;
+    --ring: 214 100% 35%; /* ADCB Navy Blue for dark mode */
+
+    /* ADCB Brand Specific Colors - Dark Mode */
+    --adcb-navy: 214 100% 35%;
+    --adcb-light-blue: 195 100% 60%;
+    --adcb-gold: 43 87% 65%;
+    --adcb-success: 142 76% 45%;
+    --adcb-warning: 43 96% 65%;
     --sidebar-background: 240 5.9% 10%;
     --sidebar-foreground: 240 4.8% 95.9%;
     --sidebar-primary: 224.3 76.3% 48%;

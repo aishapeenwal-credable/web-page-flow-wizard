@@ -100,19 +100,19 @@ export const AECBScore = () => {
           {steps.map((step, index) => (
             <div key={step.id} className="flex items-center">
               <div className="flex flex-col items-center">
-                <div className={`
-                  w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium
-                  ${step.completed 
-                    ? 'bg-green-500 text-white' 
-                    : step.active 
-                      ? 'bg-blue-600 text-white' 
-                      : 'bg-gray-200 text-gray-600'
-                  }
-                `}>
+                 <div className={`
+                   w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium
+                   ${step.completed 
+                     ? 'bg-adcb-success text-white' 
+                     : step.active 
+                       ? 'bg-primary text-primary-foreground' 
+                       : 'bg-gray-200 text-gray-600'
+                   }
+                 `}>
                   {step.completed ? <Check className="w-4 h-4" /> : step.id}
                 </div>
                 <div className="mt-2 text-center">
-                  <div className={`text-sm font-medium ${step.active ? 'text-blue-600' : 'text-gray-900'}`}>
+                  <div className={`text-sm font-medium ${step.active ? 'text-primary' : 'text-gray-900'}`}>
                     {step.name}
                   </div>
                   <div className="text-xs text-gray-500 max-w-24">
@@ -134,11 +134,11 @@ export const AECBScore = () => {
             <div className="bg-white rounded-lg shadow-sm p-6">
               <h2 className="text-xl font-semibold mb-6">Partner Details</h2>
 
-              <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-6 flex items-start gap-3">
-                <div className="w-6 h-6 bg-blue-100 rounded flex items-center justify-center flex-shrink-0 mt-1">
-                  <div className="w-2 h-2 bg-blue-600 rounded"></div>
+              <div className="bg-accent/10 border border-accent/20 rounded-lg p-4 mb-6 flex items-start gap-3">
+                <div className="w-6 h-6 bg-accent/20 rounded flex items-center justify-center flex-shrink-0 mt-1">
+                  <div className="w-2 h-2 bg-accent rounded"></div>
                 </div>
-                <p className="text-sm text-gray-700">
+                <p className="text-sm text-foreground">
                   Verification code will be sent to partners' mobile number. Please keep all your partner's mobile nearby for verification.
                 </p>
               </div>
@@ -152,7 +152,7 @@ export const AECBScore = () => {
                       <span className="font-medium">{partner.name}</span>
                       <Button
                         onClick={() => handleAuthorize(partner)}
-                        className="bg-blue-600 hover:bg-blue-700 text-white"
+                        className="bg-primary hover:bg-primary/90 text-primary-foreground"
                       >
                         Edit
                       </Button>
@@ -163,21 +163,21 @@ export const AECBScore = () => {
                  <Button
                    onClick={handleAddPartner}
                    variant="outline"
-                   className="w-full border-dashed border-2 border-gray-300 text-gray-600 hover:border-blue-400 hover:text-blue-600"
+                   className="w-full border-dashed border-2 border-muted text-muted-foreground hover:border-primary hover:text-primary"
                  >
                    + Add More Partners
                  </Button>
                </div>
 
-              <Button 
-                onClick={handleContinue} 
-                className={`${
-                  allPartnersAuthorized 
-                    ? 'bg-blue-600 hover:bg-blue-700 text-white' 
-                    : 'bg-gray-300 hover:bg-gray-400 text-gray-600'
-                }`}
-                disabled={!allPartnersAuthorized}
-              >
+               <Button 
+                 onClick={handleContinue} 
+                 className={`${
+                   allPartnersAuthorized 
+                     ? 'bg-primary hover:bg-primary/90 text-primary-foreground' 
+                     : 'bg-muted hover:bg-muted/80 text-muted-foreground'
+                 }`}
+                 disabled={!allPartnersAuthorized}
+               >
                 Save and Proceed
               </Button>
             </div>

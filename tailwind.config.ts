@@ -61,6 +61,14 @@ export default {
 					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
+				},
+				// ADCB Brand Colors
+				adcb: {
+					navy: 'hsl(var(--adcb-navy))',
+					'light-blue': 'hsl(var(--adcb-light-blue))',
+					gold: 'hsl(var(--adcb-gold))',
+					success: 'hsl(var(--adcb-success))',
+					warning: 'hsl(var(--adcb-warning))'
 				}
 			},
 			borderRadius: {
