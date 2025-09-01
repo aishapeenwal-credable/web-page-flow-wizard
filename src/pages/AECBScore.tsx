@@ -77,8 +77,8 @@ export const AECBScore = () => {
     setSelectedPartner(null);
   };
 
-  // Check if all partners are authorized
-  const allPartnersAuthorized = partners.every(partner => partner.status === 'authorized');
+  // Check if all partners are authorized - now always true since we removed status
+  const allPartnersAuthorized = true;
 
   const steps = [
     { id: 1, name: "Applicant Detail", description: "Just a few Personal details.", completed: true },
