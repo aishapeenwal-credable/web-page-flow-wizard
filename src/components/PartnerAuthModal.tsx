@@ -15,18 +15,24 @@ interface PartnerAuthModalProps {
 }
 
 interface PartnerData {
-  fullName: string;
-  emiratesId: string;
-  dateOfBirth: string;
-  gender: string;
-  email: string;
-  mobileNumber: string;
-  countryCode: string;
-  addressLine1: string;
-  street: string;
-  poBox: string;
-  area: string;
-  town: string;
+  partnerName: string;
+  prefix: string;
+  mobile: string;
+  customerType: string;
+  existingCID: string;
+  birthDate: string;
+  nationality: string;
+  passportNumber: string;
+  visaNumber: string;
+  visaExpiryDate: string;
+  countryOfCorrespondence: string;
+  passportIssueDate: string;
+  passportExpiryDate: string;
+  countryOfResidence: string;
+  eidExpiryDate: string;
+  eidNumber: string;
+  emailId: string;
+  isSignatoryResidentOfUAE: string;
   consent: boolean;
 }
 
@@ -49,18 +55,24 @@ const countryCodes = [
 
 export const PartnerAuthModal = ({ isOpen, onClose, onSubmit }: PartnerAuthModalProps) => {
   const [formData, setFormData] = useState<PartnerData>({
-    fullName: "Esther Howard",
-    emiratesId: "784-1980-94xxxxx-8",
-    dateOfBirth: "1986-03-12",
-    gender: "female",
-    email: "esther.howard@idealbrothers.ae",
-    mobileNumber: "77394 72531",
-    countryCode: "+971",
-    addressLine1: "Deira Riggat Al Buteen",
-    street: "Deira Riggat Al Buteen",
-    poBox: "93903",
-    area: "Dubai",
-    town: "sharjah",
+    partnerName: "Esther Howard",
+    prefix: "Ms.",
+    mobile: "77394 72531",
+    customerType: "Individual",
+    existingCID: "",
+    birthDate: "1986-03-12",
+    nationality: "UAE",
+    passportNumber: "",
+    visaNumber: "",
+    visaExpiryDate: "",
+    countryOfCorrespondence: "UAE",
+    passportIssueDate: "",
+    passportExpiryDate: "",
+    countryOfResidence: "UAE",
+    eidExpiryDate: "",
+    eidNumber: "784-1980-94xxxxx-8",
+    emailId: "esther.howard@idealbrothers.ae",
+    isSignatoryResidentOfUAE: "Yes",
     consent: false
   });
 
@@ -86,136 +98,201 @@ export const PartnerAuthModal = ({ isOpen, onClose, onSubmit }: PartnerAuthModal
 
         <div className="space-y-6">
           <div>
-            <h3 className="text-lg font-medium mb-4">Personal details</h3>
+            <h3 className="text-lg font-medium mb-4">Partner Details</h3>
             <div className="grid grid-cols-2 gap-4">
               <div>
-                <Label htmlFor="fullName">Full Name*</Label>
+                <Label htmlFor="partnerName">Partner Name*</Label>
                 <Input
-                  id="fullName"
-                  value={formData.fullName}
-                  onChange={(e) => handleInputChange('fullName', e.target.value)}
+                  id="partnerName"
+                  value={formData.partnerName}
+                  onChange={(e) => handleInputChange('partnerName', e.target.value)}
                   placeholder="Esther Howard"
                 />
               </div>
               <div>
-                <Label htmlFor="emiratesId">Emirates ID*</Label>
-                <Input
-                  id="emiratesId"
-                  value={formData.emiratesId}
-                  onChange={(e) => handleInputChange('emiratesId', e.target.value)}
-                  placeholder="784-1980-94xxxxx-8"
-                />
-              </div>
-              <div>
-                <Label htmlFor="dateOfBirth">Date of Birth*</Label>
-                <Input
-                  id="dateOfBirth"
-                  type="date"
-                  value={formData.dateOfBirth}
-                  onChange={(e) => handleInputChange('dateOfBirth', e.target.value)}
-                />
-              </div>
-              <div>
-                <Label htmlFor="gender">Gender*</Label>
-                <Select value={formData.gender} onValueChange={(value) => handleInputChange('gender', value)}>
+                <Label htmlFor="prefix">Prefix*</Label>
+                <Select value={formData.prefix} onValueChange={(value) => handleInputChange('prefix', value)}>
                   <SelectTrigger>
-                    <SelectValue placeholder="Select gender" />
+                    <SelectValue placeholder="Select prefix" />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="male">Male</SelectItem>
-                    <SelectItem value="female">Female</SelectItem>
-                    <SelectItem value="other">Other</SelectItem>
+                    <SelectItem value="Mr.">Mr.</SelectItem>
+                    <SelectItem value="Ms.">Ms.</SelectItem>
+                    <SelectItem value="Mrs.">Mrs.</SelectItem>
+                    <SelectItem value="Dr.">Dr.</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
               <div>
-                <Label htmlFor="email">Personal Email ID*</Label>
+                <Label htmlFor="mobile">Mobile*</Label>
                 <Input
-                  id="email"
+                  id="mobile"
+                  value={formData.mobile}
+                  onChange={(e) => handleInputChange('mobile', e.target.value)}
+                  placeholder="77394 72531"
+                />
+              </div>
+              <div>
+                <Label htmlFor="customerType">Customer Type*</Label>
+                <Select value={formData.customerType} onValueChange={(value) => handleInputChange('customerType', value)}>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Select customer type" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="Individual">Individual</SelectItem>
+                    <SelectItem value="Corporate">Corporate</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+              <div>
+                <Label htmlFor="existingCID">Existing CID</Label>
+                <Input
+                  id="existingCID"
+                  value={formData.existingCID}
+                  onChange={(e) => handleInputChange('existingCID', e.target.value)}
+                  placeholder="Enter existing CID"
+                />
+              </div>
+              <div>
+                <Label htmlFor="birthDate">Birth Date*</Label>
+                <Input
+                  id="birthDate"
+                  type="date"
+                  value={formData.birthDate}
+                  onChange={(e) => handleInputChange('birthDate', e.target.value)}
+                />
+              </div>
+              <div>
+                <Label htmlFor="nationality">Nationality*</Label>
+                <Select value={formData.nationality} onValueChange={(value) => handleInputChange('nationality', value)}>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Select nationality" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="UAE">UAE</SelectItem>
+                    <SelectItem value="Indian">Indian</SelectItem>
+                    <SelectItem value="Pakistani">Pakistani</SelectItem>
+                    <SelectItem value="Filipino">Filipino</SelectItem>
+                    <SelectItem value="British">British</SelectItem>
+                    <SelectItem value="American">American</SelectItem>
+                    <SelectItem value="Other">Other</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+              <div>
+                <Label htmlFor="passportNumber">Passport Number</Label>
+                <Input
+                  id="passportNumber"
+                  value={formData.passportNumber}
+                  onChange={(e) => handleInputChange('passportNumber', e.target.value)}
+                  placeholder="Enter passport number"
+                />
+              </div>
+              <div>
+                <Label htmlFor="visaNumber">Visa Number</Label>
+                <Input
+                  id="visaNumber"
+                  value={formData.visaNumber}
+                  onChange={(e) => handleInputChange('visaNumber', e.target.value)}
+                  placeholder="Enter visa number"
+                />
+              </div>
+              <div>
+                <Label htmlFor="visaExpiryDate">Visa Expiry Date</Label>
+                <Input
+                  id="visaExpiryDate"
+                  type="date"
+                  value={formData.visaExpiryDate}
+                  onChange={(e) => handleInputChange('visaExpiryDate', e.target.value)}
+                />
+              </div>
+              <div>
+                <Label htmlFor="countryOfCorrespondence">Country Of Correspondence*</Label>
+                <Select value={formData.countryOfCorrespondence} onValueChange={(value) => handleInputChange('countryOfCorrespondence', value)}>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Select country" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="UAE">UAE</SelectItem>
+                    <SelectItem value="India">India</SelectItem>
+                    <SelectItem value="Pakistan">Pakistan</SelectItem>
+                    <SelectItem value="Philippines">Philippines</SelectItem>
+                    <SelectItem value="UK">UK</SelectItem>
+                    <SelectItem value="USA">USA</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+              <div>
+                <Label htmlFor="passportIssueDate">Passport Issue Date</Label>
+                <Input
+                  id="passportIssueDate"
+                  type="date"
+                  value={formData.passportIssueDate}
+                  onChange={(e) => handleInputChange('passportIssueDate', e.target.value)}
+                />
+              </div>
+              <div>
+                <Label htmlFor="passportExpiryDate">Passport Expiry Date</Label>
+                <Input
+                  id="passportExpiryDate"
+                  type="date"
+                  value={formData.passportExpiryDate}
+                  onChange={(e) => handleInputChange('passportExpiryDate', e.target.value)}
+                />
+              </div>
+              <div>
+                <Label htmlFor="countryOfResidence">Country of Residence*</Label>
+                <Select value={formData.countryOfResidence} onValueChange={(value) => handleInputChange('countryOfResidence', value)}>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Select country" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="UAE">UAE</SelectItem>
+                    <SelectItem value="India">India</SelectItem>
+                    <SelectItem value="Pakistan">Pakistan</SelectItem>
+                    <SelectItem value="Philippines">Philippines</SelectItem>
+                    <SelectItem value="UK">UK</SelectItem>
+                    <SelectItem value="USA">USA</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+              <div>
+                <Label htmlFor="eidExpiryDate">EID Expiry Date</Label>
+                <Input
+                  id="eidExpiryDate"
+                  type="date"
+                  value={formData.eidExpiryDate}
+                  onChange={(e) => handleInputChange('eidExpiryDate', e.target.value)}
+                />
+              </div>
+              <div>
+                <Label htmlFor="eidNumber">EID Number*</Label>
+                <Input
+                  id="eidNumber"
+                  value={formData.eidNumber}
+                  onChange={(e) => handleInputChange('eidNumber', e.target.value)}
+                  placeholder="784-1980-94xxxxx-8"
+                />
+              </div>
+              <div>
+                <Label htmlFor="emailId">Email Id*</Label>
+                <Input
+                  id="emailId"
                   type="email"
-                  value={formData.email}
-                  onChange={(e) => handleInputChange('email', e.target.value)}
+                  value={formData.emailId}
+                  onChange={(e) => handleInputChange('emailId', e.target.value)}
                   placeholder="esther.howard@idealbrothers.ae"
                 />
               </div>
               <div>
-                <Label htmlFor="mobile">Mobile Number*</Label>
-                <div className="flex gap-2">
-                  <Select value={formData.countryCode} onValueChange={(value) => handleInputChange('countryCode', value)}>
-                    <SelectTrigger className="w-24">
-                      <SelectValue />
-                    </SelectTrigger>
-                    <SelectContent>
-                      {countryCodes.map((country) => (
-                        <SelectItem key={country.code} value={country.code}>
-                          {country.code}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                  <Input
-                    value={formData.mobileNumber}
-                    onChange={(e) => handleInputChange('mobileNumber', e.target.value)}
-                    placeholder="77394 72531"
-                  />
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div>
-            <h3 className="text-lg font-medium mb-4">Address</h3>
-            <div className="grid grid-cols-2 gap-4">
-              <div>
-                <Label htmlFor="addressLine1">Address line 1</Label>
-                <Input
-                  id="addressLine1"
-                  value={formData.addressLine1}
-                  onChange={(e) => handleInputChange('addressLine1', e.target.value)}
-                  placeholder="Deira Riggat Al Buteen"
-                />
-              </div>
-              <div>
-                <Label htmlFor="street">Street</Label>
-                <Input
-                  id="street"
-                  value={formData.street}
-                  onChange={(e) => handleInputChange('street', e.target.value)}
-                  placeholder="Deira Riggat Al Buteen"
-                />
-              </div>
-              <div>
-                <Label htmlFor="poBox">PO box</Label>
-                <Input
-                  id="poBox"
-                  value={formData.poBox}
-                  onChange={(e) => handleInputChange('poBox', e.target.value)}
-                  placeholder="93903"
-                />
-              </div>
-              <div>
-                <Label htmlFor="area">Area</Label>
-                <Input
-                  id="area"
-                  value={formData.area}
-                  onChange={(e) => handleInputChange('area', e.target.value)}
-                  placeholder="Dubai"
-                />
-              </div>
-              <div className="col-span-2">
-                <Label htmlFor="town">Town</Label>
-                <Select value={formData.town} onValueChange={(value) => handleInputChange('town', value)}>
+                <Label htmlFor="isSignatoryResidentOfUAE">Is Signatory resident of UAE?*</Label>
+                <Select value={formData.isSignatoryResidentOfUAE} onValueChange={(value) => handleInputChange('isSignatoryResidentOfUAE', value)}>
                   <SelectTrigger>
-                    <SelectValue placeholder="Select town" />
+                    <SelectValue placeholder="Select option" />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="sharjah">Sharjah</SelectItem>
-                    <SelectItem value="dubai">Dubai</SelectItem>
-                    <SelectItem value="abudhabi">Abu Dhabi</SelectItem>
-                    <SelectItem value="ajman">Ajman</SelectItem>
-                    <SelectItem value="fujairah">Fujairah</SelectItem>
-                    <SelectItem value="rak">Ras Al Khaimah</SelectItem>
-                    <SelectItem value="uaq">Umm Al Quwain</SelectItem>
+                    <SelectItem value="Yes">Yes</SelectItem>
+                    <SelectItem value="No">No</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
@@ -223,7 +300,7 @@ export const PartnerAuthModal = ({ isOpen, onClose, onSubmit }: PartnerAuthModal
           </div>
 
           <div className="space-y-3 text-sm text-gray-600">
-            <p>I, Esther Howard, hereby consent to obtain and review my credit report from Etihad Credit Bureau for the purpose of loan application.</p>
+            <p>I, {formData.partnerName}, hereby consent to obtain and review my credit report from Etihad Credit Bureau for the purpose of loan application.</p>
             <p>I acknowledge that this consent is voluntary. This authorization is valid until revoked in writing by us.</p>
             <p>I declare that the information provided in this authorization is accurate to the best of my knowledge.</p>
           </div>
