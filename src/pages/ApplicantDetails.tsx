@@ -13,20 +13,24 @@ export const ApplicantDetails = () => {
   const navigate = useNavigate();
   const [isVerified, setIsVerified] = useState(false);
   const [formData, setFormData] = useState({
-    mobile: "+971 123 456 7890",
-    email: "john.doe@idealbrothers.ae",
-    companyNumber: "208X20",
-    taxRegistration: "100289959700XXXX",
-    registeredName: "Ideal Brother (L.L.C)",
-    licensingAuthority: "Deira Riqqat Al Buteen",
+    emailAddress: "john.doe@idealbrothers.ae",
+    mobileNumber: "+971 123 456 7890",
     companyName: "Ideal Brother (L.L.C)",
-    legalForm: "Limited Liability Company",
-    addressLine1: "Deira Riqqat Al Buteen",
-    street: "Deira Riqqat Al Buteen",
-    poBox: "93903",
-    area: "Dubai",
-    town: "Sharjah",
-    tradeZone: "Freezone"
+    countryOfIncorporation: "United Arab Emirates",
+    dateOfIncorporation: "",
+    tradeLicenseNumber: "208X20",
+    tlIssuingAuthority: "Deira Riqqat Al Buteen",
+    tradeLicenseIssueDate: "",
+    tradeLicenseExpiryDate: "",
+    establishDate: "",
+    numberOfYearsInBusiness: "",
+    businessTurnover: "",
+    natureOfBusiness: "",
+    entityType: "Limited Liability Company",
+    legalConstitution: "Limited Liability Company",
+    emirates: "Dubai",
+    address: "Deira Riqqat Al Buteen",
+    preferredRMName: ""
   });
 
   const handleInputChange = (field: string, value: string) => {
@@ -121,41 +125,192 @@ export const ApplicantDetails = () => {
               <div className="mb-8">
                 <h3 className="text-lg font-medium mb-4">Please enter your details</h3>
                 
-                {/* Initial 4 fields that are always visible */}
+                {/* Basic Information */}
                 <div className="grid grid-cols-2 gap-4 mb-4">
                   <div>
-                    <Label htmlFor="mobile">Mobile Number*</Label>
+                    <Label htmlFor="emailAddress">Email Address*</Label>
                     <Input
-                      id="mobile"
-                      value={formData.mobile}
-                      onChange={(e) => handleInputChange('mobile', e.target.value)}
+                      id="emailAddress"
+                      type="email"
+                      value={formData.emailAddress}
+                      onChange={(e) => handleInputChange('emailAddress', e.target.value)}
                     />
                   </div>
                   <div>
-                    <Label htmlFor="email">Email ID*</Label>
+                    <Label htmlFor="mobileNumber">Mobile Number*</Label>
                     <Input
-                      id="email"
-                      value={formData.email}
-                      onChange={(e) => handleInputChange('email', e.target.value)}
+                      id="mobileNumber"
+                      value={formData.mobileNumber}
+                      onChange={(e) => handleInputChange('mobileNumber', e.target.value)}
                     />
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-2 gap-4 mb-4">
+                  <div>
+                    <Label htmlFor="companyName">Company Name*</Label>
+                    <Input
+                      id="companyName"
+                      value={formData.companyName}
+                      onChange={(e) => handleInputChange('companyName', e.target.value)}
+                    />
+                  </div>
+                  <div>
+                    <Label htmlFor="countryOfIncorporation">Country of Incorporation*</Label>
+                    <Input
+                      id="countryOfIncorporation"
+                      value={formData.countryOfIncorporation}
+                      onChange={(e) => handleInputChange('countryOfIncorporation', e.target.value)}
+                    />
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-2 gap-4 mb-4">
+                  <div>
+                    <Label htmlFor="dateOfIncorporation">Date of Incorporation*</Label>
+                    <Input
+                      id="dateOfIncorporation"
+                      type="date"
+                      value={formData.dateOfIncorporation}
+                      onChange={(e) => handleInputChange('dateOfIncorporation', e.target.value)}
+                    />
+                  </div>
+                  <div>
+                    <Label htmlFor="tradeLicenseNumber">Trade License Number*</Label>
+                    <Input
+                      id="tradeLicenseNumber"
+                      value={formData.tradeLicenseNumber}
+                      onChange={(e) => handleInputChange('tradeLicenseNumber', e.target.value)}
+                    />
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-2 gap-4 mb-4">
+                  <div>
+                    <Label htmlFor="tlIssuingAuthority">TL Issuing Authority*</Label>
+                    <Input
+                      id="tlIssuingAuthority"
+                      value={formData.tlIssuingAuthority}
+                      onChange={(e) => handleInputChange('tlIssuingAuthority', e.target.value)}
+                    />
+                  </div>
+                  <div>
+                    <Label htmlFor="tradeLicenseIssueDate">Trade License Issue Date*</Label>
+                    <Input
+                      id="tradeLicenseIssueDate"
+                      type="date"
+                      value={formData.tradeLicenseIssueDate}
+                      onChange={(e) => handleInputChange('tradeLicenseIssueDate', e.target.value)}
+                    />
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-2 gap-4 mb-4">
+                  <div>
+                    <Label htmlFor="tradeLicenseExpiryDate">Trade License Expiry Date*</Label>
+                    <Input
+                      id="tradeLicenseExpiryDate"
+                      type="date"
+                      value={formData.tradeLicenseExpiryDate}
+                      onChange={(e) => handleInputChange('tradeLicenseExpiryDate', e.target.value)}
+                    />
+                  </div>
+                  <div>
+                    <Label htmlFor="establishDate">Establish Date*</Label>
+                    <Input
+                      id="establishDate"
+                      type="date"
+                      value={formData.establishDate}
+                      onChange={(e) => handleInputChange('establishDate', e.target.value)}
+                    />
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-2 gap-4 mb-4">
+                  <div>
+                    <Label htmlFor="numberOfYearsInBusiness">Number of years in Business*</Label>
+                    <Input
+                      id="numberOfYearsInBusiness"
+                      type="number"
+                      value={formData.numberOfYearsInBusiness}
+                      onChange={(e) => handleInputChange('numberOfYearsInBusiness', e.target.value)}
+                    />
+                  </div>
+                  <div>
+                    <Label htmlFor="businessTurnover">Business Turnover (in AED Mio)*</Label>
+                    <Input
+                      id="businessTurnover"
+                      type="number"
+                      step="0.1"
+                      value={formData.businessTurnover}
+                      onChange={(e) => handleInputChange('businessTurnover', e.target.value)}
+                    />
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-2 gap-4 mb-4">
+                  <div>
+                    <Label htmlFor="natureOfBusiness">Nature of Business*</Label>
+                    <Input
+                      id="natureOfBusiness"
+                      value={formData.natureOfBusiness}
+                      onChange={(e) => handleInputChange('natureOfBusiness', e.target.value)}
+                    />
+                  </div>
+                  <div>
+                    <Label htmlFor="entityType">Entity Type*</Label>
+                    <Input
+                      id="entityType"
+                      value={formData.entityType}
+                      onChange={(e) => handleInputChange('entityType', e.target.value)}
+                    />
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-2 gap-4 mb-4">
+                  <div>
+                    <Label htmlFor="legalConstitution">Legal Constitution*</Label>
+                    <Input
+                      id="legalConstitution"
+                      value={formData.legalConstitution}
+                      onChange={(e) => handleInputChange('legalConstitution', e.target.value)}
+                    />
+                  </div>
+                  <div>
+                    <Label htmlFor="emirates">Emirates*</Label>
+                    <select 
+                      id="emirates"
+                      value={formData.emirates}
+                      onChange={(e) => handleInputChange('emirates', e.target.value)}
+                      className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
+                    >
+                      <option value="">Select Emirates</option>
+                      <option value="Abu Dhabi">Abu Dhabi</option>
+                      <option value="Dubai">Dubai</option>
+                      <option value="Sharjah">Sharjah</option>
+                      <option value="Ajman">Ajman</option>
+                      <option value="Umm Al Quwain">Umm Al Quwain</option>
+                      <option value="Ras Al Khaimah">Ras Al Khaimah</option>
+                      <option value="Fujairah">Fujairah</option>
+                    </select>
                   </div>
                 </div>
 
                 <div className="grid grid-cols-2 gap-4 mb-6">
                   <div>
-                    <Label htmlFor="companyNumber">Company Number*</Label>
+                    <Label htmlFor="address">Address*</Label>
                     <Input
-                      id="companyNumber"
-                      value={formData.companyNumber}
-                      onChange={(e) => handleInputChange('companyNumber', e.target.value)}
+                      id="address"
+                      value={formData.address}
+                      onChange={(e) => handleInputChange('address', e.target.value)}
                     />
                   </div>
                   <div>
-                    <Label htmlFor="taxRegistration">Tax Registration Number*</Label>
+                    <Label htmlFor="preferredRMName">Preferred RM Name</Label>
                     <Input
-                      id="taxRegistration"
-                      value={formData.taxRegistration}
-                      onChange={(e) => handleInputChange('taxRegistration', e.target.value)}
+                      id="preferredRMName"
+                      value={formData.preferredRMName}
+                      onChange={(e) => handleInputChange('preferredRMName', e.target.value)}
                     />
                   </div>
                 </div>
@@ -169,177 +324,10 @@ export const ApplicantDetails = () => {
                   </div>
                 )}
 
-                {/* Additional fields that appear after verification */}
-                {isVerified && (
-                  <>
-                    <div className="grid grid-cols-2 gap-4 mb-4">
-                      <div>
-                        <Label htmlFor="registeredName">Registered Name*</Label>
-                        <Input
-                          id="registeredName"
-                          value={formData.registeredName}
-                          onChange={(e) => handleInputChange('registeredName', e.target.value)}
-                          className="bg-green-50 border-green-200"
-                          readOnly
-                        />
-                        <div className="flex items-center mt-1">
-                          <Check className="w-4 h-4 text-green-600 mr-1" />
-                          <span className="text-xs text-green-600">Verified</span>
-                        </div>
-                      </div>
-                      <div>
-                        <Label htmlFor="licensingAuthority">Licensing Authority*</Label>
-                        <Input
-                          id="licensingAuthority"
-                          value={formData.licensingAuthority}
-                          onChange={(e) => handleInputChange('licensingAuthority', e.target.value)}
-                          className="bg-green-50 border-green-200"
-                          readOnly
-                        />
-                        <div className="flex items-center mt-1">
-                          <Check className="w-4 h-4 text-green-600 mr-1" />
-                          <span className="text-xs text-green-600">Verified</span>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className="grid grid-cols-2 gap-4 mb-6">
-                      <div>
-                        <Label htmlFor="companyName">Company Name*</Label>
-                        <Input
-                          id="companyName"
-                          value={formData.companyName}
-                          onChange={(e) => handleInputChange('companyName', e.target.value)}
-                          className="bg-green-50 border-green-200"
-                          readOnly
-                        />
-                        <div className="flex items-center mt-1">
-                          <Check className="w-4 h-4 text-green-600 mr-1" />
-                          <span className="text-xs text-green-600">Verified</span>
-                        </div>
-                      </div>
-                      <div>
-                        <Label htmlFor="legalForm">Legal Form*</Label>
-                        <Input
-                          id="legalForm"
-                          value={formData.legalForm}
-                          onChange={(e) => handleInputChange('legalForm', e.target.value)}
-                          className="bg-green-50 border-green-200"
-                          readOnly
-                        />
-                        <div className="flex items-center mt-1">
-                          <Check className="w-4 h-4 text-green-600 mr-1" />
-                          <span className="text-xs text-green-600">Verified</span>
-                        </div>
-                      </div>
-                    </div>
-
-                    <h4 className="text-md font-medium mb-4">Address Details</h4>
-                    <div className="grid grid-cols-2 gap-4 mb-4">
-                      <div>
-                        <Label htmlFor="addressLine1">Address line 1*</Label>
-                        <Input
-                          id="addressLine1"
-                          value={formData.addressLine1}
-                          onChange={(e) => handleInputChange('addressLine1', e.target.value)}
-                          className="bg-green-50 border-green-200"
-                          readOnly
-                        />
-                        <div className="flex items-center mt-1">
-                          <Check className="w-4 h-4 text-green-600 mr-1" />
-                          <span className="text-xs text-green-600">Verified</span>
-                        </div>
-                      </div>
-                      <div>
-                        <Label htmlFor="street">Street*</Label>
-                        <Input
-                          id="street"
-                          value={formData.street}
-                          onChange={(e) => handleInputChange('street', e.target.value)}
-                          className="bg-green-50 border-green-200"
-                          readOnly
-                        />
-                        <div className="flex items-center mt-1">
-                          <Check className="w-4 h-4 text-green-600 mr-1" />
-                          <span className="text-xs text-green-600">Verified</span>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className="grid grid-cols-2 gap-4 mb-4">
-                      <div>
-                        <Label htmlFor="poBox">PO box*</Label>
-                        <Input
-                          id="poBox"
-                          value={formData.poBox}
-                          onChange={(e) => handleInputChange('poBox', e.target.value)}
-                          className="bg-green-50 border-green-200"
-                          readOnly
-                        />
-                        <div className="flex items-center mt-1">
-                          <Check className="w-4 h-4 text-green-600 mr-1" />
-                          <span className="text-xs text-green-600">Verified</span>
-                        </div>
-                      </div>
-                      <div>
-                        <Label htmlFor="area">Area*</Label>
-                        <Input
-                          id="area"
-                          value={formData.area}
-                          onChange={(e) => handleInputChange('area', e.target.value)}
-                          className="bg-green-50 border-green-200"
-                          readOnly
-                        />
-                        <div className="flex items-center mt-1">
-                          <Check className="w-4 h-4 text-green-600 mr-1" />
-                          <span className="text-xs text-green-600">Verified</span>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className="grid grid-cols-2 gap-4 mb-6">
-                      <div>
-                        <Label htmlFor="town">Town*</Label>
-                        <select 
-                          id="town"
-                          value={formData.town}
-                          onChange={(e) => handleInputChange('town', e.target.value)}
-                          className="flex h-10 w-full rounded-md border border-green-200 bg-green-50 px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
-                          disabled
-                        >
-                          <option value="Sharjah">Sharjah</option>
-                          <option value="Dubai">Dubai</option>
-                          <option value="Abu Dhabi">Abu Dhabi</option>
-                        </select>
-                        <div className="flex items-center mt-1">
-                          <Check className="w-4 h-4 text-green-600 mr-1" />
-                          <span className="text-xs text-green-600">Verified</span>
-                        </div>
-                      </div>
-                      <div>
-                        <Label htmlFor="tradeZone">Trade Zone*</Label>
-                        <select 
-                          id="tradeZone"
-                          value={formData.tradeZone}
-                          onChange={(e) => handleInputChange('tradeZone', e.target.value)}
-                          className="flex h-10 w-full rounded-md border border-green-200 bg-green-50 px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
-                          disabled
-                        >
-                          <option value="Freezone">Freezone</option>
-                          <option value="Mainland">Mainland</option>
-                        </select>
-                        <div className="flex items-center mt-1">
-                          <Check className="w-4 h-4 text-green-600 mr-1" />
-                          <span className="text-xs text-green-600">Verified</span>
-                        </div>
-                      </div>
-                    </div>
-
-                    <Button onClick={handleContinue} className="bg-blue-600 hover:bg-blue-700">
-                      Continue
-                    </Button>
-                  </>
-                )}
+                {/* Continue button - always visible now */}
+                <Button onClick={handleContinue} className="bg-blue-600 hover:bg-blue-700">
+                  Continue
+                </Button>
               </div>
             </div>
           </div>
