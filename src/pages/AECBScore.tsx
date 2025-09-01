@@ -135,18 +135,12 @@ export const AECBScore = () => {
                   {partners.map((partner) => (
                     <div key={partner.id} className="flex items-center justify-between p-4 border border-gray-200 rounded-lg">
                       <span className="font-medium">{partner.name}</span>
-                      {partner.status === 'authorized' ? (
-                        <span className="px-3 py-1 bg-green-100 text-green-800 text-sm font-medium rounded-full">
-                          Authorized
-                        </span>
-                      ) : (
-                        <Button
-                          onClick={() => handleAuthorize(partner)}
-                          className="bg-blue-600 hover:bg-blue-700 text-white"
-                        >
-                          Authorize →
-                        </Button>
-                      )}
+                      <Button
+                        onClick={() => handleAuthorize(partner)}
+                        className="bg-blue-600 hover:bg-blue-700 text-white"
+                      >
+                        Edit
+                      </Button>
                     </div>
                   ))}
                 </div>
