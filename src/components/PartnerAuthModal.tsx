@@ -33,7 +33,6 @@ interface PartnerData {
   eidNumber: string;
   emailId: string;
   isSignatoryResidentOfUAE: string;
-  consent: boolean;
 }
 
 const countryCodes = [
@@ -72,8 +71,7 @@ export const PartnerAuthModal = ({ isOpen, onClose, onSubmit }: PartnerAuthModal
     eidExpiryDate: "",
     eidNumber: "784-1980-94xxxxx-8",
     emailId: "esther.howard@idealbrothers.ae",
-    isSignatoryResidentOfUAE: "Yes",
-    consent: false
+    isSignatoryResidentOfUAE: "Yes"
   });
 
   const handleInputChange = (field: keyof PartnerData, value: string | boolean) => {
@@ -299,27 +297,9 @@ export const PartnerAuthModal = ({ isOpen, onClose, onSubmit }: PartnerAuthModal
             </div>
           </div>
 
-          <div className="space-y-3 text-sm text-gray-600">
-            <p>I, {formData.partnerName}, hereby consent to obtain and review my credit report from Etihad Credit Bureau for the purpose of loan application.</p>
-            <p>I acknowledge that this consent is voluntary. This authorization is valid until revoked in writing by us.</p>
-            <p>I declare that the information provided in this authorization is accurate to the best of my knowledge.</p>
-          </div>
-
-          <div className="flex items-center space-x-2">
-            <Checkbox
-              id="consent"
-              checked={formData.consent}
-              onCheckedChange={(checked) => handleInputChange('consent', checked as boolean)}
-            />
-            <Label htmlFor="consent" className="text-sm">
-              I am authorising Abu Dhabi Commercial Bank for fetching my AECB Score
-            </Label>
-          </div>
-
           <div className="flex justify-end">
             <Button 
               onClick={handleSubmit}
-              disabled={!formData.consent}
               className="bg-blue-600 hover:bg-blue-700"
             >
               Save
