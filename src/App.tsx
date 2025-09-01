@@ -10,6 +10,7 @@ import { SignUp } from "./pages/SignUp";
 import { ApplicantDetails } from "./pages/ApplicantDetails";
 import { BankStatements } from "./pages/BankStatements";
 import { AECBScore } from "./pages/AECBScore";
+import { AECBConsent } from "./pages/AECBConsent";
 import { AnalysisLoading } from "./pages/AnalysisLoading";
 import { VATReturns } from "./pages/VATReturns";
 import { ProcessingStep } from "./pages/ProcessingStep";
@@ -53,6 +54,7 @@ const App = () => (
           <Route path="/applicant-details" element={<ApplicantDetails />} />
           <Route path="/bank-statements" element={<BankStatements />} />
           <Route path="/aecb-score" element={<AECBScore />} />
+          <Route path="/aecb-consent" element={<AECBConsent />} />
           <Route path="/analysis-loading" element={<AnalysisLoading />} />
           <Route path="/loan-application" element={<LoanApplication />} />
           <Route path="/loan-application/vat-returns" element={<VATReturns />} />

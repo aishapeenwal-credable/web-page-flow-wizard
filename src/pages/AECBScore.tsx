@@ -35,7 +35,7 @@ export const AECBScore = () => {
 
 
   const handleContinue = () => {
-    navigate("/loan-application");
+    navigate("/aecb-consent");
   };
 
   const handleAuthorize = (partner: Partner) => {
@@ -83,9 +83,10 @@ export const AECBScore = () => {
   const steps = [
     { id: 1, name: "Applicant Detail", description: "Just a few Personal details.", completed: true },
     { id: 2, name: "Partner Details", description: "Add Partner Details", completed: false, active: true },
-    { id: 3, name: "Bank Statements", description: "Upload your bank statements, safely.", completed: true },
-    { id: 4, name: "VAT Returns", description: "Check VAT returns easily.", completed: false },
-    { id: 5, name: "Loan Offer", description: "View and accept loan offers.", completed: false }
+    { id: 3, name: "AECB Consent", description: "Download and upload AECB consent forms.", completed: false },
+    { id: 4, name: "Bank Statements", description: "Upload your bank statements, safely.", completed: false },
+    { id: 5, name: "VAT Returns", description: "Check VAT returns easily.", completed: false },
+    { id: 6, name: "Loan Offer", description: "View and accept loan offers.", completed: false }
   ];
 
   return (
