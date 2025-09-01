@@ -5,7 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { User, ArrowLeft } from "lucide-react";
 import { AuthFooter } from "@/components/AuthFooter";
-import adcbLogo from "/lovable-uploads/87f5696d-9635-4638-8821-43cee3ae3336.png";
+import adcbLogo from "/lovable-uploads/784614b7-faca-42b4-aaa9-5da8f899948c.png";
 export const Login = () => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({

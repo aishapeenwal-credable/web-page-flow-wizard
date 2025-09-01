@@ -1,6 +1,6 @@
 
 import { User } from "lucide-react";
-import adcbLogo from "/lovable-uploads/87f5696d-9635-4638-8821-43cee3ae3336.png";
+import adcbLogo from "/lovable-uploads/784614b7-faca-42b4-aaa9-5da8f899948c.png";
 
 export const Header = () => {
   return (
