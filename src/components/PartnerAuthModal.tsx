@@ -235,7 +235,7 @@ export const PartnerAuthModal = ({ isOpen, onClose, onSubmit }: PartnerAuthModal
               onCheckedChange={(checked) => handleInputChange('consent', checked as boolean)}
             />
             <Label htmlFor="consent" className="text-sm">
-              I am authorising Ideal Bank for fetching my AECB Score
+              I am authorising Abu Dhabi Commercial Bank for fetching my AECB Score
             </Label>
           </div>
 

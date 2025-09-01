@@ -10,7 +10,7 @@ export const PageFooter = () => {
         </div>
         
         <div className="text-gray-500">
-          ©2024 Ideal Bank | All rights reserved | Powered by CredAble
+          ©2024 Abu Dhabi Commercial Bank | All rights reserved | Powered by CredAble
         </div>
       </div>
     </footer>

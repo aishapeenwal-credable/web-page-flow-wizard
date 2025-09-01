@@ -35,7 +35,7 @@ export const SigningModal = ({ isOpen, onClose, onApply }: SigningModalProps) =>
             <div className="space-y-4 text-sm">
               <p>
                 This letter serves as Notification of Assignment of payments under the 
-                Underlying Obligation to Ideal Bank ("Assignee")
+                Underlying Obligation to Abu Dhabi Commercial Bank ("Assignee")
               </p>
               
               <div>
