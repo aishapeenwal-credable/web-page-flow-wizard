@@ -44,8 +44,13 @@ export const AECBScore = () => {
   };
 
   const handlePartnerSubmit = (data: any) => {
+    if (selectedPartner) {
+      setPartners(partners.map(p => 
+        p.id === selectedPartner.id ? { ...p, status: 'authorized' } : p
+      ));
+    }
     setShowPartnerModal(false);
-    setShowOTPModal(true);
+    setSelectedPartner(null);
   };
 
   const handleOTPVerify = (otp: string) => {

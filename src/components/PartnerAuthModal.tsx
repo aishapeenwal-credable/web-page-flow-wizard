@@ -322,7 +322,7 @@ export const PartnerAuthModal = ({ isOpen, onClose, onSubmit }: PartnerAuthModal
               disabled={!formData.consent}
               className="bg-blue-600 hover:bg-blue-700"
             >
-              Send OTP
+              Save
             </Button>
           </div>
         </div>
