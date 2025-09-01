@@ -36,7 +36,9 @@ export const AECBConsent = () => {
         name: file.name,
         size: file.size
       }));
-      setUploadedFiles([...uploadedFiles, ...newFiles]);
+      setUploadedFiles(prev => [...prev, ...newFiles]);
+      // Reset the input so the same file can be selected again if needed
+      event.target.value = '';
     }
   };
 
@@ -130,9 +132,9 @@ export const AECBConsent = () => {
               <div className="mb-6">
                 <h3 className="text-lg font-medium mb-4">Upload Completed Consent Forms</h3>
                 
-                <div className="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center">
-                  <Upload className="w-8 h-8 text-gray-400 mx-auto mb-2" />
-                  <p className="text-sm text-gray-600 mb-4">
+                <div className="border-2 border-dashed border-muted rounded-lg p-6 text-center">
+                  <Upload className="w-8 h-8 text-muted-foreground mx-auto mb-2" />
+                  <p className="text-sm text-muted-foreground mb-4">
                     Upload your completed AECB consent forms (PDF, JPG, PNG)
                   </p>
                   <input
@@ -144,42 +146,51 @@ export const AECBConsent = () => {
                     id="file-upload"
                   />
                   <label htmlFor="file-upload">
-                    <Button variant="outline" className="cursor-pointer">
+                    <Button variant="outline" className="cursor-pointer" type="button">
                       Select Files
                     </Button>
                   </label>
                 </div>
 
                 {uploadedFiles.length > 0 && (
-                  <div className="mt-4 space-y-2">
-                    <h4 className="text-sm font-medium text-gray-700">Uploaded Files:</h4>
-                    {uploadedFiles.map((file) => (
-                      <div key={file.id} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
-                        <div className="flex-1">
-                          <p className="text-sm font-medium text-gray-900">{file.name}</p>
-                          <p className="text-xs text-gray-500">{formatFileSize(file.size)}</p>
+                  <div className="mt-6 space-y-3">
+                    <h4 className="text-sm font-medium text-foreground">Uploaded Files ({uploadedFiles.length}):</h4>
+                    <div className="space-y-2">
+                      {uploadedFiles.map((file) => (
+                        <div key={file.id} className="flex items-center justify-between p-3 bg-muted/50 rounded-lg border">
+                          <div className="flex-1">
+                            <p className="text-sm font-medium text-foreground">{file.name}</p>
+                            <p className="text-xs text-muted-foreground">{formatFileSize(file.size)}</p>
+                          </div>
+                          <Button
+                            variant="ghost"
+                            size="sm"
+                            onClick={() => handleRemoveFile(file.id)}
+                            className="text-destructive hover:text-destructive hover:bg-destructive/10"
+                          >
+                            <X className="w-4 h-4" />
+                          </Button>
                         </div>
-                        <Button
-                          variant="ghost"
-                          size="sm"
-                          onClick={() => handleRemoveFile(file.id)}
-                          className="text-red-600 hover:text-red-700"
-                        >
-                          <X className="w-4 h-4" />
-                        </Button>
-                      </div>
-                    ))}
+                      ))}
+                    </div>
                   </div>
                 )}
               </div>
 
-              <Button 
-                onClick={handleContinue} 
-                className="bg-primary hover:bg-primary/90 text-primary-foreground"
-                disabled={uploadedFiles.length === 0}
-              >
-                Save and Proceed
-              </Button>
+              <div className="mt-6 pt-6 border-t border-border">
+                <Button 
+                  onClick={handleContinue} 
+                  className="bg-primary hover:bg-primary/90 text-primary-foreground"
+                  disabled={uploadedFiles.length === 0}
+                >
+                  Save and Proceed
+                </Button>
+                {uploadedFiles.length === 0 && (
+                  <p className="text-sm text-muted-foreground mt-2">
+                    Please upload at least one consent form to proceed
+                  </p>
+                )}
+              </div>
             </div>
           </div>
         </div>
