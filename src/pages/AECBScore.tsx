@@ -117,7 +117,7 @@ export const AECBScore = () => {
 
           <div className="flex-1">
             <div className="bg-white rounded-lg shadow-sm p-6">
-              <h2 className="text-xl font-semibold mb-6">Credit Report</h2>
+              <h2 className="text-xl font-semibold mb-6">Partner Details</h2>
 
               <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-6 flex items-start gap-3">
                 <div className="w-6 h-6 bg-blue-100 rounded flex items-center justify-center flex-shrink-0 mt-1">
