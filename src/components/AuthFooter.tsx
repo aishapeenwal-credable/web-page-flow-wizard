@@ -7,10 +7,10 @@ export const AuthFooter = () => {
         <div className="flex flex-col">
           <span className="text-gray-600">Need Help?</span>
           <a 
-            href="mailto:support@idealbank.ae" 
+            href="mailto:support@adcb.com" 
             className="text-blue-600 hover:underline"
           >
-            support@idealbank.ae
+            support@adcb.com
           </a>
         </div>
         
