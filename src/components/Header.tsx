@@ -1,5 +1,6 @@
 
 import { User } from "lucide-react";
+import adcbLogo from "@/assets/adcb-logo.png";
 
 export const Header = () => {
   return (
@@ -7,8 +8,8 @@ export const Header = () => {
       <div className="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
         <div className="flex items-center space-x-2">
           <img 
-            src="/lovable-uploads/83e2b8f5-c059-4834-a41d-540e2cd6fe2e.png" 
-            alt="Ideal Bank" 
+            src={adcbLogo} 
+            alt="ADCB" 
             className="h-8"
           />
         </div>

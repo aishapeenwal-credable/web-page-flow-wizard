@@ -6,6 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { User, ArrowLeft } from "lucide-react";
 import { AuthFooter } from "@/components/AuthFooter";
+import adcbLogo from "@/assets/adcb-logo.png";
 
 export const SignUp = () => {
   const navigate = useNavigate();
@@ -46,13 +47,13 @@ export const SignUp = () => {
             <div className="flex items-center justify-between mb-8">
               <div className="flex items-center space-x-2">
                 <img 
-                  src="/lovable-uploads/83e2b8f5-c059-4834-a41d-540e2cd6fe2e.png" 
-                  alt="Ideal Bank" 
+                  src={adcbLogo} 
+                  alt="ADCB" 
                   className="h-8"
                 />
               </div>
               <div className="flex items-center space-x-4">
-                <select className="text-sm text-blue-600">
+                <select className="text-sm text-primary">
                   <option>English</option>
                   <option>العربية</option>
                 </select>
@@ -162,13 +163,13 @@ export const SignUp = () => {
                 />
                 <Label htmlFor="terms" className="text-sm">
                   By clicking Continue, I agree to{" "}
-                  <a href="#" className="text-blue-600 hover:underline">Terms & Conditions</a> of Ideal Bank
+                  <a href="#" className="text-primary hover:underline">Terms & Conditions</a> of ADCB
                 </Label>
               </div>
 
               <Button 
                 onClick={handleSignUp} 
-                className="w-full bg-blue-600 hover:bg-blue-700"
+                className="w-full"
                 disabled={!agreeTerms}
               >
                 Sign Up!
@@ -179,7 +180,7 @@ export const SignUp = () => {
                   Already have an account?{" "}
                   <button 
                     onClick={() => navigate("/login")}
-                    className="text-blue-600 hover:underline"
+                    className="text-primary hover:underline"
                   >
                     Login
                   </button>
