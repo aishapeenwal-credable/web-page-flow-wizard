@@ -145,7 +145,7 @@ export const ApplicantDetails = () => {
           <div className="flex-1">
             <div className="bg-white rounded-lg shadow-sm p-6">
               <div className="mb-8">
-                <h2 className="text-xl font-semibold mb-2">Welcome to {isVerified ? 'Abu Dhabi Commercial Bank' : 'CredAble'} Loans!</h2>
+                <h2 className="text-xl font-semibold mb-2">Welcome to ADCB!</h2>
                 <p className="text-gray-600">
                   Please provide your personal details to continue with your loan request. 
                   Your information is secure with us and will be used solely for processing your loan application.
