@@ -3,7 +3,7 @@ export const PromotionalSection = () => {
     <div className="w-80 h-full min-h-96 rounded-lg overflow-hidden flex-shrink-0 relative">
       <img 
         alt="Commercial Vehicle Financing" 
-        src="https://www.adcb.com/en/Images/27_CommercialVehicle_2470x1190_tcm41-169656.jpg" 
+        src="/lovable-uploads/cd41f64b-cb1e-447b-abfb-cddb4c21482e.png" 
         className="w-full h-full object-cover" 
       />
       <div className="absolute inset-0 bg-black/40 flex flex-col justify-center p-6">
