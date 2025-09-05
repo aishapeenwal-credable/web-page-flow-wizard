@@ -2,8 +2,8 @@ export const PromotionalSection = () => {
   return (
     <div className="w-80 h-full min-h-96 rounded-lg overflow-hidden flex-shrink-0 relative">
       <img 
-        alt="Financial Journey" 
-        src="/lovable-uploads/69489ac4-36cc-4b2a-8449-479c34ee30b3.png" 
+        alt="Commercial Vehicle Financing" 
+        src="https://www.adcb.com/en/Images/27_CommercialVehicle_2470x1190_tcm41-169656.jpg" 
         className="w-full h-full object-cover" 
       />
       <div className="absolute inset-0 bg-black/40 flex flex-col justify-center p-6">
