@@ -9,27 +9,23 @@ export const PromotionalSection = () => {
       <div className="absolute inset-0 bg-black/40 flex flex-col justify-center p-6">
         <div className="text-white">
           <h2 className="text-xl font-bold mb-3 leading-tight">
-            Empowering your financial journey
+            ASSET AND EQUIPMENT FINANCING
           </h2>
           <p className="text-lg font-semibold mb-4">
-            Loans crafted for all your aspirations
+            Funding available across wide array of brands and vehicles
           </p>
           <ul className="space-y-2 text-sm">
             <li className="flex items-start">
               <span className="font-medium">1)</span>
-              <span className="ml-2">Collateral free financing</span>
+              <span className="ml-2">Funding available across wide array of brands and vehicles</span>
             </li>
             <li className="flex items-start">
               <span className="font-medium">2)</span>
-              <span className="ml-2">Instant eligibility confirmation</span>
+              <span className="ml-2">Refinance option available for existing assets</span>
             </li>
             <li className="flex items-start">
               <span className="font-medium">3)</span>
-              <span className="ml-2">Credit limit as per requirement</span>
-            </li>
-            <li className="flex items-start">
-              <span className="font-medium">4)</span>
-              <span className="ml-2">Hassle-free disbursal in account</span>
+              <span className="ml-2">Shari'ah compliant products available</span>
             </li>
           </ul>
         </div>
